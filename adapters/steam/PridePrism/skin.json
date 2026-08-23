@@ -14,7 +14,23 @@
     "Pride",
     "Accessibility"
   ],
-  "version": "1.0.0",
-  "Steam-WebKit": "webkit.css",
-  "UseDefaultPatches": true
+  "version": "1.0.2",
+  "Patches": [
+    {
+      "MatchRegexString": "^https:\\/\\/store\\.steampowered\\.com\\/.*",
+      "TargetCss": "webkit.css"
+    },
+    {
+      "MatchRegexString": "^https:\\/\\/steamcommunity\\.com\\/.*",
+      "TargetCss": "webkit.css"
+    },
+    {
+      "MatchRegexString": "^Steam$",
+      "TargetCss": "libraryroot.custom.css"
+    },
+    {
+      "MatchRegexString": ".*",
+      "TargetCss": "libraryroot.custom.css"
+    }
+  ]
 }

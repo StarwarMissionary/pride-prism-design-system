@@ -44,7 +44,13 @@ html,
 body,
 #root,
 .steamdesktop,
-[class*="DesktopUI"] {
+[class*="steamdesktop_"],
+[class*="DesktopUI_"],
+[class*="libraryroot_"],
+[class*="pagedsettings_"],
+[class*="Settings_"],
+[class*="ModalPosition_"],
+[class*="DialogContent_"] {
   color: var(--pp-ink) !important;
   background: var(--pp-surface) !important;
 }
@@ -96,7 +102,13 @@ body::after {
 [class*="gamelistbar"],
 [class*="GameList"],
 [class*="sidebar"],
-[class*="Sidebar"] {
+[class*="Sidebar"],
+[class*="TitleBar_"],
+[class*="titlebar_"],
+[class*="SuperNav_"],
+[class*="supernav_"],
+[class*="TopBar_"],
+[class*="topbar_"] {
   background-color: var(--pp-surface) !important;
 }
 

@@ -34,6 +34,7 @@ body {
 }
 
 .store_nav,
+.store_nav_bg,
 .store_header_btn,
 .popup_block_new,
 .newmodal {
@@ -51,6 +52,165 @@ a,
 .btnv6_blue_hoverfade,
 .btn_blue_steamui {
   background: linear-gradient(90deg, #750787, var(--pp-accent)) !important;
+}
+
+#global_header,
+.responsive_header,
+.responsive_header_content,
+.supernav_container,
+.home_pagecontent_ctn,
+.home_ctn,
+.home_tab_bg_ctn,
+.home_tabs_sections {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-surface) !important;
+  background-image: none !important;
+}
+
+.store_nav_bg,
+.store_nav {
+  background: linear-gradient(90deg, var(--pp-raised), #2d1046 54%, var(--pp-muted)) !important;
+  box-shadow: 0 1px 0 rgba(116, 215, 238, 0.26), 0 8px 24px rgba(9, 0, 15, 0.28) !important;
+}
+
+.store_nav .tab,
+.store_nav .tab > span,
+.supernav,
+.supernav_container a {
+  color: var(--pp-ink) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+.store_nav .tab:hover,
+.store_nav .tab:hover > span,
+.supernav:hover,
+.supernav_active {
+  color: var(--pp-focus) !important;
+  background: rgba(117, 7, 135, 0.34) !important;
+}
+
+.searchbox {
+  background: rgba(9, 0, 15, 0.9) !important;
+  border: 1px solid rgba(255, 175, 200, 0.28) !important;
+  box-shadow: inset 0 0 0 1px rgba(116, 215, 238, 0.05) !important;
+}
+
+.searchbox input,
+.searchbox input.default {
+  color: var(--pp-ink) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+.searchbox .btn_search,
+.searchbox .btn_search:hover {
+  background-color: var(--pp-accent) !important;
+  background-image: linear-gradient(135deg, var(--pp-focus), var(--pp-accent)) !important;
+}
+
+.store_header_btn_content,
+.wishlist_block,
+.home_section_button,
+.home_tab_button {
+  color: var(--pp-ink) !important;
+  background: var(--pp-raised) !important;
+  border: 1px solid rgba(116, 215, 238, 0.18) !important;
+  border-radius: 7px !important;
+  text-shadow: none !important;
+}
+
+.home_section_button:hover,
+.home_tab_button:hover,
+.home_tab_button.active {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(90deg, rgba(117, 7, 135, 0.88), rgba(255, 79, 216, 0.38)) !important;
+  border-color: rgba(255, 175, 200, 0.55) !important;
+}
+
+.home_cluster_ctn,
+.carousel_container,
+.home_area_spotlight,
+.spotlight,
+.home_tabs_row_ctn,
+.home_tab_content,
+.sale_capsule,
+.community_recommendations_by_steam_labs_ctn,
+.recommended_by_steam_labs_ctn,
+.recommended_creators_ctn {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-raised) !important;
+  background-image: none !important;
+  border-color: rgba(255, 175, 200, 0.14) !important;
+  box-shadow: 0 12px 34px rgba(9, 0, 15, 0.2) !important;
+}
+
+.store_capsule,
+.sale_capsule,
+.home_area_spotlight {
+  border-radius: 9px !important;
+  outline: 1px solid rgba(116, 215, 238, 0.12) !important;
+  outline-offset: -1px !important;
+  overflow: hidden !important;
+}
+
+.store_capsule:hover,
+.sale_capsule:hover,
+.home_area_spotlight:hover {
+  outline-color: rgba(255, 175, 200, 0.55) !important;
+  box-shadow: 0 14px 38px rgba(117, 7, 135, 0.28) !important;
+}
+
+.home_section_title,
+.home_title,
+.home_title_ctn,
+.tab_item_name,
+.spotlight_body,
+.recommended_by_deep_dive_title {
+  color: var(--pp-ink) !important;
+  text-shadow: none !important;
+}
+
+.home_section_subtitle,
+.tab_item_details,
+.spotlight_body,
+.spotlight_price {
+  color: var(--pp-ink-muted) !important;
+}
+
+.home_section_title::after {
+  content: "";
+  display: block;
+  width: 4.5rem;
+  height: 2px;
+  margin-top: 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787) !important;
+}
+
+.discount_pct,
+.discount_block .discount_pct {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(135deg, #750787, var(--pp-accent)) !important;
+}
+
+.discount_prices,
+.discount_final_price,
+.spotlight_price {
+  background-color: var(--pp-muted) !important;
+}
+
+.carousel_thumbs > div {
+  background-color: #755f80 !important;
+}
+
+.carousel_thumbs > div.focus,
+.carousel_thumbs > div:hover {
+  background-color: var(--pp-focus) !important;
+}
+
+* {
+  scrollbar-color: #750787 var(--pp-surface) !important;
 }
 
 :focus-visible {

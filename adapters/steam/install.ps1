@@ -15,13 +15,18 @@ if (-not (Test-Path -LiteralPath $steamExe)) {
     throw "Steam was not found at: $SteamPath"
 }
 
-$millenniumDll = Join-Path $SteamPath 'millennium.dll'
-if (-not (Test-Path -LiteralPath $millenniumDll)) {
+$currentMillenniumDll = Join-Path $SteamPath 'millennium\lib\millennium.dll'
+$legacyMillenniumDll = Join-Path $SteamPath 'millennium.dll'
+if (-not (Test-Path -LiteralPath $currentMillenniumDll) -and -not (Test-Path -LiteralPath $legacyMillenniumDll)) {
     throw 'Millennium is not installed. Use the official installer linked in README.md first.'
 }
 
 $source = Join-Path $PSScriptRoot 'PridePrism'
-$skinsRoot = Join-Path $SteamPath 'steamui\skins'
+if (Test-Path -LiteralPath $currentMillenniumDll) {
+    $skinsRoot = Join-Path $SteamPath 'millennium\themes'
+} else {
+    $skinsRoot = Join-Path $SteamPath 'steamui\skins'
+}
 $destination = Join-Path $skinsRoot 'PridePrism'
 New-Item -ItemType Directory -Path $skinsRoot -Force | Out-Null
 

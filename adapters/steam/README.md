@@ -5,7 +5,7 @@ Steam does not expose a native custom-palette setting. This adapter is a CSS-onl
 ## Install
 
 1. Install Millennium from its [official Windows installation page](https://docs.steambrew.app/users/getting-started/installation).
-2. Run `install.ps1`. It resolves the registered Steam path, backs up any existing `PridePrism` theme folder, and copies the adapter to `steamui\skins\PridePrism`.
+2. Run `install.ps1`. It resolves the registered Steam path, backs up any existing `PridePrism` theme folder, and copies the adapter to Millennium's active theme directory (`millennium\themes\PridePrism` in current releases, with legacy-path detection).
 3. In Steam, open **Steam -> Millennium -> Themes** and choose **Pride Prism**. If the Millennium CLI is available, `millennium themes use PridePrism` performs the same selection.
 4. Restart Steam when Millennium requests it.
 
