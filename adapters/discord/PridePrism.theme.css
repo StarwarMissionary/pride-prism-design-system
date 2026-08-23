@@ -1,0 +1,180 @@
+/**
+ * @name Pride Prism
+ * @author StarwarMissionary
+ * @description A dark, professional Progress Pride theme with restrained motion.
+ * @version 1.0.0
+ * @source https://github.com/StarwarMissionary/pride-prism-design-system
+ */
+
+:root {
+  --pp-red: #e40303;
+  --pp-orange: #ff8c00;
+  --pp-yellow: #ffed00;
+  --pp-green: #008026;
+  --pp-blue: #004dff;
+  --pp-violet: #750787;
+  --pp-trans-blue: #74d7ee;
+  --pp-trans-pink: #ffafc8;
+  --pp-surface: #140021;
+  --pp-surface-raised: #24103a;
+  --pp-surface-muted: #33164d;
+  --pp-ink: #fff9f2;
+  --pp-ink-muted: #dccfe5;
+  --pp-accent: #ff4fd8;
+  --pp-focus: #74d7ee;
+  --pp-spectrum: linear-gradient(
+    90deg,
+    var(--pp-red),
+    var(--pp-orange),
+    var(--pp-yellow),
+    var(--pp-green),
+    var(--pp-blue),
+    var(--pp-violet)
+  );
+}
+
+.theme-light,
+.theme-dark,
+.theme-darker,
+.theme-midnight {
+  --background-primary: var(--pp-surface) !important;
+  --background-secondary: #19072a !important;
+  --background-secondary-alt: #210c35 !important;
+  --background-tertiary: #0d0017 !important;
+  --background-floating: var(--pp-surface-raised) !important;
+  --background-accent: var(--pp-violet) !important;
+  --background-modifier-hover: rgba(255, 79, 216, 0.1) !important;
+  --background-modifier-active: rgba(255, 79, 216, 0.16) !important;
+  --background-modifier-selected: rgba(117, 7, 135, 0.42) !important;
+  --background-modifier-accent: rgba(255, 255, 255, 0.1) !important;
+  --channeltextarea-background: #26103b !important;
+  --modal-background: var(--pp-surface-raised) !important;
+  --modal-footer-background: #19072a !important;
+  --input-background: #0f011a !important;
+  --scrollbar-thin-thumb: var(--pp-violet) !important;
+  --scrollbar-auto-thumb: var(--pp-violet) !important;
+  --scrollbar-auto-track: #0d0017 !important;
+  --text-normal: var(--pp-ink) !important;
+  --text-muted: var(--pp-ink-muted) !important;
+  --header-primary: var(--pp-ink) !important;
+  --header-secondary: var(--pp-ink-muted) !important;
+  --interactive-normal: #dccfe5 !important;
+  --interactive-hover: #ffffff !important;
+  --interactive-active: var(--pp-trans-blue) !important;
+  --interactive-muted: #755f80 !important;
+  --brand-experiment: var(--pp-accent) !important;
+  --brand-experiment-560: #d72db5 !important;
+  --brand-500: var(--pp-accent) !important;
+  --status-positive: #00b85c !important;
+  --status-warning: var(--pp-yellow) !important;
+  --status-danger: #ff3b3b !important;
+
+  /* Current Discord surface tokens. */
+  --bg-base-primary: var(--pp-surface) !important;
+  --bg-base-secondary: #19072a !important;
+  --bg-base-tertiary: #0d0017 !important;
+  --bg-surface-overlay: var(--pp-surface-raised) !important;
+  --background-base-low: #19072a !important;
+  --background-base-lower: #0d0017 !important;
+  --background-base-lowest: #09000f !important;
+  --background-surface-high: var(--pp-surface-raised) !important;
+  --background-surface-higher: var(--pp-surface-muted) !important;
+  --background-surface-highest: #43205d !important;
+  --border-subtle: rgba(255, 255, 255, 0.1) !important;
+  --border-normal: rgba(255, 175, 200, 0.22) !important;
+  --text-default: var(--pp-ink) !important;
+  --text-muted-new: var(--pp-ink-muted) !important;
+}
+
+html,
+body,
+#app-mount {
+  background: var(--pp-surface) !important;
+}
+
+#app-mount::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100000;
+  height: 5px;
+  pointer-events: none;
+  background: var(--pp-spectrum);
+  background-size: 180% 100%;
+  box-shadow: 0 2px 14px rgba(255, 79, 216, 0.3);
+  animation: pride-prism-drift 12s linear infinite;
+}
+
+nav[aria-label="Servers sidebar"] {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 79, 216, 0.08), transparent 34%),
+    #0d0017 !important;
+}
+
+nav[aria-label="Servers sidebar"]::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 3px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    var(--pp-red),
+    var(--pp-orange),
+    var(--pp-yellow),
+    var(--pp-green),
+    var(--pp-blue),
+    var(--pp-violet)
+  );
+  opacity: 0.82;
+}
+
+a,
+[role="link"] {
+  --text-link: var(--pp-trans-blue) !important;
+}
+
+::selection {
+  color: var(--pp-ink);
+  background: rgba(255, 79, 216, 0.42);
+}
+
+:focus-visible {
+  outline: 2px solid var(--pp-focus) !important;
+  outline-offset: 2px !important;
+}
+
+[role="dialog"] {
+  border: 1px solid rgba(255, 175, 200, 0.18);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.48) !important;
+}
+
+[role="dialog"] nav [aria-selected="true"],
+[role="dialog"] nav a:hover {
+  background: linear-gradient(90deg, rgba(117, 7, 135, 0.65), rgba(255, 79, 216, 0.12)) !important;
+  color: var(--pp-ink) !important;
+}
+
+[aria-label="User settings"] button,
+[aria-label="User Settings"] button {
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+button:hover {
+  filter: saturate(1.06);
+}
+
+@keyframes pride-prism-drift {
+  to { background-position: 180% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #app-mount::before { animation: none; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -39,6 +39,13 @@ foreach ($file in $siteFiles) {
     Write-Host "SITE OK: $file"
 }
 
+$discordTheme = Join-Path $repoRoot 'adapters\discord\PridePrism.theme.css'
+if (-not (Test-Path -LiteralPath $discordTheme)) { throw "Discord theme missing: $discordTheme" }
+if (-not (Select-String -LiteralPath $discordTheme -Pattern '@name Pride Prism' -Quiet)) {
+    throw 'Discord theme metadata is invalid.'
+}
+Write-Host "DISCORD THEME OK: $discordTheme"
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if ($node) {
     & $node.Source --check (Join-Path $repoRoot 'docs\app.js')
