@@ -7,7 +7,9 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 $jsonFiles = @(
     (Join-Path $repoRoot 'tokens\pride-prism.tokens.json'),
     (Join-Path $repoRoot 'adapters\discord\pride-prism-gradient.json'),
-    (Join-Path $repoRoot 'adapters\chrome\manifest.json')
+    (Join-Path $repoRoot 'adapters\chrome\manifest.json'),
+    (Join-Path $repoRoot 'adapters\chrome-start-page\manifest.json'),
+    (Join-Path $repoRoot 'adapters\steam\PridePrism\skin.json')
 )
 
 foreach ($file in $jsonFiles) {
@@ -46,11 +48,41 @@ if (-not (Select-String -LiteralPath $discordTheme -Pattern '@name Pride Prism' 
 }
 Write-Host "DISCORD THEME OK: $discordTheme"
 
+$steamThemeRoot = Join-Path $repoRoot 'adapters\steam\PridePrism'
+$steamThemeFiles = @(
+    'libraryroot.custom.css',
+    'libraryroot.custom.js',
+    'friends.custom.css',
+    'friends.custom.js',
+    'bigpicture.custom.css',
+    'bigpicture.custom.js',
+    'webkit.css'
+)
+foreach ($name in $steamThemeFiles) {
+    $file = Join-Path $steamThemeRoot $name
+    if (-not (Test-Path -LiteralPath $file)) { throw "Steam theme asset missing: $file" }
+    Write-Host "STEAM THEME OK: $file"
+}
+
+$steamScriptFiles = $steamThemeFiles | Where-Object { $_ -like '*.js' }
+foreach ($name in $steamScriptFiles) {
+    $file = Join-Path $steamThemeRoot $name
+    $activeCode = Get-Content -LiteralPath $file -Raw -Encoding UTF8
+    $activeCode = $activeCode -replace '(?s)/\*.*?\*/', '' -replace '(?m)^\s*//.*$', ''
+    if (-not [string]::IsNullOrWhiteSpace($activeCode)) {
+        throw "Steam adapter must remain CSS-only: $file"
+    }
+}
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if ($node) {
     & $node.Source --check (Join-Path $repoRoot 'docs\app.js')
     if ($LASTEXITCODE -ne 0) { throw 'Website JavaScript validation failed.' }
     Write-Host 'JAVASCRIPT OK: docs\app.js'
+
+    & $node.Source --check (Join-Path $repoRoot 'adapters\chrome-start-page\app.js')
+    if ($LASTEXITCODE -ne 0) { throw 'Chrome start-page JavaScript validation failed.' }
+    Write-Host 'JAVASCRIPT OK: adapters\chrome-start-page\app.js'
 }
 
 $buildScript = Join-Path $repoRoot 'tools\PridePrankLab\build.ps1'

@@ -9,9 +9,10 @@ Pride Prism is a polished, high-contrast Pride theme system for desktop apps. It
 - Shared color, typography, motion, and effect tokens in JSON, CSS, and XAML.
 - A native ChatGPT/Codex configuration adapter.
 - A permissionless Chrome theme package with no scripts or site access.
+- A separate permissionless Chrome start page with local shortcuts and opt-in celebration.
 - A portable Windows `.theme` package and restore workflow.
 - Discord custom-gradient values plus a no-restart theme for existing Vencord installs.
-- A Steam-safe fallback that does not patch or inject into the client.
+- A Millennium-compatible Steam theme, kept CSS-only and reversible.
 - The optional Pride Prank Lab overlay for live celebration effects across supported desktop windows.
 
 ## Default character
@@ -32,7 +33,7 @@ The Windows and Chrome adapters include generated bitmap assets. Recreate them w
 
 ## Safety and reversibility
 
-Pride Prism does not modify signed application binaries. The Chrome package is theme-only and requests no permissions. The Windows installer saves the previous theme path. Discord can use its native Nitro editor or the local Vencord theme when Vencord is already installed; Steam falls back safely when its client does not expose the requested customization.
+Pride Prism does not modify signed application binaries. The Chrome package is theme-only and requests no permissions. The Windows installer saves the previous theme path. Discord can use its native Nitro editor or the local Vencord theme when Vencord is already installed. Steam's client does not expose custom palettes, so its CSS-only adapter requires the optional third-party, open-source Millennium framework; the adapter README documents installation and rollback.
 
 ## References
 
@@ -40,6 +41,8 @@ Pride Prism does not modify signed application binaries. The Chrome package is t
 - [Discord custom themes](https://support.discord.com/hc/en-us/articles/207260127-How-to-Change-Discord-Color-Themes-and-Customize-Appearance-Settings)
 - [Chrome themes](https://developer.chrome.com/docs/extensions/mv2/themes)
 - [Windows theme file format](https://learn.microsoft.com/en-us/windows/win32/controls/themesfileformat-overview)
+- [Millennium installation](https://docs.steambrew.app/users/getting-started/installation)
+- [Millennium theme template](https://github.com/SteamClientHomebrew/ThemeTemplate)
 
 ## License
 

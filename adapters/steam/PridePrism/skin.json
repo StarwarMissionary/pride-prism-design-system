@@ -1,0 +1,20 @@
+{
+  "name": "Pride Prism",
+  "author": "StarwarMissionary",
+  "description": "A dark, professional Progress Pride theme with restrained motion.",
+  "github": {
+    "owner": "StarwarMissionary",
+    "repo_name": "pride-prism-design-system"
+  },
+  "header_image": "https://starwarmissionary.github.io/pride-prism-design-system/assets/pride-prism-og.png",
+  "splash_image": "https://starwarmissionary.github.io/pride-prism-design-system/assets/pride-prism-og.png",
+  "tags": [
+    "Dark",
+    "Colorful",
+    "Pride",
+    "Accessibility"
+  ],
+  "version": "1.0.0",
+  "Steam-WebKit": "webkit.css",
+  "UseDefaultPatches": true
+}

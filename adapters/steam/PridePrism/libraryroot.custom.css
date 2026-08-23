@@ -1,0 +1,163 @@
+/**
+ * Pride Prism — Steam desktop and library
+ * Dark work surfaces, Progress Pride edge accents, restrained motion.
+ */
+
+:root {
+  --pp-red: #e40303;
+  --pp-orange: #ff8c00;
+  --pp-yellow: #ffed00;
+  --pp-green: #008026;
+  --pp-blue: #004dff;
+  --pp-violet: #750787;
+  --pp-trans-blue: #74d7ee;
+  --pp-trans-pink: #ffafc8;
+  --pp-surface: #140021;
+  --pp-surface-raised: #24103a;
+  --pp-surface-muted: #33164d;
+  --pp-ink: #fff9f2;
+  --pp-ink-muted: #dccfe5;
+  --pp-accent: #ff4fd8;
+  --pp-focus: #74d7ee;
+
+  --gpSystemLightestGrey: var(--pp-ink) !important;
+  --gpSystemLighterGrey: var(--pp-ink-muted) !important;
+  --gpSystemLightGrey: #aa98b4 !important;
+  --gpSystemGrey: #755f80 !important;
+  --gpSystemDarkGrey: var(--pp-surface-muted) !important;
+  --gpSystemDarkerGrey: var(--pp-surface-raised) !important;
+  --gpSystemDarkestGrey: var(--pp-surface) !important;
+  --gpStoreLightestGrey: var(--pp-ink) !important;
+  --gpStoreLighterGrey: var(--pp-ink-muted) !important;
+  --gpStoreLightGrey: #aa98b4 !important;
+  --gpStoreDarkGrey: var(--pp-surface-muted) !important;
+  --gpStoreDarkerGrey: var(--pp-surface-raised) !important;
+  --gpStoreDarkestGrey: var(--pp-surface) !important;
+  --gpColor-Blue: var(--pp-accent) !important;
+  --gpColor-BlueHi: var(--pp-trans-blue) !important;
+  --gpColor-Green: #00b85c !important;
+  --gpColor-Yellow: var(--pp-yellow) !important;
+  --gpColor-Red: #ff3b3b !important;
+}
+
+html,
+body,
+#root,
+.steamdesktop,
+[class*="DesktopUI"] {
+  color: var(--pp-ink) !important;
+  background: var(--pp-surface) !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 999999;
+  height: 5px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--pp-red),
+    var(--pp-orange),
+    var(--pp-yellow),
+    var(--pp-green),
+    var(--pp-blue),
+    var(--pp-violet)
+  );
+  background-size: 180% 100%;
+  box-shadow: 0 2px 16px rgba(255, 79, 216, 0.3);
+  animation: pride-prism-steam-drift 14s linear infinite;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 5px auto 0 0;
+  z-index: 999998;
+  width: 3px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    #000000,
+    #613915 18%,
+    var(--pp-trans-blue) 36%,
+    var(--pp-trans-pink) 54%,
+    #ffffff 70%,
+    var(--pp-violet)
+  );
+  opacity: 0.88;
+}
+
+[class*="libraryhome"],
+[class*="LibraryHome"],
+[class*="appdetails"],
+[class*="AppDetails"],
+[class*="gamelistbar"],
+[class*="GameList"],
+[class*="sidebar"],
+[class*="Sidebar"] {
+  background-color: var(--pp-surface) !important;
+}
+
+[class*="libraryhome"]::before,
+[class*="LibraryHome"]::before,
+[class*="appdetails"]::before,
+[class*="AppDetails"]::before {
+  background: radial-gradient(circle at 84% 0%, rgba(117, 7, 135, 0.22), transparent 34rem) !important;
+}
+
+[class*="gamelistentry_Selected"],
+[class*="Selected"] [class*="gamelistentry"],
+[aria-selected="true"] {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(90deg, rgba(117, 7, 135, 0.72), rgba(255, 79, 216, 0.12)) !important;
+}
+
+button,
+[role="button"] {
+  border-radius: 8px !important;
+  transition: color 160ms ease, background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease !important;
+}
+
+button:hover,
+[role="button"]:hover {
+  filter: saturate(1.08);
+}
+
+a,
+[role="link"] {
+  color: var(--pp-trans-blue) !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  color: var(--pp-ink) !important;
+  background: rgba(9, 0, 15, 0.72) !important;
+  border-color: rgba(255, 175, 200, 0.2) !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--pp-focus) !important;
+  outline-offset: 2px !important;
+}
+
+::selection {
+  color: var(--pp-ink);
+  background: rgba(255, 79, 216, 0.42);
+}
+
+@keyframes pride-prism-steam-drift {
+  to { background-position: 180% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

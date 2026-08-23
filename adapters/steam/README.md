@@ -1,5 +1,16 @@
 # Steam adapter
 
-This adapter does not modify Steam files, web UI resources, or signed client packages. The current safe default is to let Steam inherit the Pride Prism Windows accent where supported.
+Steam does not expose a native custom-palette setting. This adapter is a CSS-only theme for [Millennium](https://github.com/SteamClientHomebrew/Millennium), the open-source third-party Steam client theming framework. Millennium changes how Steam loads at startup; review its documentation before installing it.
 
-For an explicit Pride border or celebration moment, choose **Steam** in the optional Pride Prank Lab. Continuous confetti and disco effects are disabled by default.
+## Install
+
+1. Install Millennium from its [official Windows installation page](https://docs.steambrew.app/users/getting-started/installation).
+2. Run `install.ps1`. It resolves the registered Steam path, backs up any existing `PridePrism` theme folder, and copies the adapter to `steamui\skins\PridePrism`.
+3. In Steam, open **Steam -> Millennium -> Themes** and choose **Pride Prism**. If the Millennium CLI is available, `millennium themes use PridePrism` performs the same selection.
+4. Restart Steam when Millennium requests it.
+
+The theme uses vanilla CSS and contains no executable JavaScript. Motion is limited to a slow edge accent and is disabled by `prefers-reduced-motion`.
+
+## Roll back
+
+Select the default theme in Steam, or run `Start-Process "steam://millennium/settings/themes/disable"`. To remove Millennium itself, use its [official uninstall workflow](https://docs.steambrew.app/users/parting-ways/uninstall).

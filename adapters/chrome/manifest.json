@@ -20,7 +20,7 @@
       "ntp_background": [20, 0, 33],
       "ntp_text": [255, 249, 242],
       "ntp_link": [116, 215, 238],
-      "button_background": [255, 79, 216]
+      "button_background": [36, 16, 58]
     },
     "tints": {
       "buttons": [0.88, 0.62, 0.72]

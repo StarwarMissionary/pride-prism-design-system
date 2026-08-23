@@ -1,0 +1,39 @@
+/** Pride Prism — Steam friends and chat */
+
+:root {
+  --pp-surface: #140021;
+  --pp-raised: #24103a;
+  --pp-muted: #33164d;
+  --pp-ink: #fff9f2;
+  --pp-ink-muted: #dccfe5;
+  --pp-accent: #ff4fd8;
+  --pp-focus: #74d7ee;
+}
+
+html,
+body,
+#root,
+[class*="friendsui"],
+[class*="chatRoom"] {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-surface) !important;
+}
+
+[class*="friendList"],
+[class*="chatHeader"],
+[class*="ChatRoomGroup"] {
+  background-color: var(--pp-raised) !important;
+}
+
+[class*="chatEntry"],
+[class*="FriendMessage"] {
+  border-color: rgba(255, 175, 200, 0.14) !important;
+}
+
+[class*="friendGroup"] [aria-selected="true"],
+[class*="chatRoom"] [aria-selected="true"] {
+  background: linear-gradient(90deg, rgba(117, 7, 135, 0.72), rgba(255, 79, 216, 0.12)) !important;
+}
+
+a { color: var(--pp-focus) !important; }
+:focus-visible { outline: 2px solid var(--pp-focus) !important; outline-offset: 2px !important; }

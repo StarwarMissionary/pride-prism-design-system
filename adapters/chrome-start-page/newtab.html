@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Pride Prism</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="pride-edge" aria-hidden="true"></div>
+    <div class="progress-edge" aria-hidden="true"></div>
+    <div class="aurora aurora-one" aria-hidden="true"></div>
+    <div class="aurora aurora-two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="https://starwarmissionary.github.io/pride-prism-design-system/" aria-label="Open the Pride Prism design system">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <span>Pride Prism</span>
+      </a>
+      <div class="topbar-actions">
+        <button class="quiet-button" id="manageButton" type="button" aria-pressed="false">Manage</button>
+        <button class="celebrate-button" id="celebrateButton" type="button">
+          <span aria-hidden="true">✦</span> Celebrate
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="greeting">
+        <p class="eyebrow" id="dateText">Today</p>
+        <h1 id="clockText">00:00</h1>
+        <p class="greeting" id="greeting">Welcome back.</p>
+
+        <form class="search" action="https://www.google.com/search" method="get" role="search">
+          <label class="sr-only" for="searchInput">Search Google</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m21 21-4.4-4.4m2.4-5.1a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" />
+          </svg>
+          <input id="searchInput" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search the web" />
+          <kbd>/</kbd>
+        </form>
+      </section>
+
+      <section class="shortcuts-section" aria-labelledby="shortcutsTitle">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Your space</p>
+            <h2 id="shortcutsTitle">Quick launch</h2>
+          </div>
+          <p class="manage-hint" id="manageHint">Remove shortcuts or add your own.</p>
+        </div>
+        <div class="shortcut-grid" id="shortcutGrid"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span class="status-dot" aria-hidden="true"></span>
+      Proudly dark. Quietly joyful.
+    </footer>
+
+    <dialog id="shortcutDialog">
+      <form method="dialog" id="shortcutForm">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">Quick launch</p>
+            <h2>Add a shortcut</h2>
+          </div>
+          <button class="icon-button" type="button" id="closeDialogButton" aria-label="Close">×</button>
+        </div>
+        <label>
+          Name
+          <input id="shortcutName" name="name" required maxlength="24" autocomplete="off" placeholder="Design system" />
+        </label>
+        <label>
+          Web address
+          <input id="shortcutUrl" name="url" required type="url" autocomplete="off" placeholder="https://example.com" />
+        </label>
+        <div class="dialog-actions">
+          <button class="quiet-button" type="button" id="cancelDialogButton">Cancel</button>
+          <button class="primary-button" type="submit">Add shortcut</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="celebration" id="celebration" aria-hidden="true"></div>
+    <p class="sr-only" id="announcement" aria-live="polite"></p>
+    <script src="app.js"></script>
+  </body>
+</html>

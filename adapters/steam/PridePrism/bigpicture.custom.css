@@ -1,0 +1,26 @@
+/** Pride Prism — Steam Big Picture */
+
+:root {
+  --pp-surface: #140021;
+  --pp-raised: #24103a;
+  --pp-ink: #fff9f2;
+  --pp-accent: #ff4fd8;
+  --pp-focus: #74d7ee;
+}
+
+html,
+body,
+#root {
+  color: var(--pp-ink) !important;
+  background: radial-gradient(circle at 80% 0%, rgba(117, 7, 135, 0.25), transparent 40rem), var(--pp-surface) !important;
+}
+
+[class*="Focused"],
+:focus-visible {
+  outline-color: var(--pp-focus) !important;
+  box-shadow: 0 0 0 3px rgba(116, 215, 238, 0.28) !important;
+}
+
+[class*="Primary"] {
+  background: linear-gradient(90deg, #750787, var(--pp-accent)) !important;
+}

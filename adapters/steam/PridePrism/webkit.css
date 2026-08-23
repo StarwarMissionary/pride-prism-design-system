@@ -1,0 +1,59 @@
+/** Pride Prism — Steam store and community surfaces */
+
+:root {
+  --pp-surface: #140021;
+  --pp-raised: #24103a;
+  --pp-muted: #33164d;
+  --pp-ink: #fff9f2;
+  --pp-ink-muted: #dccfe5;
+  --pp-accent: #ff4fd8;
+  --pp-focus: #74d7ee;
+  --gpStoreDarkestGrey: var(--pp-surface) !important;
+  --gpStoreDarkerGrey: var(--pp-raised) !important;
+  --gpStoreDarkGrey: var(--pp-muted) !important;
+  --gpStoreLightestGrey: var(--pp-ink) !important;
+  --gpStoreLighterGrey: var(--pp-ink-muted) !important;
+  --gpColor-Blue: var(--pp-accent) !important;
+  --gpColor-BlueHi: var(--pp-focus) !important;
+}
+
+html,
+body,
+body.v6,
+.responsive_page_frame,
+.responsive_page_content,
+.responsive_page_template_content,
+.home_page_body_ctn,
+.page_content_ctn {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-surface) !important;
+}
+
+body {
+  background-image: radial-gradient(circle at 85% 0%, rgba(117, 7, 135, 0.2), transparent 36rem) !important;
+}
+
+.store_nav,
+.store_header_btn,
+.popup_block_new,
+.newmodal {
+  background-color: var(--pp-raised) !important;
+  border-color: rgba(255, 175, 200, 0.18) !important;
+}
+
+a,
+.linkbar,
+.btnv6_blue_hoverfade > span {
+  color: var(--pp-focus) !important;
+}
+
+.btn_green_white_innerfade,
+.btnv6_blue_hoverfade,
+.btn_blue_steamui {
+  background: linear-gradient(90deg, #750787, var(--pp-accent)) !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--pp-focus) !important;
+  outline-offset: 2px !important;
+}
