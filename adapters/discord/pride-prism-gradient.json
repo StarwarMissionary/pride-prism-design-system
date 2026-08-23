@@ -1,0 +1,14 @@
+{
+  "name": "Pride Prism",
+  "mode": "dark",
+  "colors": [
+    "#E40303",
+    "#FF8C00",
+    "#FFED00",
+    "#008026",
+    "#750787"
+  ],
+  "directionDegrees": 135,
+  "intensityPercent": 82,
+  "note": "Discord supports up to five custom-gradient colors for eligible Nitro accounts."
+}

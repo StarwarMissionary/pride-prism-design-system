@@ -1,0 +1,54 @@
+:root {
+  --prism-red: #e40303;
+  --prism-orange: #ff8c00;
+  --prism-yellow: #ffed00;
+  --prism-green: #008026;
+  --prism-blue: #004dff;
+  --prism-violet: #750787;
+  --prism-trans-blue: #74d7ee;
+  --prism-trans-pink: #ffafc8;
+
+  --prism-surface: #140021;
+  --prism-surface-raised: #24103a;
+  --prism-surface-muted: #33164d;
+  --prism-foreground: #fff9f2;
+  --prism-foreground-muted: #dccfe5;
+  --prism-accent: #ff4fd8;
+  --prism-focus: #74d7ee;
+  --prism-positive: #00b85c;
+  --prism-warning: #ffed00;
+  --prism-negative: #ff3b3b;
+
+  --prism-gradient-classic: linear-gradient(90deg, #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787);
+  --prism-gradient-progress: linear-gradient(135deg, #000 0%, #613915 9%, #74d7ee 18%, #ffafc8 27%, #fff 36%, #e40303 48%, #ff8c00 58%, #ffed00 68%, #008026 78%, #004dff 89%, #750787 100%);
+  --prism-gradient-surface: linear-gradient(135deg, #140021 0%, #24103a 55%, #33164d 100%);
+  --prism-radius-sm: 6px;
+  --prism-radius-md: 12px;
+  --prism-radius-lg: 18px;
+  --prism-shadow: 0 16px 48px rgb(20 0 33 / 34%);
+  --prism-motion-fast: 160ms;
+  --prism-motion-standard: 280ms;
+  --prism-motion-gradient: 1200ms;
+  --prism-easing: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-prism-theme="light"] {
+  --prism-surface: #fff4fa;
+  --prism-surface-raised: #fff;
+  --prism-surface-muted: #f3dff0;
+  --prism-foreground: #2b0033;
+  --prism-foreground-muted: #65436b;
+  --prism-accent: #750787;
+  --prism-focus: #004dff;
+  --prism-positive: #008026;
+  --prism-warning: #ff8c00;
+  --prism-negative: #e40303;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}

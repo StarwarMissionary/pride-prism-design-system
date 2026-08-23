@@ -1,0 +1,8 @@
+bin/
+obj/
+*.user
+*.suo
+*.log
+.DS_Store
+Thumbs.db
+adapters/windows/.install-state/
