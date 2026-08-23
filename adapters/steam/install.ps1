@@ -40,6 +40,25 @@ if (Test-Path -LiteralPath $destination) {
 Copy-Item -LiteralPath $source -Destination $destination -Recurse
 Write-Host "Pride Prism installed at: $destination"
 
+if (Test-Path -LiteralPath $currentMillenniumDll) {
+    $configRoot = Join-Path $SteamPath 'millennium\config'
+    $quickCssPath = Join-Path $configRoot 'quick.css'
+    New-Item -ItemType Directory -Path $configRoot -Force | Out-Null
+
+    if (Test-Path -LiteralPath $quickCssPath) {
+        $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+        $quickCssBackup = Join-Path $configRoot "quick.css.backup-$timestamp"
+        Copy-Item -LiteralPath $quickCssPath -Destination $quickCssBackup
+        Write-Host "Previous Millennium Quick CSS preserved at: $quickCssBackup"
+    }
+
+    $libraryCss = Get-Content -LiteralPath (Join-Path $source 'libraryroot.custom.css') -Raw
+    $webkitCss = Get-Content -LiteralPath (Join-Path $source 'webkit.css') -Raw
+    $quickCss = "/* Pride Prism generated fallback: Steam desktop + webviews */`r`n$libraryCss`r`n$webkitCss"
+    Set-Content -LiteralPath $quickCssPath -Value $quickCss -Encoding UTF8
+    Write-Host "Pride Prism Quick CSS fallback installed at: $quickCssPath"
+}
+
 $millennium = Get-Command millennium -ErrorAction SilentlyContinue
 if ($millennium) {
     & $millennium.Source themes use PridePrism

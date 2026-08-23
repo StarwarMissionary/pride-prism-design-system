@@ -160,6 +160,77 @@ textarea,
   background: rgba(255, 79, 216, 0.42);
 }
 
+/* Steam desktop UI (stable, non-hashed class names) */
+html.MillenniumWindow_MainSteamWindow,
+html.MillenniumWindow_MainSteamWindow body.DesktopUI,
+body.DesktopUI .Wrapper.ForceOpaqueBackground,
+body.DesktopUI .OuterFrame,
+body.DesktopUI .ContentFrame,
+body.DesktopUI .LocalContentContainer {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-surface) !important;
+  background-image: none !important;
+}
+
+body.DesktopUI .TopBar,
+body.DesktopUI .TitleBar,
+body.DesktopUI .BottomBar,
+body.DesktopUI .RootMenuBar,
+body.DesktopUI .SuperNavBar {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(90deg, var(--pp-surface-raised), #2d1046 56%, var(--pp-surface-muted)) !important;
+  border-color: rgba(116, 215, 238, 0.22) !important;
+}
+
+body.DesktopUI .TopBar,
+body.DesktopUI .BottomBar {
+  position: relative !important;
+  box-shadow: 0 8px 28px rgba(9, 0, 15, 0.28) !important;
+}
+
+body.DesktopUI .TopBar::after,
+body.DesktopUI .BottomBar::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  z-index: 30;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--pp-red), var(--pp-orange), var(--pp-yellow), var(--pp-green), var(--pp-blue), var(--pp-violet), var(--pp-trans-blue), var(--pp-trans-pink)) !important;
+}
+
+body.DesktopUI .BottomBar::before {
+  inset: 0 0 auto 0;
+}
+
+body.DesktopUI .RootMenuButton,
+body.DesktopUI .SuperNav,
+body.DesktopUI .SuperNavBar,
+body.DesktopUI .FriendsButton,
+body.DesktopUI .DownloadStatus {
+  color: var(--pp-ink-muted) !important;
+}
+
+body.DesktopUI .RootMenuButton:hover,
+body.DesktopUI .SuperNav:hover,
+body.DesktopUI .FriendsButton:hover,
+body.DesktopUI .DownloadStatus:hover {
+  color: var(--pp-trans-blue) !important;
+  background-color: rgba(117, 7, 135, 0.3) !important;
+}
+
+body.DesktopUI .WindowControls .windowControlButton,
+body.DesktopUI .TitleBarControls .windowControlButton {
+  color: var(--pp-ink-muted) !important;
+  background: transparent !important;
+}
+
+body.DesktopUI .WindowControls .windowControlButton:hover,
+body.DesktopUI .TitleBarControls .windowControlButton:hover {
+  color: var(--pp-ink) !important;
+  background: rgba(116, 215, 238, 0.14) !important;
+}
+
 @keyframes pride-prism-steam-drift {
   to { background-position: 180% 0; }
 }

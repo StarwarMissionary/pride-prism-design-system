@@ -213,6 +213,113 @@ a,
   scrollbar-color: #750787 var(--pp-surface) !important;
 }
 
+/* Steam Store v7 navigation and content */
+body.v7 :has(> [role="navigation"][aria-label="Store menu"]),
+body.v7 [role="navigation"][aria-label="Store menu"] {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(90deg, var(--pp-raised), #351252 52%, var(--pp-muted)) !important;
+  border-color: rgba(116, 215, 238, 0.24) !important;
+  box-shadow: 0 10px 28px rgba(9, 0, 15, 0.3) !important;
+}
+
+body.v7 [role="navigation"][aria-label="Store menu"] {
+  position: relative !important;
+}
+
+body.v7 [role="navigation"][aria-label="Store menu"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  pointer-events: none;
+  background: linear-gradient(90deg, #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787, #74d7ee, #ffafc8) !important;
+}
+
+body.v7 [role="navigation"][aria-label="Store menu"] :is(a, button, [role="button"]) {
+  color: var(--pp-ink) !important;
+  border-radius: 7px !important;
+}
+
+body.v7 [role="navigation"][aria-label="Store menu"] :is(a, button, [role="button"]):hover {
+  color: var(--pp-focus) !important;
+  background-color: rgba(117, 7, 135, 0.38) !important;
+}
+
+body.v7 form[role="search"] {
+  color: var(--pp-ink) !important;
+  background: rgba(9, 0, 15, 0.9) !important;
+  border: 1px solid rgba(255, 175, 200, 0.36) !important;
+  border-radius: 8px !important;
+  box-shadow: inset 0 0 0 1px rgba(116, 215, 238, 0.08) !important;
+}
+
+body.v7 form[role="search"] :is(input, [role="combobox"]) {
+  color: var(--pp-ink) !important;
+  background: transparent !important;
+}
+
+body.v7 form[role="search"] button {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(135deg, var(--pp-focus), var(--pp-accent)) !important;
+  border-radius: 7px !important;
+}
+
+body.v7 a[href*="/wishlist"] {
+  color: var(--pp-ink) !important;
+  background: rgba(117, 7, 135, 0.34) !important;
+  border: 1px solid rgba(255, 175, 200, 0.28) !important;
+  border-radius: 7px !important;
+}
+
+body.v7 #footer {
+  color: var(--pp-ink-muted) !important;
+  background: linear-gradient(145deg, rgba(36, 16, 58, 0.97), rgba(20, 0, 33, 0.98)) !important;
+  border-top: 1px solid rgba(116, 215, 238, 0.22) !important;
+}
+
+.home_page_takeover_link {
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+.home_page_takeover_link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgba(228, 3, 3, 0.17), rgba(255, 140, 0, 0.13) 18%, rgba(255, 237, 0, 0.1) 34%, rgba(0, 128, 38, 0.11) 50%, rgba(0, 77, 255, 0.16) 68%, rgba(117, 7, 135, 0.2) 84%, rgba(255, 79, 216, 0.18)) !important;
+  box-shadow: inset 0 0 0 2px rgba(255, 175, 200, 0.22) !important;
+}
+
+.main_capsule,
+.store_main_capsule,
+.tab_item,
+.home_area_spotlight,
+.sale_capsule {
+  outline: 1px solid rgba(116, 215, 238, 0.2) !important;
+  outline-offset: -1px !important;
+  box-shadow: 0 14px 36px rgba(9, 0, 15, 0.28) !important;
+}
+
+.main_capsule:hover,
+.store_main_capsule:hover,
+.tab_item:hover,
+.home_area_spotlight:hover,
+.sale_capsule:hover {
+  outline-color: rgba(255, 175, 200, 0.64) !important;
+  box-shadow: 0 16px 40px rgba(117, 7, 135, 0.32) !important;
+}
+
+.main_capsule .info,
+.tab_item_content,
+.spotlight_body,
+.home_tab_content {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-raised) !important;
+  background-image: none !important;
+}
+
 :focus-visible {
   outline: 2px solid var(--pp-focus) !important;
   outline-offset: 2px !important;

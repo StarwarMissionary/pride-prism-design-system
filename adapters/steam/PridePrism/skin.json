@@ -14,7 +14,7 @@
     "Pride",
     "Accessibility"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "Patches": [
     {
       "MatchRegexString": "^https:\\/\\/store\\.steampowered\\.com\\/.*",
