@@ -10,7 +10,7 @@ Pride Prism is a polished, high-contrast Pride theme system for desktop apps. It
 - A native ChatGPT/Codex configuration adapter.
 - A permissionless Chrome theme package with no scripts or site access.
 - A separate permissionless Chrome start page with local shortcuts and opt-in celebration.
-- A portable Windows `.theme` package and restore workflow.
+- A portable Windows `.theme` package plus a per-user rainbow cursor scheme and restore workflow.
 - Discord custom-gradient values plus a no-restart theme for existing Vencord installs.
 - A Millennium-compatible Steam theme, kept CSS-only and reversible.
 - The optional Pride Prank Lab overlay for live celebration effects across supported desktop windows.
@@ -33,7 +33,7 @@ The Windows and Chrome adapters include generated bitmap assets. Recreate them w
 
 ## Safety and reversibility
 
-Pride Prism does not modify signed application binaries. The Chrome package is theme-only and requests no permissions. The Windows installer saves the previous theme path. Discord can use its native Nitro editor or the local Vencord theme when Vencord is already installed. Steam's client does not expose custom palettes, so its CSS-only adapter requires the optional third-party, open-source Millennium framework; the adapter README documents installation and rollback.
+Pride Prism does not modify signed application binaries. The Chrome package is theme-only and requests no permissions. The Windows installers save the previous theme and cursor values before making per-user changes. Discord can use its native Nitro editor or the local Vencord theme when Vencord is already installed. Steam's client does not expose custom palettes, so its CSS-only adapter requires the optional third-party, open-source Millennium framework; the adapter README documents installation and rollback.
 
 ## References
 

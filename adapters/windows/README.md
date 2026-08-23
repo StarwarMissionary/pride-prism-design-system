@@ -11,3 +11,7 @@ Restore the previously recorded theme:
 ```powershell
 ./restore.ps1
 ```
+
+## Cursor scheme
+
+The separate [`cursor`](cursor/) adapter installs Pride Prism's rainbow pointer set for the current user without a restart. It preserves the original cursor registry values and includes its own restore script.

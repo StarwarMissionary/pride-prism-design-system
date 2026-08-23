@@ -41,6 +41,20 @@ foreach ($file in $siteFiles) {
     Write-Host "SITE OK: $file"
 }
 
+$cursorScripts = @(
+    (Join-Path $repoRoot 'adapters\windows\cursor\install.ps1'),
+    (Join-Path $repoRoot 'adapters\windows\cursor\restore.ps1'),
+    (Join-Path $repoRoot 'adapters\windows\cursor\refresh.ps1')
+)
+foreach ($file in $cursorScripts) {
+    if (-not (Test-Path -LiteralPath $file)) { throw "Cursor adapter script missing: $file" }
+    $tokens = $null
+    $errors = $null
+    [void][System.Management.Automation.Language.Parser]::ParseFile($file, [ref]$tokens, [ref]$errors)
+    if ($errors.Count) { throw "Cursor adapter syntax invalid: $file ($($errors.Message -join ' | '))" }
+    Write-Host "CURSOR SCRIPT OK: $file"
+}
+
 $discordTheme = Join-Path $repoRoot 'adapters\discord\PridePrism.theme.css'
 if (-not (Test-Path -LiteralPath $discordTheme)) { throw "Discord theme missing: $discordTheme" }
 if (-not (Select-String -LiteralPath $discordTheme -Pattern '@name Pride Prism' -Quiet)) {
