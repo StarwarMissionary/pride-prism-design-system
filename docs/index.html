@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#140021" />
+    <title>Pride Prism — Dark-first design system</title>
+    <meta
+      name="description"
+      content="A polished, accessible, dark-first Pride design system for desktop applications."
+    />
+    <meta property="og:title" content="Pride Prism — Dark-first design system" />
+    <meta
+      property="og:description"
+      content="Pride, engineered for everyday use. Tokens and adapters for Codex, Chrome, Discord, Steam, and Windows."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://starwarmissionary.github.io/pride-prism-design-system/" />
+    <meta
+      property="og:image"
+      content="https://starwarmissionary.github.io/pride-prism-design-system/assets/pride-prism-og.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pride Prism — Dark-first design system" />
+    <meta
+      name="twitter:description"
+      content="Pride, engineered for everyday use."
+    />
+    <meta
+      name="twitter:image"
+      content="https://starwarmissionary.github.io/pride-prism-design-system/assets/pride-prism-og.png"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="#top" aria-label="Pride Prism home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Pride Prism</span>
+        </a>
+        <nav aria-label="Primary navigation">
+          <a href="#foundations">Foundations</a>
+          <a href="#palette">Palette</a>
+          <a href="#adapters">Adapters</a>
+          <a
+            class="nav-github"
+            href="https://github.com/StarwarMissionary/pride-prism-design-system"
+          >GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero shell" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Dark by default · WCAG-minded</p>
+          <h1>Pride, engineered for <span>everyday use.</span></h1>
+          <p class="hero-lede">
+            A cohesive token system for interfaces that feel celebratory without
+            sacrificing focus. Vivid identity, deep-violet surfaces, and motion
+            that knows when to stay quiet.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#palette">Explore the system</a>
+            <a
+              class="button button-secondary"
+              href="https://github.com/StarwarMissionary/pride-prism-design-system"
+            >View source <span aria-hidden="true">↗</span></a>
+          </div>
+          <ul class="proof-list" aria-label="Design system qualities">
+            <li>Native-first</li>
+            <li>Reversible</li>
+            <li>Reduced-motion ready</li>
+          </ul>
+        </div>
+
+        <div class="hero-art" aria-label="Pride Prism interface preview">
+          <div class="prism-stage">
+            <div class="stage-topbar">
+              <span class="stage-dot red"></span>
+              <span class="stage-dot yellow"></span>
+              <span class="stage-dot green"></span>
+              <span class="stage-title">pride-prism.tokens.json</span>
+            </div>
+            <div class="stage-body">
+              <div class="mini-sidebar" aria-hidden="true">
+                <span class="mini-logo"></span>
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="mini-canvas">
+                <p class="mini-label">ACTIVE THEME</p>
+                <div class="mini-heading">Build brightly.</div>
+                <p class="mini-copy">Professional contrast with unmistakable Pride.</p>
+                <div class="mini-palette" aria-hidden="true">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+                <div class="mini-card-row" aria-hidden="true">
+                  <span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-chip chip-one">Surface · #140021</div>
+          <div class="floating-chip chip-two">Accent · #FF4FD8</div>
+        </div>
+      </section>
+
+      <section class="rainbow-rule" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </section>
+
+      <section class="section shell" id="foundations">
+        <div class="section-heading">
+          <p class="kicker">01 · Foundations</p>
+          <h2>Expressive where it matters.<br />Quiet where work happens.</h2>
+          <p>
+            Pride Prism treats the rainbow as identity and the interface as a tool.
+            Color celebrates at the edges; content stays calm and readable.
+          </p>
+        </div>
+        <div class="principle-grid">
+          <article class="principle-card featured">
+            <span class="card-number">01</span>
+            <div class="principle-icon contrast-icon" aria-hidden="true"></div>
+            <h3>Contrast first</h3>
+            <p>Warm white type sits on near-black violet, preserving hierarchy and long-session comfort.</p>
+            <div class="metric"><strong>16.8:1</strong><span>Primary text contrast</span></div>
+          </article>
+          <article class="principle-card">
+            <span class="card-number">02</span>
+            <div class="principle-icon spectrum-icon" aria-hidden="true"></div>
+            <h3>Full-spectrum identity</h3>
+            <p>Classic and Progress Pride colors are first-class tokens, not a decorative afterthought.</p>
+          </article>
+          <article class="principle-card">
+            <span class="card-number">03</span>
+            <div class="principle-icon motion-icon" aria-hidden="true"></div>
+            <h3>Purposeful motion</h3>
+            <p>Transitions guide attention. Celebration is brief, intentional, and never enabled by default.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section palette-section" id="palette">
+        <div class="shell">
+          <div class="section-heading split-heading">
+            <div>
+              <p class="kicker">02 · Color</p>
+              <h2>A spectrum with a job.</h2>
+            </div>
+            <p>
+              Every color has a stable token and clear role. Select any swatch to
+              copy its value.
+            </p>
+          </div>
+
+          <div class="palette-group">
+            <div class="palette-label"><h3>Classic Pride</h3><span>Identity spectrum</span></div>
+            <div class="swatch-grid classic-swatches">
+              <button class="swatch red" data-copy="#E40303"><span>Red</span><code>#E40303</code></button>
+              <button class="swatch orange" data-copy="#FF8C00"><span>Orange</span><code>#FF8C00</code></button>
+              <button class="swatch yellow" data-copy="#FFED00"><span>Yellow</span><code>#FFED00</code></button>
+              <button class="swatch green" data-copy="#008026"><span>Green</span><code>#008026</code></button>
+              <button class="swatch blue" data-copy="#004DFF"><span>Blue</span><code>#004DFF</code></button>
+              <button class="swatch violet" data-copy="#750787"><span>Violet</span><code>#750787</code></button>
+            </div>
+          </div>
+
+          <div class="palette-group progress-group">
+            <div class="palette-label"><h3>Progress Pride</h3><span>Inclusive extensions</span></div>
+            <div class="swatch-grid progress-swatches">
+              <button class="swatch black" data-copy="#000000"><span>Black</span><code>#000000</code></button>
+              <button class="swatch brown" data-copy="#613915"><span>Brown</span><code>#613915</code></button>
+              <button class="swatch trans-blue" data-copy="#74D7EE"><span>Trans blue</span><code>#74D7EE</code></button>
+              <button class="swatch trans-pink" data-copy="#FFAFC8"><span>Trans pink</span><code>#FFAFC8</code></button>
+              <button class="swatch white" data-copy="#FFFFFF"><span>White</span><code>#FFFFFF</code></button>
+            </div>
+          </div>
+
+          <div class="token-lab">
+            <div class="token-code">
+              <div class="code-header"><span>CSS custom properties</span><button data-copy-target="token-snippet">Copy snippet</button></div>
+              <pre id="token-snippet"><code><span class="code-selector">:root</span> {
+  <span class="code-key">--prism-surface</span>: <span class="code-value">#140021</span>;
+  <span class="code-key">--prism-ink</span>: <span class="code-value">#FFF9F2</span>;
+  <span class="code-key">--prism-accent</span>: <span class="code-value">#FF4FD8</span>;
+  <span class="code-key">--prism-focus</span>: <span class="code-value">#74D7EE</span>;
+  <span class="code-key">--prism-motion</span>: <span class="code-value">280ms</span>;
+}</code></pre>
+            </div>
+            <div class="token-preview">
+              <div class="preview-header">
+                <div><span>Live surface</span><strong>Dark / Pride Prism</strong></div>
+                <span class="status-pill">Active</span>
+              </div>
+              <div class="preview-message">
+                <span class="avatar">PP</span>
+                <div><strong>Pride Prism</strong><p>Readable by default. Celebratory by choice.</p></div>
+              </div>
+              <label class="intensity-control" for="intensity">
+                <span>Decorative intensity</span><output id="intensity-output">35%</output>
+              </label>
+              <input id="intensity" type="range" min="10" max="100" value="35" />
+              <button class="button button-primary compact" id="celebrate" type="button">Preview celebration</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="adapters">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="kicker">03 · Adapters</p>
+            <h2>One system.<br />Five surfaces.</h2>
+          </div>
+          <p>Native settings lead. Safe, reversible fallbacks cover what each application does not expose.</p>
+        </div>
+        <div class="adapter-list">
+          <article class="adapter-row">
+            <div class="app-icon codex-icon">C</div><div><h3>ChatGPT / Codex</h3><p>Dark violet chrome, magenta accent, Dracula code theme</p></div><span class="native-badge">Native</span>
+          </article>
+          <article class="adapter-row">
+            <div class="app-icon discord-icon">D</div><div><h3>Discord</h3><p>Five-color custom gradient for eligible Nitro accounts</p></div><span class="native-badge">Native</span>
+          </article>
+          <article class="adapter-row">
+            <div class="app-icon chrome-icon">G</div><div><h3>Google Chrome</h3><p>Permissionless theme package with Pride frame and new tab</p></div><span class="native-badge">Native</span>
+          </article>
+          <article class="adapter-row">
+            <div class="app-icon windows-icon">W</div><div><h3>Windows</h3><p>Dark app/system mode, Progress Pride wallpaper, violet accent</p></div><span class="native-badge">Native</span>
+          </article>
+          <article class="adapter-row">
+            <div class="app-icon steam-icon">S</div><div><h3>Steam</h3><p>Dark client plus safe Windows accent inheritance where supported</p></div><span class="fallback-badge">Safe fallback</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section motion-section">
+        <div class="shell motion-layout">
+          <div>
+            <p class="kicker">04 · Motion</p>
+            <h2>Celebration,<br />with restraint.</h2>
+          </div>
+          <div class="motion-copy">
+            <p>
+              Core transitions finish in 160–280 ms. Ambient accents move on a slow
+              five-second cycle. Decorative bursts last six seconds and require an
+              explicit action.
+            </p>
+            <ul>
+              <li><span>160 ms</span> Focus and hover response</li>
+              <li><span>280 ms</span> Standard interface transition</li>
+              <li><span>5 s</span> Optional ambient accent cycle</li>
+              <li><span>0</span> Continuous effects enabled by default</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing shell">
+        <div class="closing-card">
+          <p class="kicker">Open design system</p>
+          <h2>Love wins.<br />Build brightly.</h2>
+          <p>Use the tokens, adapt the system, and keep every surface unmistakably yours.</p>
+          <a class="button button-primary" href="https://github.com/StarwarMissionary/pride-prism-design-system">Get Pride Prism on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-inner">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>Pride Prism</span></div>
+        <p>Designed with intention · <span id="year"></span></p>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+  </body>
+</html>

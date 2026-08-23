@@ -28,6 +28,24 @@ foreach ($file in $images) {
     finally { $image.Dispose() }
 }
 
+$siteFiles = @(
+    (Join-Path $repoRoot 'docs\index.html'),
+    (Join-Path $repoRoot 'docs\styles.css'),
+    (Join-Path $repoRoot 'docs\app.js'),
+    (Join-Path $repoRoot 'docs\assets\pride-prism-og.png')
+)
+foreach ($file in $siteFiles) {
+    if (-not (Test-Path -LiteralPath $file)) { throw "Site asset missing: $file" }
+    Write-Host "SITE OK: $file"
+}
+
+$node = Get-Command node -ErrorAction SilentlyContinue
+if ($node) {
+    & $node.Source --check (Join-Path $repoRoot 'docs\app.js')
+    if ($LASTEXITCODE -ne 0) { throw 'Website JavaScript validation failed.' }
+    Write-Host 'JAVASCRIPT OK: docs\app.js'
+}
+
 $buildScript = Join-Path $repoRoot 'tools\PridePrankLab\build.ps1'
 & $buildScript | Out-Host
 if ($LASTEXITCODE -ne 0) { throw 'Pride Prank Lab build failed.' }

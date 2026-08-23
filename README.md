@@ -2,6 +2,8 @@
 
 Pride Prism is a polished, high-contrast Pride theme system for desktop apps. Its default is dark mode, it uses native theming where an app supports it, and it keeps motion optional, restrained, and reversible.
 
+**Live design system:** https://starwarmissionary.github.io/pride-prism-design-system/
+
 ## Included
 
 - Shared color, typography, motion, and effect tokens in JSON, CSS, and XAML.
