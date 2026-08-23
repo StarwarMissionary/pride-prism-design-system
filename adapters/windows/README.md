@@ -1,6 +1,6 @@
 # Windows adapter
 
-The installer uses the documented Windows `.theme` format. It copies the generated wallpaper into `%LOCALAPPDATA%\PridePrism`, saves the previous theme path, installs a dark-mode theme under the current user's theme directory, and opens it through the normal Windows theme handler.
+The installer uses the documented Windows `.theme` format. It copies the generated wallpaper into `%LOCALAPPDATA%\PridePrism`, saves the previous theme and title-bar accent preference, installs a dark-mode theme under the current user's theme directory, and opens it through the normal Windows theme handler. Violet title-bar accents are enabled so native application frames participate in the theme.
 
 ```powershell
 ./install.ps1
