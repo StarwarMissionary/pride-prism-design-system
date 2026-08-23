@@ -17,6 +17,19 @@ foreach ($file in $jsonFiles) {
     Write-Host "JSON OK: $file"
 }
 
+$steamSkinPath = Join-Path $repoRoot 'adapters\steam\PridePrism\skin.json'
+$steamSkin = Get-Content -LiteralPath $steamSkinPath -Raw -Encoding UTF8 | ConvertFrom-Json
+if ($steamSkin.UseDefaultPatches -ne $true) {
+    throw 'Steam skin must use Millennium default scoped patches.'
+}
+if ($steamSkin.'Steam-WebKit' -ne 'webkit.css') {
+    throw 'Steam skin must route webviews through webkit.css.'
+}
+if ($steamSkin.PSObject.Properties['Patches']) {
+    throw 'Steam skin must not define a global catch-all patch.'
+}
+Write-Host 'STEAM PATCH ROUTING OK: Library, Friends, Big Picture, and webviews are scoped.'
+
 Add-Type -AssemblyName System.Drawing
 $images = @(
     (Join-Path $repoRoot 'adapters\chrome\images\theme_frame.png'),
@@ -87,6 +100,15 @@ foreach ($name in $steamScriptFiles) {
         throw "Steam adapter must remain CSS-only: $file"
     }
 }
+
+$steamInstaller = Join-Path $repoRoot 'adapters\steam\install.ps1'
+$steamInstallerTokens = $null
+$steamInstallerErrors = $null
+[void][System.Management.Automation.Language.Parser]::ParseFile($steamInstaller, [ref]$steamInstallerTokens, [ref]$steamInstallerErrors)
+if ($steamInstallerErrors.Count) {
+    throw "Steam installer syntax invalid: $($steamInstallerErrors.Message -join ' | ')"
+}
+Write-Host "STEAM INSTALLER OK: $steamInstaller"
 
 $node = Get-Command node -ErrorAction SilentlyContinue
 if ($node) {

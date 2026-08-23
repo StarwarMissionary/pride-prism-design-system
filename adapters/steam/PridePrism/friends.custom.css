@@ -1,39 +1,314 @@
-/** Pride Prism — Steam friends and chat */
+/**
+ * Pride Prism — Steam Friends & Chat
+ * Complete dark Progress Pride treatment with restrained motion.
+ */
 
 :root {
+  --pp-red: #e40303;
+  --pp-orange: #ff8c00;
+  --pp-yellow: #ffed00;
+  --pp-green: #008026;
+  --pp-blue: #004dff;
+  --pp-violet: #750787;
+  --pp-trans-blue: #74d7ee;
+  --pp-trans-pink: #ffafc8;
   --pp-surface: #140021;
+  --pp-surface-deep: #09000f;
   --pp-raised: #24103a;
   --pp-muted: #33164d;
   --pp-ink: #fff9f2;
   --pp-ink-muted: #dccfe5;
   --pp-accent: #ff4fd8;
   --pp-focus: #74d7ee;
+
+  --gpSystemLightestGrey: var(--pp-ink) !important;
+  --gpSystemLighterGrey: var(--pp-ink-muted) !important;
+  --gpSystemLightGrey: #aa98b4 !important;
+  --gpSystemGrey: #755f80 !important;
+  --gpSystemDarkGrey: var(--pp-muted) !important;
+  --gpSystemDarkerGrey: var(--pp-raised) !important;
+  --gpSystemDarkestGrey: var(--pp-surface) !important;
+  --gpStoreLightestGrey: var(--pp-ink) !important;
+  --gpStoreLighterGrey: var(--pp-ink-muted) !important;
+  --gpStoreDarkGrey: var(--pp-muted) !important;
+  --gpStoreDarkerGrey: var(--pp-raised) !important;
+  --gpStoreDarkestGrey: var(--pp-surface) !important;
+  --gpColor-Blue: var(--pp-accent) !important;
+  --gpColor-BlueHi: var(--pp-focus) !important;
+  --color-text-secondary: var(--pp-ink-muted) !important;
+  --color-text-light-subtitle: #aa98b4 !important;
 }
 
 html,
 body,
 #root,
-[class*="friendsui"],
-[class*="chatRoom"] {
+.friendsui-container,
+.FriendsListContent,
+.friendsListContainer,
+.friendlist,
+.friendlistListContainer,
+.chatRoomListContainer,
+.ChatRoomList,
+.chatHistory,
+.chatHistoryScroll,
+.chatRoomGroupNavColumn,
+[class*="friendsui-container"],
+[class*="FriendsListContent"],
+[class*="friendsListContainer"],
+[class*="friendlistListContainer"],
+[class*="chatRoomListContainer"],
+[class*="chatHistoryScroll"] {
   color: var(--pp-ink) !important;
   background-color: var(--pp-surface) !important;
+  background-image: none !important;
 }
 
-[class*="friendList"],
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 999999;
+  height: 4px;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--pp-red), var(--pp-orange), var(--pp-yellow), var(--pp-green), var(--pp-blue), var(--pp-violet), var(--pp-trans-blue), var(--pp-trans-pink)) !important;
+  box-shadow: 0 2px 14px rgba(255, 79, 216, 0.28);
+}
+
+.friendListHeaderContainer,
+.friends_nav,
+.friendListFooter,
+.chatTitleBar,
+.chatHeader,
+.chatRoomHeader,
+.chatRoomGroupHeader,
+.groupHeaderContainer,
+.friendsListSectionTitle,
+[class*="friendListHeaderContainer"],
+[class*="friends_nav"],
+[class*="friendListFooter"],
+[class*="chatTitleBar"],
 [class*="chatHeader"],
-[class*="ChatRoomGroup"] {
-  background-color: var(--pp-raised) !important;
+[class*="chatRoomHeader"],
+[class*="chatRoomGroupHeader"],
+[class*="groupHeaderContainer"],
+[class*="friendsListSectionTitle"] {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(90deg, var(--pp-raised), #2d1046 58%, var(--pp-muted)) !important;
+  border-color: rgba(116, 215, 238, 0.22) !important;
+  box-shadow: 0 8px 24px rgba(9, 0, 15, 0.22) !important;
 }
 
+.friendGroup,
+.gameGroup,
+.OtherGamesGroup,
+.chatRoomGroup,
+.chatRoomTextChannel,
+.chatEntry,
+.ChatMessageBlock,
+[class*="friendGroup"],
+[class*="gameGroup"],
+[class*="OtherGamesGroup"],
+[class*="chatRoomGroup"],
+[class*="chatRoomTextChannel"],
 [class*="chatEntry"],
-[class*="FriendMessage"] {
+[class*="ChatMessageBlock"] {
+  color: var(--pp-ink-muted) !important;
   border-color: rgba(255, 175, 200, 0.14) !important;
 }
 
-[class*="friendGroup"] [aria-selected="true"],
-[class*="chatRoom"] [aria-selected="true"] {
-  background: linear-gradient(90deg, rgba(117, 7, 135, 0.72), rgba(255, 79, 216, 0.12)) !important;
+.friend,
+.friendGroup .friend,
+.gameGroup .friend,
+.OtherGamesGroup .friend,
+.chatRoomTextChannel,
+[class*="friendGroup"] [class*="friend"],
+[class*="gameGroup"] [class*="friend"],
+[class*="OtherGamesGroup"] [class*="friend"] {
+  color: var(--pp-ink-muted) !important;
+  background-color: rgba(36, 16, 58, 0.62) !important;
+  border-color: transparent !important;
+  transition: color 150ms ease, background-color 150ms ease, box-shadow 150ms ease !important;
 }
 
-a { color: var(--pp-focus) !important; }
-:focus-visible { outline: 2px solid var(--pp-focus) !important; outline-offset: 2px !important; }
+.friend:hover,
+.friendGroup .friend:hover,
+.gameGroup .friend:hover,
+.OtherGamesGroup .friend:hover,
+.chatRoomTextChannel:hover,
+[class*="friendGroup"] [class*="friend"]:hover,
+[class*="gameGroup"] [class*="friend"]:hover,
+[class*="OtherGamesGroup"] [class*="friend"]:hover {
+  color: var(--pp-ink) !important;
+  background-color: rgba(117, 7, 135, 0.38) !important;
+  box-shadow: inset 3px 0 0 var(--pp-trans-blue) !important;
+}
+
+.friend.active,
+.friend.selected,
+.chatRoomTextChannel.active,
+.chatRoomTextChannel.selected,
+[aria-selected="true"],
+[class*="friendGroup"] [aria-selected="true"],
+[class*="chatRoom"] [aria-selected="true"] {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(90deg, rgba(117, 7, 135, 0.82), rgba(255, 79, 216, 0.16)) !important;
+  box-shadow: inset 3px 0 0 var(--pp-trans-pink) !important;
+}
+
+.friend .personaName,
+.friend .playerName,
+.friend .friendStatus,
+.friend .gameName,
+.chatRoomTextChannel,
+.chatEntry,
+.ChatMessageBlock,
+[class*="personaName"],
+[class*="playerName"],
+[class*="friendStatus"],
+[class*="gameName"] {
+  color: var(--pp-ink-muted) !important;
+  text-shadow: none !important;
+}
+
+.friend.online .personaName,
+.friend.ingame .personaName,
+.friend .persona.online,
+.friend .persona.ingame,
+[class*="friend"] [class*="online"],
+[class*="friend"] [class*="ingame"] {
+  color: var(--pp-trans-blue) !important;
+}
+
+.friend.ingame .gameName,
+.friend .gameName,
+[class*="friend"] [class*="gameName"] {
+  color: #7ee7a2 !important;
+}
+
+.friendSearchInput,
+.chatTextarea,
+.chatTextarea textarea,
+.chatTextarea [contenteditable="true"],
+.DialogInput,
+.DialogTextInputBase,
+._DialogInputContainer,
+input,
+textarea,
+[contenteditable="true"],
+[class*="friendSearchInput"],
+[class*="chatTextarea"] {
+  color: var(--pp-ink) !important;
+  background-color: rgba(9, 0, 15, 0.82) !important;
+  border-color: rgba(255, 175, 200, 0.28) !important;
+  box-shadow: inset 0 0 0 1px rgba(116, 215, 238, 0.08) !important;
+}
+
+.ModalDialogPopup,
+.ModalPosition_Content,
+.DialogContent,
+.DialogContentTransition,
+.DialogBody,
+.GenericConfirmDialog,
+.ChatRoomGroupDialog_contents,
+.FriendNotificationsDialog,
+[class*="ModalDialogPopup"],
+[class*="DialogContent"],
+[class*="GenericConfirmDialog"] {
+  color: var(--pp-ink) !important;
+  background: radial-gradient(circle at 90% 0%, rgba(117, 7, 135, 0.24), transparent 24rem), var(--pp-raised) !important;
+  border-color: rgba(116, 215, 238, 0.24) !important;
+  box-shadow: 0 18px 52px rgba(9, 0, 15, 0.6) !important;
+}
+
+.DialogHeader,
+.DialogSubHeader,
+.SettingsDialogSubHeader,
+.DialogLabelStrong,
+[class*="DialogHeader"],
+[class*="DialogSubHeader"] {
+  color: var(--pp-ink) !important;
+}
+
+.DialogBodyText,
+.DialogLabel,
+.DialogToggle_Description,
+.DialogLabelExplainer {
+  color: var(--pp-ink-muted) !important;
+}
+
+button.DialogButton,
+button,
+[role="button"] {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-muted) !important;
+  border-color: rgba(255, 175, 200, 0.24) !important;
+  border-radius: 7px !important;
+  transition: color 150ms ease, background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease !important;
+}
+
+button.DialogButton.Primary,
+button.DialogButton.GreenPlay,
+[class*="PrimaryButton"],
+[class*="AcceptButton"] {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(100deg, var(--pp-violet), var(--pp-accent)) !important;
+  box-shadow: 0 8px 22px rgba(117, 7, 135, 0.3) !important;
+}
+
+button:hover,
+[role="button"]:hover,
+button.DialogButton:hover {
+  color: var(--pp-ink) !important;
+  background-color: #472066 !important;
+  box-shadow: 0 0 0 1px rgba(116, 215, 238, 0.36) !important;
+}
+
+.contextMenuItem,
+.PP7LM0Ow1K5qkR8WElLpt,
+.GreenEnvelopeMenu,
+[role="menu"],
+[role="menuitem"],
+[class*="contextMenu"] {
+  color: var(--pp-ink-muted) !important;
+  background-color: var(--pp-raised) !important;
+  border-color: rgba(116, 215, 238, 0.18) !important;
+}
+
+.contextMenuItem:hover,
+[role="menuitem"]:hover,
+[role="menuitem"][aria-selected="true"] {
+  color: var(--pp-ink) !important;
+  background-color: rgba(117, 7, 135, 0.52) !important;
+}
+
+a,
+[role="link"] {
+  color: var(--pp-focus) !important;
+}
+
+svg {
+  fill: currentColor;
+}
+
+* {
+  scrollbar-color: var(--pp-violet) var(--pp-surface-deep) !important;
+}
+
+::selection {
+  color: var(--pp-ink);
+  background: rgba(255, 79, 216, 0.42);
+}
+
+:focus-visible {
+  outline: 2px solid var(--pp-focus) !important;
+  outline-offset: 2px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

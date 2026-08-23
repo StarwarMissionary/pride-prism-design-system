@@ -38,19 +38,18 @@
   --gpColor-Green: #00b85c !important;
   --gpColor-Yellow: var(--pp-yellow) !important;
   --gpColor-Red: #ff3b3b !important;
+  --gpBackground-DarkMedium: var(--pp-surface) !important;
+  --gpBackground-DarkSoft: var(--pp-surface-raised) !important;
+  --gpBackground-LightMedium: rgba(117, 7, 135, 0.42) !important;
+  --gpBackground-LightSoft: rgba(255, 175, 200, 0.12) !important;
+  --color-text-secondary: var(--pp-ink-muted) !important;
+  --color-text-light-subtitle: #aa98b4 !important;
 }
 
 html,
 body,
 #root,
-.steamdesktop,
-[class*="steamdesktop_"],
-[class*="DesktopUI_"],
-[class*="libraryroot_"],
-[class*="pagedsettings_"],
-[class*="Settings_"],
-[class*="ModalPosition_"],
-[class*="DialogContent_"] {
+.steamdesktop {
   color: var(--pp-ink) !important;
   background: var(--pp-surface) !important;
 }
@@ -95,29 +94,9 @@ body::after {
   opacity: 0.88;
 }
 
-[class*="libraryhome"],
-[class*="LibraryHome"],
-[class*="appdetails"],
-[class*="AppDetails"],
-[class*="gamelistbar"],
-[class*="GameList"],
-[class*="sidebar"],
-[class*="Sidebar"],
-[class*="TitleBar_"],
-[class*="titlebar_"],
-[class*="SuperNav_"],
-[class*="supernav_"],
-[class*="TopBar_"],
-[class*="topbar_"] {
-  background-color: var(--pp-surface) !important;
-}
-
-[class*="libraryhome"]::before,
-[class*="LibraryHome"]::before,
-[class*="appdetails"]::before,
-[class*="AppDetails"]::before {
-  background: radial-gradient(circle at 84% 0%, rgba(117, 7, 135, 0.22), transparent 34rem) !important;
-}
+/* Keep the Library's dynamically generated app-detail layers untouched.
+ * Painting every hashed appdetails/libraryhome descendant creates an opaque
+ * overlay above Steam's game art and controls on current client builds. */
 
 [class*="gamelistentry_Selected"],
 [class*="Selected"] [class*="gamelistentry"],
@@ -148,6 +127,16 @@ textarea,
   color: var(--pp-ink) !important;
   background: rgba(9, 0, 15, 0.72) !important;
   border-color: rgba(255, 175, 200, 0.2) !important;
+}
+
+.DialogTextInputBase,
+._DialogInputContainer,
+.DialogInput,
+.DialogDropDown,
+[class*="DialogInput_"] {
+  color: var(--pp-ink) !important;
+  background-color: rgba(9, 0, 15, 0.78) !important;
+  border-color: rgba(255, 175, 200, 0.24) !important;
 }
 
 :focus-visible {
@@ -229,6 +218,103 @@ body.DesktopUI .WindowControls .windowControlButton:hover,
 body.DesktopUI .TitleBarControls .windowControlButton:hover {
   color: var(--pp-ink) !important;
   background: rgba(116, 215, 238, 0.14) !important;
+}
+
+/* Menus, dialogs, settings, notifications, and downloads */
+.ModalDialogPopup,
+.ModalPosition_Content,
+.DialogContent,
+.DialogContentTransition,
+.DialogBody,
+.GenericConfirmDialog,
+[role="dialog"],
+[class*="ModalDialogPopup"],
+[class*="DialogContent_"] {
+  color: var(--pp-ink) !important;
+  background: radial-gradient(circle at 88% 0%, rgba(117, 7, 135, 0.24), transparent 26rem), var(--pp-surface-raised) !important;
+  border-color: rgba(116, 215, 238, 0.24) !important;
+  box-shadow: 0 20px 56px rgba(9, 0, 15, 0.62) !important;
+}
+
+.ModalPosition_TopBar,
+[class*="ModalPosition_TopBar"] {
+  background: linear-gradient(90deg, var(--pp-red), var(--pp-orange), var(--pp-yellow), var(--pp-green), var(--pp-blue), var(--pp-violet), var(--pp-trans-blue), var(--pp-trans-pink)) !important;
+}
+
+.DialogHeader,
+.DialogSubHeader,
+.SettingsDialogSubHeader,
+.DialogLabelStrong,
+[class*="DialogHeader"],
+[class*="DialogSubHeader"] {
+  color: var(--pp-ink) !important;
+}
+
+.DialogBodyText,
+.DialogLabel,
+.DialogToggle_Description,
+.DialogLabelExplainer,
+[class*="DialogBodyText"] {
+  color: var(--pp-ink-muted) !important;
+}
+
+button.DialogButton,
+.DialogButton,
+[class*="DialogButton"] {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-surface-muted) !important;
+  border-color: rgba(255, 175, 200, 0.24) !important;
+  border-radius: 8px !important;
+}
+
+button.DialogButton.Primary,
+button.DialogButton.GreenPlay,
+[class*="PlayButton"],
+[class*="PrimaryButton"] {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(100deg, var(--pp-violet), var(--pp-accent)) !important;
+  box-shadow: 0 8px 24px rgba(117, 7, 135, 0.34) !important;
+}
+
+.PP7LM0Ow1K5qkR8WElLpt,
+.GreenEnvelopeMenu,
+.contextMenuItem,
+[role="menu"],
+[role="menuitem"],
+[class*="contextmenu_"],
+[class*="ContextMenu_"] {
+  color: var(--pp-ink-muted) !important;
+  background-color: var(--pp-surface-raised) !important;
+  border-color: rgba(116, 215, 238, 0.18) !important;
+}
+
+.contextMenuItem:hover,
+[role="menuitem"]:hover,
+[role="menuitem"][aria-selected="true"] {
+  color: var(--pp-ink) !important;
+  background-color: rgba(117, 7, 135, 0.5) !important;
+}
+
+[class*="notification_"],
+[class*="Notification_"],
+[class*="toast_"],
+[class*="Toast_"],
+[class*="achievement_"],
+[class*="Achievement_"] {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(105deg, rgba(36, 16, 58, 0.98), rgba(51, 22, 77, 0.98)) !important;
+  border-color: rgba(255, 175, 200, 0.26) !important;
+  box-shadow: inset 3px 0 0 var(--pp-trans-pink), 0 12px 34px rgba(9, 0, 15, 0.45) !important;
+}
+
+[class*="downloads_ProgressBar"],
+.DialogProgressBar_Value,
+.DialogSlider_Value {
+  background: linear-gradient(90deg, var(--pp-trans-blue), var(--pp-accent), var(--pp-violet)) !important;
+}
+
+* {
+  scrollbar-color: var(--pp-violet) #09000f !important;
 }
 
 @keyframes pride-prism-steam-drift {

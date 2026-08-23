@@ -1,26 +1,181 @@
-/** Pride Prism — Steam Big Picture */
+/**
+ * Pride Prism — Steam Big Picture
+ * Dark controller-first surfaces with clear Progress Pride focus states.
+ */
 
 :root {
+  --pp-red: #e40303;
+  --pp-orange: #ff8c00;
+  --pp-yellow: #ffed00;
+  --pp-green: #008026;
+  --pp-blue: #004dff;
+  --pp-violet: #750787;
+  --pp-trans-blue: #74d7ee;
+  --pp-trans-pink: #ffafc8;
   --pp-surface: #140021;
+  --pp-deep: #09000f;
   --pp-raised: #24103a;
+  --pp-muted: #33164d;
   --pp-ink: #fff9f2;
+  --pp-ink-muted: #dccfe5;
   --pp-accent: #ff4fd8;
   --pp-focus: #74d7ee;
+
+  --gpSystemLightestGrey: var(--pp-ink) !important;
+  --gpSystemLighterGrey: var(--pp-ink-muted) !important;
+  --gpSystemLightGrey: #aa98b4 !important;
+  --gpSystemGrey: #755f80 !important;
+  --gpSystemDarkGrey: var(--pp-muted) !important;
+  --gpSystemDarkerGrey: var(--pp-raised) !important;
+  --gpSystemDarkestGrey: var(--pp-surface) !important;
+  --gpStoreLightestGrey: var(--pp-ink) !important;
+  --gpStoreLighterGrey: var(--pp-ink-muted) !important;
+  --gpStoreDarkGrey: var(--pp-muted) !important;
+  --gpStoreDarkerGrey: var(--pp-raised) !important;
+  --gpStoreDarkestGrey: var(--pp-surface) !important;
+  --gpColor-Blue: var(--pp-accent) !important;
+  --gpColor-BlueHi: var(--pp-focus) !important;
+  --gpColor-Green: #00b85c !important;
+  --gpBackground-DarkMedium: var(--pp-surface) !important;
+  --gpBackground-DarkSoft: var(--pp-raised) !important;
+  --gpBackground-LightMedium: rgba(117, 7, 135, 0.42) !important;
+  --gpBackground-LightSoft: rgba(255, 175, 200, 0.12) !important;
 }
 
 html,
 body,
-#root {
+#root,
+.GamepadUI,
+.BasicUI,
+[class*="GamepadUI"],
+[class*="BasicUI"],
+[class*="gamepadui"],
+[class*="libraryhome"],
+[class*="LibraryHome"] {
   color: var(--pp-ink) !important;
-  background: radial-gradient(circle at 80% 0%, rgba(117, 7, 135, 0.25), transparent 40rem), var(--pp-surface) !important;
+  background: radial-gradient(circle at 82% 0%, rgba(117, 7, 135, 0.3), transparent 38rem), var(--pp-surface) !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 999999;
+  height: 5px;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--pp-red), var(--pp-orange), var(--pp-yellow), var(--pp-green), var(--pp-blue), var(--pp-violet), var(--pp-trans-blue), var(--pp-trans-pink)) !important;
+  box-shadow: 0 3px 22px rgba(255, 79, 216, 0.3);
+}
+
+[class*="Header"],
+[class*="header"],
+[class*="Footer"],
+[class*="footer"],
+[class*="MainMenu"],
+[class*="QuickAccess"],
+[class*="Navigation"] {
+  color: var(--pp-ink) !important;
+  background-color: rgba(36, 16, 58, 0.94) !important;
+  border-color: rgba(116, 215, 238, 0.2) !important;
+  box-shadow: 0 10px 30px rgba(9, 0, 15, 0.3) !important;
+}
+
+[class*="Carousel"],
+[class*="GameCapsule"],
+[class*="AppCapsule"],
+[class*="Collection"],
+[class*="Card"],
+[class*="Panel"],
+[class*="Tile"] {
+  color: var(--pp-ink-muted) !important;
+  border-color: rgba(255, 175, 200, 0.16) !important;
+  border-radius: 10px !important;
+  transition: color 160ms ease, background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease !important;
 }
 
 [class*="Focused"],
+[class*="focused"],
+.gpfocus,
+[data-gp-focus="true"],
+[aria-selected="true"],
 :focus-visible {
-  outline-color: var(--pp-focus) !important;
-  box-shadow: 0 0 0 3px rgba(116, 215, 238, 0.28) !important;
+  color: var(--pp-ink) !important;
+  outline: 3px solid var(--pp-focus) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 6px rgba(116, 215, 238, 0.18), 0 12px 34px rgba(117, 7, 135, 0.34) !important;
 }
 
-[class*="Primary"] {
-  background: linear-gradient(90deg, #750787, var(--pp-accent)) !important;
+button,
+[role="button"],
+.DialogButton,
+[class*="Button"] {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-muted) !important;
+  border-color: rgba(255, 175, 200, 0.22) !important;
+  border-radius: 9px !important;
+}
+
+[class*="Primary"],
+.DialogButton.Primary,
+.DialogButton.GreenPlay,
+[class*="PlayButton"] {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(105deg, var(--pp-violet), var(--pp-accent)) !important;
+  box-shadow: 0 10px 28px rgba(117, 7, 135, 0.36) !important;
+}
+
+[class*="Modal"],
+[class*="Dialog"],
+.ModalPosition_Content,
+.DialogContent,
+.DialogContentTransition,
+.DialogBody,
+[role="dialog"] {
+  color: var(--pp-ink) !important;
+  background: radial-gradient(circle at 90% 0%, rgba(117, 7, 135, 0.24), transparent 26rem), var(--pp-raised) !important;
+  border-color: rgba(116, 215, 238, 0.26) !important;
+  box-shadow: 0 22px 60px rgba(9, 0, 15, 0.62) !important;
+}
+
+[class*="Toast"],
+[class*="Notification"],
+[class*="Achievement"] {
+  color: var(--pp-ink) !important;
+  background: linear-gradient(110deg, rgba(36, 16, 58, 0.98), rgba(51, 22, 77, 0.98)) !important;
+  border-color: rgba(255, 175, 200, 0.28) !important;
+  box-shadow: inset 3px 0 0 var(--pp-trans-pink), 0 12px 32px rgba(9, 0, 15, 0.45) !important;
+}
+
+input,
+textarea,
+[contenteditable="true"],
+.DialogInput,
+.DialogTextInputBase,
+._DialogInputContainer {
+  color: var(--pp-ink) !important;
+  background-color: rgba(9, 0, 15, 0.82) !important;
+  border-color: rgba(255, 175, 200, 0.28) !important;
+}
+
+a,
+[role="link"] {
+  color: var(--pp-focus) !important;
+}
+
+* {
+  scrollbar-color: var(--pp-violet) var(--pp-deep) !important;
+}
+
+::selection {
+  color: var(--pp-ink);
+  background: rgba(255, 79, 216, 0.42);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
