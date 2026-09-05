@@ -6,3 +6,7 @@ obj/
 .DS_Store
 Thumbs.db
 adapters/windows/.install-state/
+dist/
+.local/
+*.local.json
+__pycache__/

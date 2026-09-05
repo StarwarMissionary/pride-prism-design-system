@@ -1,32 +1,34 @@
-# Pride Prism usage guide
+# Pride Prism design contract
 
-## Principles
+## Foundations
 
-1. Pride is unmistakable through color order and Progress Pride accents, not visual noise.
-2. Text contrast and task legibility take priority over decoration.
-3. Native theming is preferred over client patching or process injection.
-4. Motion is opt-in, slow, and disabled for reduced-motion users.
-5. A celebration action may temporarily increase energy; the resting state remains calm.
+Use `tokens/palettes.json` and `tokens/theme.mjs`. Generated exports are the delivery format; adapters map roles onto supported app surfaces. Never maintain a second palette by hand.
 
-## Color usage
+- Canvas / raised / muted: stable dark, low-chroma neutrals.
+- Foreground / secondary foreground: readable text on all three surfaces.
+- Accent / onAccent / hover / pressed: tested solid action pairs. Accent alone is not a text or universal state-indicator token.
+- Selection / selectionText: distinct dark fill and readable text. Add a visible check, native selection outline or focus-colored rail when an arbitrary custom accent is too dark.
+- Border: essential control boundary. BorderSubtle: decorative separation only.
+- Focus / link: independent of identity. Use an offset ring or contrasting separator next to bright controls.
+- Positive / warning / negative: stable functional meaning, supplemented with text/icons. Preserve native presence, Play, commerce, charts, material and scene colors.
+- Identity gradient: decorative hard-stop rail using reference colors and weights. It is not a functional button fill. Progress-inspired is a palette, not a rendering of the geometric flag.
 
-- Use deep violet as the dark surface and warm white for primary text.
-- Use magenta for focus and selected states.
-- Use the full rainbow for borders, headers, illustrations, and non-text decoration.
-- Keep yellow away from small white text; use dark text on yellow.
-- Preserve semantic meaning: green is positive, red is destructive/error, yellow is caution.
+## Rhythm and symmetry
 
-## Motion usage
+Use the shared 4/8/12/16/24/32 px spacing scale and 6/12/18 px corner roles in owned UI. Align peer controls and card edges; let cards grow with text. Use 16px body copy on the website and readable label sizes.
 
-- Standard UI transitions: 160–280 ms.
-- Decorative gradient travel: at least 1.2 seconds per step.
-- Accent cycling: at least 5 seconds per color.
-- Do not run continuous confetti, strobe, or full-screen flashes.
-- Celebration bursts should end automatically within six seconds.
+Native applications retain their pane widths, window controls, fonts, DPI, controller focus geometry, and layout. Shared roles should make different apps feel related without forcing identical structures. Never paint full-window transparent overlays, wildcard containers or artwork.
 
-## Accessibility
+## Motion
 
-- Target WCAG AA contrast for body text.
-- Respect `prefers-reduced-motion` and Windows reduced-motion settings.
-- Never use color as the only status indicator.
-- Keep click targets and content unobstructed.
+Default decorative motion is off. Interactions may use 160–280 ms color/border transitions. Explicit celebrations finish within 1.5 seconds. Honor reduced motion and do not run global animation resets that suppress native loading/progress.
+
+The legacy optional overlay is not the foundation configuration system. It is excluded from normal validation builds and native coverage claims.
+
+## Choice and privacy
+
+Palette names are preferences, not required identity labels. Reference colors and proportions are attributed, variants explicit, catalog non-exhaustive. Keep custom accents separate from reference colors. No telemetry or public personal profile; browser preferences stay local.
+
+## Acceptance
+
+Run token/contrast/parity tests, then renderer-specific checks. Ordinary text target: 4.5:1. Essential boundary/focus target: 3:1 against adjacent surfaces. Static contrast arithmetic is not an application-wide WCAG certification. Check keyboard focus, 200% enlargement, 320px width, reduced motion, input/error/disabled/selected states and rollback. See [foundation audit](FOUNDATION_AUDIT.md) for the full release gates.

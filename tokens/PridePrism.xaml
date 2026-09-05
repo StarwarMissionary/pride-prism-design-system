@@ -1,30 +1,51 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <Color x:Key="PrismRed">#E40303</Color>
-  <Color x:Key="PrismOrange">#FF8C00</Color>
-  <Color x:Key="PrismYellow">#FFED00</Color>
-  <Color x:Key="PrismGreen">#008026</Color>
-  <Color x:Key="PrismBlue">#004DFF</Color>
-  <Color x:Key="PrismViolet">#750787</Color>
-  <Color x:Key="PrismTransBlue">#74D7EE</Color>
-  <Color x:Key="PrismTransPink">#FFAFC8</Color>
-  <Color x:Key="PrismSurface">#140021</Color>
-  <Color x:Key="PrismSurfaceRaised">#24103A</Color>
-  <Color x:Key="PrismForeground">#FFF9F2</Color>
-  <Color x:Key="PrismAccent">#FF4FD8</Color>
+  <!-- Generated dark tokens. Reference stripes are decoration, not status colors. -->
+  <Color x:Key="PrismSurface">#141118</Color>
+  <Color x:Key="PrismSurfaceRaised">#1E1A24</Color>
+  <Color x:Key="PrismSurfaceMuted">#2A2433</Color>
+  <Color x:Key="PrismForeground">#F6F1F8</Color>
+  <Color x:Key="PrismForegroundMuted">#C9BFD2</Color>
+  <Color x:Key="PrismAccent">#B6B9CF</Color>
+  <Color x:Key="PrismOnAccent">#141118</Color>
+  <Color x:Key="PrismAccentHover">#BFC1D5</Color>
+  <Color x:Key="PrismAccentPressed">#A7AABE</Color>
+  <Color x:Key="PrismFocus">#A6C8FF</Color>
+  <Color x:Key="PrismLink">#A6C8FF</Color>
+  <Color x:Key="PrismSelection">#46314F</Color>
+  <Color x:Key="PrismSelectionText">#F6F1F8</Color>
+  <Color x:Key="PrismBorder">#8B7998</Color>
+  <Color x:Key="PrismBorderSubtle">#3E3548</Color>
+  <Color x:Key="PrismPositive">#66D6A4</Color>
+  <Color x:Key="PrismWarning">#E8C66A</Color>
+  <Color x:Key="PrismNegative">#FF7A90</Color>
 
   <SolidColorBrush x:Key="PrismSurfaceBrush" Color="{StaticResource PrismSurface}" />
   <SolidColorBrush x:Key="PrismSurfaceRaisedBrush" Color="{StaticResource PrismSurfaceRaised}" />
+  <SolidColorBrush x:Key="PrismSurfaceMutedBrush" Color="{StaticResource PrismSurfaceMuted}" />
   <SolidColorBrush x:Key="PrismForegroundBrush" Color="{StaticResource PrismForeground}" />
+  <SolidColorBrush x:Key="PrismForegroundMutedBrush" Color="{StaticResource PrismForegroundMuted}" />
   <SolidColorBrush x:Key="PrismAccentBrush" Color="{StaticResource PrismAccent}" />
+  <SolidColorBrush x:Key="PrismOnAccentBrush" Color="{StaticResource PrismOnAccent}" />
+  <SolidColorBrush x:Key="PrismAccentHoverBrush" Color="{StaticResource PrismAccentHover}" />
+  <SolidColorBrush x:Key="PrismAccentPressedBrush" Color="{StaticResource PrismAccentPressed}" />
+  <SolidColorBrush x:Key="PrismFocusBrush" Color="{StaticResource PrismFocus}" />
+  <SolidColorBrush x:Key="PrismLinkBrush" Color="{StaticResource PrismLink}" />
+  <SolidColorBrush x:Key="PrismSelectionBrush" Color="{StaticResource PrismSelection}" />
+  <SolidColorBrush x:Key="PrismSelectionTextBrush" Color="{StaticResource PrismSelectionText}" />
+  <SolidColorBrush x:Key="PrismBorderBrush" Color="{StaticResource PrismBorder}" />
+  <SolidColorBrush x:Key="PrismBorderSubtleBrush" Color="{StaticResource PrismBorderSubtle}" />
+  <SolidColorBrush x:Key="PrismPositiveBrush" Color="{StaticResource PrismPositive}" />
+  <SolidColorBrush x:Key="PrismWarningBrush" Color="{StaticResource PrismWarning}" />
+  <SolidColorBrush x:Key="PrismNegativeBrush" Color="{StaticResource PrismNegative}" />
 
-  <LinearGradientBrush x:Key="PrismClassicGradient" StartPoint="0,0.5" EndPoint="1,0.5">
-    <GradientStop Color="{StaticResource PrismRed}" Offset="0" />
-    <GradientStop Color="{StaticResource PrismOrange}" Offset="0.2" />
-    <GradientStop Color="{StaticResource PrismYellow}" Offset="0.4" />
-    <GradientStop Color="{StaticResource PrismGreen}" Offset="0.6" />
-    <GradientStop Color="{StaticResource PrismBlue}" Offset="0.8" />
-    <GradientStop Color="{StaticResource PrismViolet}" Offset="1" />
+  <LinearGradientBrush x:Key="PrismIdentityGradient" StartPoint="0,0.5" EndPoint="1,0.5">
+    <GradientStop Color="#8B7998" Offset="0" />
+    <GradientStop Color="#8B7998" Offset="0.25" />
+    <GradientStop Color="#B6B9CF" Offset="0.25" />
+    <GradientStop Color="#B6B9CF" Offset="0.75" />
+    <GradientStop Color="#8B7998" Offset="0.75" />
+    <GradientStop Color="#8B7998" Offset="1" />
   </LinearGradientBrush>
 
   <CornerRadius x:Key="PrismRadiusSmall">6</CornerRadius>
@@ -32,5 +53,6 @@
   <CornerRadius x:Key="PrismRadiusLarge">18</CornerRadius>
   <Duration x:Key="PrismMotionFast">0:0:0.160</Duration>
   <Duration x:Key="PrismMotionStandard">0:0:0.280</Duration>
-  <Duration x:Key="PrismMotionGradient">0:0:1.200</Duration>
+  <Duration x:Key="PrismMotionDecoration">0:0:0.000</Duration>
+  <Duration x:Key="PrismMotionCelebration">0:0:1.500</Duration>
 </ResourceDictionary>

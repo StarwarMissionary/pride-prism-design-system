@@ -1,207 +1,183 @@
-/** Pride Prism — Steam store and community surfaces */
+/**
+ * Pride Prism — Steam Store and Community webviews.
+ * Paint chrome and text panels only; Steam owns artwork, layout, prices,
+ * discounts, review/status colors and native green purchase/play actions.
+ */
 
 :root {
-  --pp-surface: #140021;
-  --pp-raised: #24103a;
-  --pp-muted: #33164d;
-  --pp-ink: #fff9f2;
-  --pp-ink-muted: #dccfe5;
-  --pp-accent: #ff4fd8;
-  --pp-focus: #74d7ee;
+  /* Shared --prism-* tokens are prepended by scripts/build-theme.mjs. */
+  --pp-surface: var(--prism-surface);
+  --pp-raised: var(--prism-surface-raised);
+  --pp-muted: var(--prism-surface-muted);
+  --pp-ink: var(--prism-foreground);
+  --pp-ink-muted: var(--prism-foreground-muted);
+  --pp-accent: var(--prism-accent);
+  --pp-on-accent: var(--prism-on-accent);
+  --pp-accent-hover: var(--prism-accent-hover);
+  --pp-accent-pressed: var(--prism-accent-pressed);
+  --pp-focus: var(--prism-focus);
+  --pp-link: var(--prism-link);
+  --pp-selection: var(--prism-selection);
+  --pp-selection-text: var(--prism-selection-text);
+  --pp-border: var(--prism-border);
+  --pp-border-subtle: var(--prism-border-subtle);
+  --pp-pride: var(--prism-identity-gradient);
   --gpStoreDarkestGrey: var(--pp-surface) !important;
   --gpStoreDarkerGrey: var(--pp-raised) !important;
   --gpStoreDarkGrey: var(--pp-muted) !important;
   --gpStoreLightestGrey: var(--pp-ink) !important;
   --gpStoreLighterGrey: var(--pp-ink-muted) !important;
-  --gpColor-Blue: var(--pp-accent) !important;
-  --gpColor-BlueHi: var(--pp-focus) !important;
 }
 
+/* Background color leaves Steam's promotional background images intact. */
 html,
 body,
-body.v6,
 .responsive_page_frame,
 .responsive_page_content,
-.responsive_page_template_content,
-.home_page_body_ctn,
-.page_content_ctn {
+.responsive_page_template_content {
   color: var(--pp-ink) !important;
   background-color: var(--pp-surface) !important;
-}
-
-body {
-  background-image: radial-gradient(circle at 85% 0%, rgba(117, 7, 135, 0.2), transparent 36rem) !important;
-}
-
-.store_nav,
-.store_nav_bg,
-.store_header_btn,
-.popup_block_new,
-.newmodal {
-  background-color: var(--pp-raised) !important;
-  border-color: rgba(255, 175, 200, 0.18) !important;
-}
-
-a,
-.linkbar,
-.btnv6_blue_hoverfade > span {
-  color: var(--pp-focus) !important;
-}
-
-.btn_green_white_innerfade,
-.btnv6_blue_hoverfade,
-.btn_blue_steamui {
-  background: linear-gradient(90deg, #750787, var(--pp-accent)) !important;
 }
 
 #global_header,
 .responsive_header,
-.responsive_header_content,
-.supernav_container,
-.home_pagecontent_ctn,
-.home_ctn,
-.home_tab_bg_ctn,
-.home_tabs_sections {
+.store_nav_bg,
+.popup_block_new,
+.newmodal {
   color: var(--pp-ink) !important;
-  background-color: var(--pp-surface) !important;
-  background-image: none !important;
+  background-color: var(--pp-raised) !important;
+  border-color: var(--pp-border-subtle) !important;
 }
 
-.store_nav_bg,
-.store_nav {
-  background: linear-gradient(90deg, var(--pp-raised), #2d1046 54%, var(--pp-muted)) !important;
-  box-shadow: 0 1px 0 rgba(116, 215, 238, 0.26), 0 8px 24px rgba(9, 0, 15, 0.28) !important;
+/* Decorate the real navigation bar, without pseudo-elements or new geometry. */
+.store_nav,
+body.v7 [role="navigation"][aria-label="Store menu"] {
+  color: var(--pp-ink) !important;
+  background: var(--pp-pride) bottom / 100% 3px no-repeat, var(--pp-raised) !important;
+  border-color: var(--pp-border-subtle) !important;
+}
+
+/* Audited Store v7 dropdown wrapper: not its ancestors or every descendant. */
+body.v7 [role="navigation"][aria-label="Store menu"] + div {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-raised) !important;
+  border-color: var(--pp-border-subtle) !important;
 }
 
 .store_nav .tab,
 .store_nav .tab > span,
-.supernav,
-.supernav_container a {
+.supernav_container .supernav,
+body.v7 [role="navigation"][aria-label="Store menu"] :is(a, button, [role="button"]),
+body.v7 [role="navigation"][aria-label="Store menu"] + div :is(a, button, [role="button"]) {
   color: var(--pp-ink) !important;
-  background: transparent !important;
-  text-shadow: none !important;
 }
 
 .store_nav .tab:hover,
-.store_nav .tab:hover > span,
-.supernav:hover,
-.supernav_active {
-  color: var(--pp-focus) !important;
-  background: rgba(117, 7, 135, 0.34) !important;
+.supernav_container .supernav:hover,
+.supernav_container .supernav_active,
+body.v7 [role="navigation"][aria-label="Store menu"] :is(a, button, [role="button"]):hover,
+body.v7 [role="navigation"][aria-label="Store menu"] :is(a, button, [role="button"])[aria-expanded="true"],
+body.v7 [role="navigation"][aria-label="Store menu"] + div :is(a, button, [role="button"]):hover {
+  color: var(--pp-selection-text) !important;
+  background-color: var(--pp-selection) !important;
 }
 
-.searchbox {
-  background: rgba(9, 0, 15, 0.9) !important;
-  border: 1px solid rgba(255, 175, 200, 0.28) !important;
-  box-shadow: inset 0 0 0 1px rgba(116, 215, 238, 0.05) !important;
+.searchbox,
+body.v7 form[role="search"] {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-surface) !important;
+  border-color: var(--pp-border) !important;
 }
 
 .searchbox input,
-.searchbox input.default {
+.searchbox input.default,
+body.v7 form[role="search"] :is(input, [role="combobox"]) {
   color: var(--pp-ink) !important;
-  background: transparent !important;
-  text-shadow: none !important;
+  background-color: transparent !important;
 }
 
-.searchbox .btn_search,
-.searchbox .btn_search:hover {
-  background-color: var(--pp-accent) !important;
-  background-image: linear-gradient(135deg, var(--pp-focus), var(--pp-accent)) !important;
-}
-
-.store_header_btn_content,
-.wishlist_block,
-.home_section_button,
-.home_tab_button {
-  color: var(--pp-ink) !important;
-  background: var(--pp-raised) !important;
-  border: 1px solid rgba(116, 215, 238, 0.18) !important;
-  border-radius: 7px !important;
-  text-shadow: none !important;
-}
-
-.home_section_button:hover,
-.home_tab_button:hover,
-.home_tab_button.active {
-  color: var(--pp-ink) !important;
-  background: linear-gradient(90deg, rgba(117, 7, 135, 0.88), rgba(255, 79, 216, 0.38)) !important;
-  border-color: rgba(255, 175, 200, 0.55) !important;
-}
-
-.home_cluster_ctn,
-.carousel_container,
-.home_area_spotlight,
-.spotlight,
-.home_tabs_row_ctn,
-.home_tab_content,
-.sale_capsule,
-.community_recommendations_by_steam_labs_ctn,
-.recommended_by_steam_labs_ctn,
-.recommended_creators_ctn {
-  color: var(--pp-ink) !important;
-  background-color: var(--pp-raised) !important;
-  background-image: none !important;
-  border-color: rgba(255, 175, 200, 0.14) !important;
-  box-shadow: 0 12px 34px rgba(9, 0, 15, 0.2) !important;
-}
-
-.store_capsule,
-.sale_capsule,
-.home_area_spotlight {
-  border-radius: 9px !important;
-  outline: 1px solid rgba(116, 215, 238, 0.12) !important;
-  outline-offset: -1px !important;
-  overflow: hidden !important;
-}
-
-.store_capsule:hover,
-.sale_capsule:hover,
-.home_area_spotlight:hover {
-  outline-color: rgba(255, 175, 200, 0.55) !important;
-  box-shadow: 0 14px 38px rgba(117, 7, 135, 0.28) !important;
-}
-
-.home_section_title,
-.home_title,
-.home_title_ctn,
-.tab_item_name,
-.spotlight_body,
-.recommended_by_deep_dive_title {
-  color: var(--pp-ink) !important;
-  text-shadow: none !important;
-}
-
-.home_section_subtitle,
-.tab_item_details,
-.spotlight_body,
-.spotlight_price {
+.searchbox input::placeholder,
+body.v7 form[role="search"] input::placeholder {
   color: var(--pp-ink-muted) !important;
 }
 
-.home_section_title::after {
-  content: "";
-  display: block;
-  width: 4.5rem;
-  height: 2px;
-  margin-top: 7px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787) !important;
+/* Keep the legacy search icon's background image; change only its backplate. */
+.searchbox .btn_search,
+body.v7 form[role="search"] button {
+  color: var(--pp-on-accent) !important;
+  background-color: var(--pp-accent) !important;
 }
 
-.discount_pct,
-.discount_block .discount_pct {
+.searchbox .btn_search:hover,
+body.v7 form[role="search"] button:enabled:hover {
+  background-color: var(--pp-accent-hover) !important;
+}
+
+.searchbox .btn_search:active,
+body.v7 form[role="search"] button:enabled:active {
+  background-color: var(--pp-accent-pressed) !important;
+}
+
+/* Only neutral/blue controls; do not recolor Steam's green commerce actions. */
+.btnv6_blue_hoverfade,
+.btnv6_blue_hoverfade > span,
+.btn_blue_steamui,
+.btn_blue_steamui > span,
+.store_header_btn_content,
+.home_section_button,
+.home_tab_button {
   color: var(--pp-ink) !important;
-  background: linear-gradient(135deg, #750787, var(--pp-accent)) !important;
+  background: var(--pp-muted) !important;
+  border-color: var(--pp-border) !important;
 }
 
-.discount_prices,
-.discount_final_price,
-.spotlight_price {
-  background-color: var(--pp-muted) !important;
+.btnv6_blue_hoverfade:hover,
+.btnv6_blue_hoverfade:hover > span,
+.btn_blue_steamui:hover,
+.btn_blue_steamui:hover > span,
+.home_section_button:hover,
+.home_tab_button:hover,
+.home_tab_button.active {
+  color: var(--pp-selection-text) !important;
+  background: var(--pp-selection) !important;
+}
+
+/* These are content panels, not capsule art, takeovers or carousels. */
+.store_main_capsule > .info,
+.tab_row_item > .tab_item_content {
+  background: var(--pp-raised) !important;
+  border-color: var(--pp-border-subtle) !important;
+}
+
+.store_main_capsule > .info .app_name,
+.store_main_capsule > .info .reason,
+.tab_row_item > .tab_item_content .tab_item_title,
+.home_section_title,
+.home_title,
+.recommended_by_deep_dive_title {
+  color: var(--pp-ink) !important;
+}
+
+.store_main_capsule > .info .review_count,
+.tab_row_item > .tab_item_content .tab_item_tags,
+.tab_row_item > .tab_item_content .tab_item_release_date,
+.home_section_subtitle {
+  color: var(--pp-ink-muted) !important;
+}
+
+.tab_row_item:hover > .tab_item_content {
+  background: var(--pp-selection) !important;
+}
+
+.linkbar a,
+.newmodal a,
+.store_main_capsule > .info .reason a,
+#footer a {
+  color: var(--pp-link) !important;
 }
 
 .carousel_thumbs > div {
-  background-color: #755f80 !important;
+  background-color: var(--pp-border) !important;
 }
 
 .carousel_thumbs > div.focus,
@@ -209,118 +185,22 @@ a,
   background-color: var(--pp-focus) !important;
 }
 
-* {
-  scrollbar-color: #750787 var(--pp-surface) !important;
-}
-
-/* Steam Store v7 navigation and content */
-body.v7 :has(> [role="navigation"][aria-label="Store menu"]),
-body.v7 [role="navigation"][aria-label="Store menu"] {
-  color: var(--pp-ink) !important;
-  background: linear-gradient(90deg, var(--pp-raised), #351252 52%, var(--pp-muted)) !important;
-  border-color: rgba(116, 215, 238, 0.24) !important;
-  box-shadow: 0 10px 28px rgba(9, 0, 15, 0.3) !important;
-}
-
-body.v7 [role="navigation"][aria-label="Store menu"] {
-  position: relative !important;
-}
-
-body.v7 [role="navigation"][aria-label="Store menu"]::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 3px;
-  pointer-events: none;
-  background: linear-gradient(90deg, #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787, #74d7ee, #ffafc8) !important;
-}
-
-body.v7 [role="navigation"][aria-label="Store menu"] :is(a, button, [role="button"]) {
-  color: var(--pp-ink) !important;
-  border-radius: 7px !important;
-}
-
-body.v7 [role="navigation"][aria-label="Store menu"] :is(a, button, [role="button"]):hover {
-  color: var(--pp-focus) !important;
-  background-color: rgba(117, 7, 135, 0.38) !important;
-}
-
-body.v7 form[role="search"] {
-  color: var(--pp-ink) !important;
-  background: rgba(9, 0, 15, 0.9) !important;
-  border: 1px solid rgba(255, 175, 200, 0.36) !important;
-  border-radius: 8px !important;
-  box-shadow: inset 0 0 0 1px rgba(116, 215, 238, 0.08) !important;
-}
-
-body.v7 form[role="search"] :is(input, [role="combobox"]) {
-  color: var(--pp-ink) !important;
-  background: transparent !important;
-}
-
-body.v7 form[role="search"] button {
-  color: var(--pp-ink) !important;
-  background: linear-gradient(135deg, var(--pp-focus), var(--pp-accent)) !important;
-  border-radius: 7px !important;
-}
-
-body.v7 a[href*="/wishlist"] {
-  color: var(--pp-ink) !important;
-  background: rgba(117, 7, 135, 0.34) !important;
-  border: 1px solid rgba(255, 175, 200, 0.28) !important;
-  border-radius: 7px !important;
-}
-
-body.v7 #footer {
+#footer {
   color: var(--pp-ink-muted) !important;
-  background: linear-gradient(145deg, rgba(36, 16, 58, 0.97), rgba(20, 0, 33, 0.98)) !important;
-  border-top: 1px solid rgba(116, 215, 238, 0.22) !important;
-}
-
-.home_page_takeover_link {
-  position: relative !important;
-  isolation: isolate !important;
-}
-
-.home_page_takeover_link::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  background: linear-gradient(115deg, rgba(228, 3, 3, 0.17), rgba(255, 140, 0, 0.13) 18%, rgba(255, 237, 0, 0.1) 34%, rgba(0, 128, 38, 0.11) 50%, rgba(0, 77, 255, 0.16) 68%, rgba(117, 7, 135, 0.2) 84%, rgba(255, 79, 216, 0.18)) !important;
-  box-shadow: inset 0 0 0 2px rgba(255, 175, 200, 0.22) !important;
-}
-
-.main_capsule,
-.store_main_capsule,
-.tab_item,
-.home_area_spotlight,
-.sale_capsule {
-  outline: 1px solid rgba(116, 215, 238, 0.2) !important;
-  outline-offset: -1px !important;
-  box-shadow: 0 14px 36px rgba(9, 0, 15, 0.28) !important;
-}
-
-.main_capsule:hover,
-.store_main_capsule:hover,
-.tab_item:hover,
-.home_area_spotlight:hover,
-.sale_capsule:hover {
-  outline-color: rgba(255, 175, 200, 0.64) !important;
-  box-shadow: 0 16px 40px rgba(117, 7, 135, 0.32) !important;
-}
-
-.main_capsule .info,
-.tab_item_content,
-.spotlight_body,
-.home_tab_content {
-  color: var(--pp-ink) !important;
   background-color: var(--pp-raised) !important;
-  background-image: none !important;
+  border-color: var(--pp-border-subtle) !important;
 }
 
+/* Recolor existing focus outlines without changing native ring geometry. */
 :focus-visible {
-  outline: 2px solid var(--pp-focus) !important;
-  outline-offset: 2px !important;
+  outline-color: var(--pp-focus) !important;
+}
+
+html {
+  scrollbar-color: var(--pp-border) var(--pp-surface) !important;
+}
+
+::selection {
+  color: var(--pp-selection-text);
+  background-color: var(--pp-selection);
 }

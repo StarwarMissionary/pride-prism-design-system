@@ -1,83 +1,79 @@
 {
-  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "schemaVersion": 1,
   "name": "Pride Prism",
-  "version": "1.0.0",
-  "color": {
-    "pride": {
-      "red": "#E40303",
-      "orange": "#FF8C00",
-      "yellow": "#FFED00",
-      "green": "#008026",
-      "blue": "#004DFF",
-      "violet": "#750787"
-    },
-    "progress": {
-      "black": "#000000",
-      "brown": "#613915",
-      "transBlue": "#74D7EE",
-      "transPink": "#FFAFC8",
-      "white": "#FFFFFF"
-    },
-    "semantic": {
-      "dark": {
-        "surface": "#140021",
-        "surfaceRaised": "#24103A",
-        "surfaceMuted": "#33164D",
-        "foreground": "#FFF9F2",
-        "foregroundMuted": "#DCCFE5",
-        "accent": "#FF4FD8",
-        "focus": "#74D7EE",
-        "positive": "#00B85C",
-        "warning": "#FFED00",
-        "negative": "#FF3B3B",
-        "border": "#750787"
-      },
-      "light": {
-        "surface": "#FFF4FA",
-        "surfaceRaised": "#FFFFFF",
-        "surfaceMuted": "#F3DFF0",
-        "foreground": "#2B0033",
-        "foregroundMuted": "#65436B",
-        "accent": "#750787",
-        "focus": "#004DFF",
-        "positive": "#008026",
-        "warning": "#FF8C00",
-        "negative": "#E40303",
-        "border": "#FFAFC8"
-      }
+  "mode": "dark",
+  "palette": {
+    "id": "neutral",
+    "label": "Neutral",
+    "kind": "original-palette",
+    "colors": [
+      "#8B7998",
+      "#B6B9CF",
+      "#8B7998"
+    ],
+    "weights": [
+      1,
+      2,
+      1
+    ],
+    "accent": "#B6B9CF",
+    "attribution": {
+      "name": "Pride Prism contributors",
+      "url": "https://github.com/StarwarMissionary/pride-prism-design-system",
+      "note": "An original neutral workspace palette, not a flag."
     }
   },
-  "gradient": {
-    "classic": "linear-gradient(90deg, #E40303 0%, #FF8C00 20%, #FFED00 40%, #008026 60%, #004DFF 80%, #750787 100%)",
-    "progress": "linear-gradient(135deg, #000000 0%, #613915 9%, #74D7EE 18%, #FFAFC8 27%, #FFFFFF 36%, #E40303 48%, #FF8C00 58%, #FFED00 68%, #008026 78%, #004DFF 89%, #750787 100%)",
-    "surface": "linear-gradient(135deg, #140021 0%, #24103A 55%, #33164D 100%)"
+  "colors": {
+    "surface": "#141118",
+    "surfaceRaised": "#1E1A24",
+    "surfaceMuted": "#2A2433",
+    "foreground": "#F6F1F8",
+    "foregroundMuted": "#C9BFD2",
+    "accent": "#B6B9CF",
+    "onAccent": "#141118",
+    "accentHover": "#BFC1D5",
+    "accentPressed": "#A7AABE",
+    "focus": "#A6C8FF",
+    "link": "#A6C8FF",
+    "selection": "#46314F",
+    "selectionText": "#F6F1F8",
+    "border": "#8B7998",
+    "borderSubtle": "#3E3548",
+    "positive": "#66D6A4",
+    "warning": "#E8C66A",
+    "negative": "#FF7A90"
   },
-  "typography": {
-    "ui": "Inter, Segoe UI, system-ui, sans-serif",
-    "code": "Cascadia Code, ui-monospace, SFMono-Regular, Consolas, monospace",
-    "weightRegular": 400,
-    "weightStrong": 650
-  },
-  "radius": {
-    "small": 6,
-    "medium": 12,
-    "large": 18
+  "gradient": "linear-gradient(90deg, #8B7998 0% 25%, #B6B9CF 25% 75%, #8B7998 75% 100%)",
+  "metrics": {
+    "spaceXs": "4px",
+    "spaceSm": "8px",
+    "spaceMd": "12px",
+    "spaceLg": "16px",
+    "spaceXl": "24px",
+    "space2xl": "32px",
+    "radiusSm": "6px",
+    "radiusMd": "12px",
+    "radiusLg": "18px",
+    "fontUi": "\"Segoe UI Variable\", \"Segoe UI\", system-ui, sans-serif",
+    "fontCode": "\"Cascadia Code\", ui-monospace, Consolas, monospace",
+    "fontSizeSmall": "0.8125rem",
+    "fontSizeBody": "0.9375rem",
+    "fontSizeTitle": "1.25rem",
+    "lineHeight": 1.5,
+    "fontWeightRegular": 400,
+    "fontWeightStrong": 650,
+    "controlBorderWidth": "1px",
+    "focusWidth": "2px",
+    "focusOffset": "2px",
+    "identityThickness": "3px"
   },
   "motion": {
     "fastMs": 160,
     "standardMs": 280,
-    "gradientMs": 1200,
-    "accentCycleMs": 5000,
-    "celebrationMs": 6000,
+    "decorationMs": 0,
+    "celebrationMs": 1500,
     "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
-    "reducedMotion": "disable decorative motion"
-  },
-  "effects": {
-    "defaultIntensity": 35,
-    "defaultConfetti": false,
-    "defaultDisco": false,
-    "defaultBanner": false,
-    "borderThickness": 6,
-    "shadow": "0 16px 48px rgba(20, 0, 33, 0.34)"
+    "decorativeDefault": "off",
+    "reducedMotion": "disable-decorative"
   }
 }

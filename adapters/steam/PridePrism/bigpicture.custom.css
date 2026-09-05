@@ -1,181 +1,145 @@
 /**
- * Pride Prism — Steam Big Picture
- * Dark controller-first surfaces with clear Progress Pride focus states.
+ * Pride Prism — Steam Big Picture.
+ * Use audited semantic aliases and shared tokens, not hashed-class wildcards.
+ * Steam owns controller focus geometry, artwork, overlays and action/status hues.
  */
 
 :root {
-  --pp-red: #e40303;
-  --pp-orange: #ff8c00;
-  --pp-yellow: #ffed00;
-  --pp-green: #008026;
-  --pp-blue: #004dff;
-  --pp-violet: #750787;
-  --pp-trans-blue: #74d7ee;
-  --pp-trans-pink: #ffafc8;
-  --pp-surface: #140021;
-  --pp-deep: #09000f;
-  --pp-raised: #24103a;
-  --pp-muted: #33164d;
-  --pp-ink: #fff9f2;
-  --pp-ink-muted: #dccfe5;
-  --pp-accent: #ff4fd8;
-  --pp-focus: #74d7ee;
+  /* Shared --prism-* tokens are prepended by scripts/build-theme.mjs. */
+  --pp-surface: var(--prism-surface);
+  --pp-raised: var(--prism-surface-raised);
+  --pp-muted: var(--prism-surface-muted);
+  --pp-ink: var(--prism-foreground);
+  --pp-ink-muted: var(--prism-foreground-muted);
+  --pp-accent: var(--prism-accent);
+  --pp-on-accent: var(--prism-on-accent);
+  --pp-accent-hover: var(--prism-accent-hover);
+  --pp-accent-pressed: var(--prism-accent-pressed);
+  --pp-focus: var(--prism-focus);
+  --pp-link: var(--prism-link);
+  --pp-selection: var(--prism-selection);
+  --pp-selection-text: var(--prism-selection-text);
+  --pp-border: var(--prism-border);
+  --pp-border-subtle: var(--prism-border-subtle);
+  --pp-pride: var(--prism-identity-gradient);
 
+  /* Neutral native tokens only: never remap Steam's green/status colors. */
   --gpSystemLightestGrey: var(--pp-ink) !important;
   --gpSystemLighterGrey: var(--pp-ink-muted) !important;
-  --gpSystemLightGrey: #aa98b4 !important;
-  --gpSystemGrey: #755f80 !important;
+  --gpSystemLightGrey: var(--pp-ink-muted) !important;
+  --gpSystemGrey: var(--pp-border) !important;
   --gpSystemDarkGrey: var(--pp-muted) !important;
   --gpSystemDarkerGrey: var(--pp-raised) !important;
   --gpSystemDarkestGrey: var(--pp-surface) !important;
-  --gpStoreLightestGrey: var(--pp-ink) !important;
-  --gpStoreLighterGrey: var(--pp-ink-muted) !important;
-  --gpStoreDarkGrey: var(--pp-muted) !important;
-  --gpStoreDarkerGrey: var(--pp-raised) !important;
-  --gpStoreDarkestGrey: var(--pp-surface) !important;
-  --gpColor-Blue: var(--pp-accent) !important;
-  --gpColor-BlueHi: var(--pp-focus) !important;
-  --gpColor-Green: #00b85c !important;
   --gpBackground-DarkMedium: var(--pp-surface) !important;
   --gpBackground-DarkSoft: var(--pp-raised) !important;
-  --gpBackground-LightMedium: rgba(117, 7, 135, 0.42) !important;
-  --gpBackground-LightSoft: rgba(255, 175, 200, 0.12) !important;
+  --gpBackground-LightMedium: var(--pp-selection) !important;
+  --gpBackground-LightSoft: var(--pp-muted) !important;
 }
 
-html,
-body,
-#root,
-.GamepadUI,
-.BasicUI,
-[class*="GamepadUI"],
-[class*="BasicUI"],
-[class*="gamepadui"],
-[class*="libraryhome"],
-[class*="LibraryHome"] {
+.BasicUiRoot {
   color: var(--pp-ink) !important;
-  background: radial-gradient(circle at 82% 0%, rgba(117, 7, 135, 0.3), transparent 38rem), var(--pp-surface) !important;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 999999;
-  height: 5px;
-  pointer-events: none;
-  background: linear-gradient(90deg, var(--pp-red), var(--pp-orange), var(--pp-yellow), var(--pp-green), var(--pp-blue), var(--pp-violet), var(--pp-trans-blue), var(--pp-trans-pink)) !important;
-  box-shadow: 0 3px 22px rgba(255, 79, 216, 0.3);
+/* Do not paint transparent/true-black home modes or replace home artwork. */
+.BasicHome.OpaqueBackground:not(.TrueBlack):not(.Transparent) {
+  background-color: var(--pp-surface) !important;
 }
 
-[class*="Header"],
-[class*="header"],
-[class*="Footer"],
-[class*="footer"],
-[class*="MainMenu"],
-[class*="QuickAccess"],
-[class*="Navigation"] {
+/* MainMenuEmbedded is a full-window overlay; MainNavMenuAnchor has zero width.
+ * Neither is a paint surface. Only the actual non-VR menu panel is decorated. */
+.MainMenuEmbedded .Menu:not(.VR) {
   color: var(--pp-ink) !important;
-  background-color: rgba(36, 16, 58, 0.94) !important;
-  border-color: rgba(116, 215, 238, 0.2) !important;
-  box-shadow: 0 10px 30px rgba(9, 0, 15, 0.3) !important;
+  background: var(--pp-pride) top / 100% 3px no-repeat, var(--pp-raised) !important;
+  border-color: var(--pp-border-subtle) !important;
 }
 
-[class*="Carousel"],
-[class*="GameCapsule"],
-[class*="AppCapsule"],
-[class*="Collection"],
-[class*="Card"],
-[class*="Panel"],
-[class*="Tile"] {
+.QuickAccessMenu,
+.BasicFooter,
+.QuickAccessFooter {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-raised) !important;
+  border-color: var(--pp-border-subtle) !important;
+}
+
+/* Paint the dialog once, never its transition/positioning layers. */
+.BasicUiRoot .DialogContent {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-raised) !important;
+  border-color: var(--pp-border-subtle) !important;
+}
+
+.BasicUiRoot :is(.DialogHeader, .DialogSubHeader, .DialogLabelStrong) {
+  color: var(--pp-ink) !important;
+}
+
+.BasicUiRoot :is(.DialogBodyText, .DialogLabel, .DialogLabelExplainer) {
   color: var(--pp-ink-muted) !important;
-  border-color: rgba(255, 175, 200, 0.16) !important;
-  border-radius: 10px !important;
-  transition: color 160ms ease, background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease !important;
 }
 
-[class*="Focused"],
-[class*="focused"],
-.gpfocus,
-[data-gp-focus="true"],
-[aria-selected="true"],
-:focus-visible {
+/* Actual dialog buttons only; native GreenPlay and game capsules are untouched. */
+.BasicUiRoot button.DialogButton:not(.GreenPlay) {
   color: var(--pp-ink) !important;
-  outline: 3px solid var(--pp-focus) !important;
-  outline-offset: 3px !important;
-  box-shadow: 0 0 0 6px rgba(116, 215, 238, 0.18), 0 12px 34px rgba(117, 7, 135, 0.34) !important;
+  background: var(--pp-muted) !important;
+  border-color: var(--pp-border) !important;
 }
 
-button,
-[role="button"],
-.DialogButton,
-[class*="Button"] {
+.BasicUiRoot button.DialogButton:not(.GreenPlay):not(.Primary):enabled:not(.Disabled):hover {
+  color: var(--pp-selection-text) !important;
+  background: var(--pp-selection) !important;
+}
+
+.BasicUiRoot button.DialogButton.Primary:not(.GreenPlay) {
+  color: var(--pp-on-accent) !important;
+  background: var(--pp-accent) !important;
+}
+
+.BasicUiRoot button.DialogButton.Primary:not(.GreenPlay):enabled:not(.Disabled):hover {
+  background: var(--pp-accent-hover) !important;
+}
+
+.BasicUiRoot button.DialogButton.Primary:not(.GreenPlay):enabled:not(.Disabled):active {
+  background: var(--pp-accent-pressed) !important;
+}
+
+.BasicUiRoot button.DialogButton:not(.GreenPlay):is(:disabled, .Disabled) {
+  color: var(--pp-ink-muted) !important;
+  background: var(--pp-raised) !important;
+}
+
+.BasicUiRoot input.DialogInput,
+.BasicUiRoot input.DialogTextInputBase,
+.BasicUiRoot textarea.DialogInput {
   color: var(--pp-ink) !important;
-  background-color: var(--pp-muted) !important;
-  border-color: rgba(255, 175, 200, 0.22) !important;
-  border-radius: 9px !important;
+  background-color: var(--pp-surface) !important;
+  border-color: var(--pp-border) !important;
 }
 
-[class*="Primary"],
-.DialogButton.Primary,
-.DialogButton.GreenPlay,
-[class*="PlayButton"] {
-  color: var(--pp-ink) !important;
-  background: linear-gradient(105deg, var(--pp-violet), var(--pp-accent)) !important;
-  box-shadow: 0 10px 28px rgba(117, 7, 135, 0.36) !important;
+.BasicUiRoot input.DialogInput::placeholder,
+.BasicUiRoot input.DialogTextInputBase::placeholder,
+.BasicUiRoot textarea.DialogInput::placeholder {
+  color: var(--pp-ink-muted) !important;
 }
 
-[class*="Modal"],
-[class*="Dialog"],
-.ModalPosition_Content,
-.DialogContent,
-.DialogContentTransition,
-.DialogBody,
-[role="dialog"] {
-  color: var(--pp-ink) !important;
-  background: radial-gradient(circle at 90% 0%, rgba(117, 7, 135, 0.24), transparent 26rem), var(--pp-raised) !important;
-  border-color: rgba(116, 215, 238, 0.26) !important;
-  box-shadow: 0 22px 60px rgba(9, 0, 15, 0.62) !important;
+.BasicUiRoot .DialogBodyText a,
+.BasicUiRoot .DialogLabelExplainer a {
+  color: var(--pp-link) !important;
 }
 
-[class*="Toast"],
-[class*="Notification"],
-[class*="Achievement"] {
-  color: var(--pp-ink) !important;
-  background: linear-gradient(110deg, rgba(36, 16, 58, 0.98), rgba(51, 22, 77, 0.98)) !important;
-  border-color: rgba(255, 175, 200, 0.28) !important;
-  box-shadow: inset 3px 0 0 var(--pp-trans-pink), 0 12px 32px rgba(9, 0, 15, 0.45) !important;
+/* Recolor an existing outline, never replace focus transforms or shadow rings. */
+.BasicUiRoot :is(.gpfocus, :focus-visible),
+.QuickAccessMenu :is(.gpfocus, :focus-visible),
+.MainMenuEmbedded .Menu:not(.VR) :is(.gpfocus, :focus-visible) {
+  outline-color: var(--pp-focus) !important;
 }
 
-input,
-textarea,
-[contenteditable="true"],
-.DialogInput,
-.DialogTextInputBase,
-._DialogInputContainer {
-  color: var(--pp-ink) !important;
-  background-color: rgba(9, 0, 15, 0.82) !important;
-  border-color: rgba(255, 175, 200, 0.28) !important;
+.BasicUiRoot,
+.QuickAccessMenu,
+.MainMenuEmbedded .Menu:not(.VR) {
+  scrollbar-color: var(--pp-border) var(--pp-surface) !important;
 }
 
-a,
-[role="link"] {
-  color: var(--pp-focus) !important;
-}
-
-* {
-  scrollbar-color: var(--pp-violet) var(--pp-deep) !important;
-}
-
-::selection {
-  color: var(--pp-ink);
-  background: rgba(255, 79, 216, 0.42);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.001ms !important;
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-  }
+.BasicUiRoot ::selection {
+  color: var(--pp-selection-text);
+  background-color: var(--pp-selection);
 }

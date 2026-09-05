@@ -1,5 +1,5 @@
 const STORAGE_KEY = "pridePrism.quickLinks.v1";
-const PALETTE = ["#E40303", "#FF8C00", "#FFED00", "#008026", "#004DFF", "#750787", "#74D7EE", "#FFAFC8"];
+const PALETTE = getComputedStyle(document.documentElement).getPropertyValue("--prism-identity-gradient").match(/#[0-9a-f]{6}/gi) || [getComputedStyle(document.documentElement).getPropertyValue("--prism-accent").trim()];
 const DEFAULT_SHORTCUTS = [
   { name: "GitHub", url: "https://github.com/" },
   { name: "YouTube", url: "https://www.youtube.com/" },
@@ -136,9 +136,9 @@ function celebrate() {
 
   const container = document.querySelector("#celebration");
   const fragment = document.createDocumentFragment();
-  for (let index = 0; index < 38; index += 1) {
+  for (let index = 0; index < 16; index += 1) {
     const particle = document.createElement("span");
-    const angle = (Math.PI * 2 * index) / 38 + Math.random() * 0.16;
+    const angle = (Math.PI * 2 * index) / 16 + Math.random() * 0.16;
     const distance = 120 + Math.random() * Math.min(window.innerWidth, 460);
     particle.className = "prism-particle";
     particle.style.setProperty("--particle-color", PALETTE[index % PALETTE.length]);

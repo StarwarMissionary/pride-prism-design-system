@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param()
+param([switch]$BuildOptionalOverlay)
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $PSScriptRoot
@@ -110,8 +110,14 @@ if ($steamInstallerErrors.Count) {
 }
 Write-Host "STEAM INSTALLER OK: $steamInstaller"
 
+& (Join-Path $repoRoot 'scripts\test-windows.ps1')
+
 $node = Get-Command node -ErrorAction SilentlyContinue
 if ($node) {
+    & $node.Source (Join-Path $repoRoot 'scripts\test-theme.mjs')
+    if ($LASTEXITCODE -ne 0) { throw 'Shared theme contract validation failed.' }
+    & $node.Source (Join-Path $repoRoot 'scripts\test-adapters.mjs')
+    if ($LASTEXITCODE -ne 0) { throw 'Adapter boundary validation failed.' }
     & $node.Source --check (Join-Path $repoRoot 'docs\app.js')
     if ($LASTEXITCODE -ne 0) { throw 'Website JavaScript validation failed.' }
     Write-Host 'JAVASCRIPT OK: docs\app.js'
@@ -121,8 +127,11 @@ if ($node) {
     Write-Host 'JAVASCRIPT OK: adapters\chrome-start-page\app.js'
 }
 
-$buildScript = Join-Path $repoRoot 'tools\PridePrankLab\build.ps1'
-& $buildScript | Out-Host
-if ($LASTEXITCODE -ne 0) { throw 'Pride Prank Lab build failed.' }
+if (-not $node) { throw 'Node.js is required to validate the shared theme contract.' }
+if ($BuildOptionalOverlay) {
+    $buildScript = Join-Path $repoRoot 'tools\PridePrankLab\build.ps1'
+    & $buildScript | Out-Host
+    if ($LASTEXITCODE -ne 0) { throw 'Pride Prank Lab build failed.' }
+}
 
 Write-Host 'Pride Prism validation passed.'

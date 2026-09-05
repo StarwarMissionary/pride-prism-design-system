@@ -246,11 +246,11 @@ namespace PridePrankLab
         private DateTime burstUntil = DateTime.MinValue;
 
         internal bool MasterEnabled = true;
-        internal bool RainbowBorderEnabled = true;
+        internal bool RainbowBorderEnabled;
         internal bool ConfettiEnabled;
         internal bool BannerEnabled;
         internal bool DiscoEnabled;
-        internal bool NativeAccentEnabled = true;
+        internal bool NativeAccentEnabled;
         internal bool PinWhenInactive;
         internal int Intensity = 35;
         internal string BannerText = "HAPPY PRIDE!  LOVE WINS";
@@ -806,11 +806,11 @@ namespace PridePrankLab
             };
             Controls.Add(paletteBox);
 
-            borderCheck = MakeCheck("Animated rainbow border", 22, 227, true);
+            borderCheck = MakeCheck("Animated rainbow border", 22, 227, false);
             confettiCheck = MakeCheck("Continuous confetti", 240, 227, false);
             bannerCheck = MakeCheck("Pride celebration banner", 22, 260, false);
             discoCheck = MakeCheck("Disco glow", 240, 260, false);
-            nativeAccentCheck = MakeCheck("Cycle native window accent", 22, 293, true);
+            nativeAccentCheck = MakeCheck("Cycle native window accent", 22, 293, false);
             pinCheck = MakeCheck("Show while app is behind", 240, 293, false);
             Controls.Add(borderCheck);
             Controls.Add(confettiCheck);

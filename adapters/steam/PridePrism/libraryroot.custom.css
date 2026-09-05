@@ -1,332 +1,252 @@
-/**
- * Pride Prism — Steam desktop and library
- * Dark work surfaces, Progress Pride edge accents, restrained motion.
+/** Pride Prism — Millennium desktop, Library, menus and dialogs.
+ * Semantic classes are provided by Millennium. Never paint every Container,
+ * AppDetails* descendant, or transition overlay: Steam layers content there.
+ * Decoration changes color only; Steam retains all sizing and positioning.
  */
-
 :root {
-  --pp-red: #e40303;
-  --pp-orange: #ff8c00;
-  --pp-yellow: #ffed00;
-  --pp-green: #008026;
-  --pp-blue: #004dff;
-  --pp-violet: #750787;
-  --pp-trans-blue: #74d7ee;
-  --pp-trans-pink: #ffafc8;
-  --pp-surface: #140021;
-  --pp-surface-raised: #24103a;
-  --pp-surface-muted: #33164d;
-  --pp-ink: #fff9f2;
-  --pp-ink-muted: #dccfe5;
-  --pp-accent: #ff4fd8;
-  --pp-focus: #74d7ee;
-
-  --gpSystemLightestGrey: var(--pp-ink) !important;
-  --gpSystemLighterGrey: var(--pp-ink-muted) !important;
-  --gpSystemLightGrey: #aa98b4 !important;
-  --gpSystemGrey: #755f80 !important;
-  --gpSystemDarkGrey: var(--pp-surface-muted) !important;
-  --gpSystemDarkerGrey: var(--pp-surface-raised) !important;
-  --gpSystemDarkestGrey: var(--pp-surface) !important;
-  --gpStoreLightestGrey: var(--pp-ink) !important;
-  --gpStoreLighterGrey: var(--pp-ink-muted) !important;
-  --gpStoreLightGrey: #aa98b4 !important;
-  --gpStoreDarkGrey: var(--pp-surface-muted) !important;
-  --gpStoreDarkerGrey: var(--pp-surface-raised) !important;
-  --gpStoreDarkestGrey: var(--pp-surface) !important;
-  --gpColor-Blue: var(--pp-accent) !important;
-  --gpColor-BlueHi: var(--pp-trans-blue) !important;
-  --gpColor-Green: #00b85c !important;
-  --gpColor-Yellow: var(--pp-yellow) !important;
-  --gpColor-Red: #ff3b3b !important;
-  --gpBackground-DarkMedium: var(--pp-surface) !important;
-  --gpBackground-DarkSoft: var(--pp-surface-raised) !important;
-  --gpBackground-LightMedium: rgba(117, 7, 135, 0.42) !important;
-  --gpBackground-LightSoft: rgba(255, 175, 200, 0.12) !important;
-  --color-text-secondary: var(--pp-ink-muted) !important;
-  --color-text-light-subtitle: #aa98b4 !important;
+  /* Shared --prism-* tokens are prepended by scripts/build-theme.mjs. */
+  --pp-surface: var(--prism-surface);
+  --pp-surface-raised: var(--prism-surface-raised);
+  --pp-surface-muted: var(--prism-surface-muted);
+  --pp-ink: var(--prism-foreground);
+  --pp-ink-muted: var(--prism-foreground-muted);
+  --pp-accent: var(--prism-accent);
+  --pp-on-accent: var(--prism-on-accent);
+  --pp-accent-hover: var(--prism-accent-hover);
+  --pp-accent-pressed: var(--prism-accent-pressed);
+  --pp-focus: var(--prism-focus);
+  --pp-link: var(--prism-link);
+  --pp-selection: var(--prism-selection);
+  --pp-selection-text: var(--prism-selection-text);
+  --pp-border: var(--prism-border);
+  --pp-border-subtle: var(--prism-border-subtle);
+  --pp-pride: var(--prism-identity-gradient);
 }
 
-html,
-body,
-#root,
-.steamdesktop {
-  color: var(--pp-ink) !important;
+/* Keep browser/compositor and app-detail overlay backgrounds transparent. */
+body.DesktopUI .Wrapper.ForceOpaqueBackground {
   background: var(--pp-surface) !important;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 999999;
-  height: 5px;
-  pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    var(--pp-red),
-    var(--pp-orange),
-    var(--pp-yellow),
-    var(--pp-green),
-    var(--pp-blue),
-    var(--pp-violet)
-  );
-  background-size: 180% 100%;
-  box-shadow: 0 2px 16px rgba(255, 79, 216, 0.3);
-  animation: pride-prism-steam-drift 14s linear infinite;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 5px auto 0 0;
-  z-index: 999998;
-  width: 3px;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    #000000,
-    #613915 18%,
-    var(--pp-trans-blue) 36%,
-    var(--pp-trans-pink) 54%,
-    #ffffff 70%,
-    var(--pp-violet)
-  );
-  opacity: 0.88;
-}
-
-/* Keep the Library's dynamically generated app-detail layers untouched.
- * Painting every hashed appdetails/libraryhome descendant creates an opaque
- * overlay above Steam's game art and controls on current client builds. */
-
-[class*="gamelistentry_Selected"],
-[class*="Selected"] [class*="gamelistentry"],
-[aria-selected="true"] {
   color: var(--pp-ink) !important;
-  background: linear-gradient(90deg, rgba(117, 7, 135, 0.72), rgba(255, 79, 216, 0.12)) !important;
 }
-
-button,
-[role="button"] {
-  border-radius: 8px !important;
-  transition: color 160ms ease, background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease !important;
+body.DesktopUI .TopBar {
+  background: var(--pp-pride) top / 100% 3px no-repeat, var(--pp-surface-raised) !important;
+  box-shadow: inset 0 -1px var(--pp-border-subtle) !important;
 }
-
-button:hover,
-[role="button"]:hover {
-  filter: saturate(1.08);
-}
-
-a,
-[role="link"] {
-  color: var(--pp-trans-blue) !important;
-}
-
-input,
-textarea,
-[contenteditable="true"] {
-  color: var(--pp-ink) !important;
-  background: rgba(9, 0, 15, 0.72) !important;
-  border-color: rgba(255, 175, 200, 0.2) !important;
-}
-
-.DialogTextInputBase,
-._DialogInputContainer,
-.DialogInput,
-.DialogDropDown,
-[class*="DialogInput_"] {
-  color: var(--pp-ink) !important;
-  background-color: rgba(9, 0, 15, 0.78) !important;
-  border-color: rgba(255, 175, 200, 0.24) !important;
-}
-
-:focus-visible {
-  outline: 2px solid var(--pp-focus) !important;
-  outline-offset: 2px !important;
-}
-
-::selection {
-  color: var(--pp-ink);
-  background: rgba(255, 79, 216, 0.42);
-}
-
-/* Steam desktop UI (stable, non-hashed class names) */
-html.MillenniumWindow_MainSteamWindow,
-html.MillenniumWindow_MainSteamWindow body.DesktopUI,
-body.DesktopUI .Wrapper.ForceOpaqueBackground,
-body.DesktopUI .OuterFrame,
-body.DesktopUI .ContentFrame,
-body.DesktopUI .LocalContentContainer {
-  color: var(--pp-ink) !important;
-  background-color: var(--pp-surface) !important;
-  background-image: none !important;
-}
-
-body.DesktopUI .TopBar,
-body.DesktopUI .TitleBar,
-body.DesktopUI .BottomBar,
-body.DesktopUI .RootMenuBar,
-body.DesktopUI .SuperNavBar {
-  color: var(--pp-ink) !important;
-  background: linear-gradient(90deg, var(--pp-surface-raised), #2d1046 56%, var(--pp-surface-muted)) !important;
-  border-color: rgba(116, 215, 238, 0.22) !important;
-}
-
-body.DesktopUI .TopBar,
-body.DesktopUI .BottomBar {
-  position: relative !important;
-  box-shadow: 0 8px 28px rgba(9, 0, 15, 0.28) !important;
-}
-
-body.DesktopUI .TopBar::after,
-body.DesktopUI .BottomBar::before {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 2px;
-  z-index: 30;
-  pointer-events: none;
-  background: linear-gradient(90deg, var(--pp-red), var(--pp-orange), var(--pp-yellow), var(--pp-green), var(--pp-blue), var(--pp-violet), var(--pp-trans-blue), var(--pp-trans-pink)) !important;
-}
-
-body.DesktopUI .BottomBar::before {
-  inset: 0 0 auto 0;
-}
-
-body.DesktopUI .RootMenuButton,
-body.DesktopUI .SuperNav,
-body.DesktopUI .SuperNavBar,
-body.DesktopUI .FriendsButton,
-body.DesktopUI .DownloadStatus {
-  color: var(--pp-ink-muted) !important;
-}
-
-body.DesktopUI .RootMenuButton:hover,
-body.DesktopUI .SuperNav:hover,
-body.DesktopUI .FriendsButton:hover,
-body.DesktopUI .DownloadStatus:hover {
-  color: var(--pp-trans-blue) !important;
-  background-color: rgba(117, 7, 135, 0.3) !important;
-}
-
-body.DesktopUI .WindowControls .windowControlButton,
-body.DesktopUI .TitleBarControls .windowControlButton {
-  color: var(--pp-ink-muted) !important;
+body.DesktopUI :is(.TitleBar, .RootMenuBar, .SuperNavBar) {
   background: transparent !important;
 }
-
-body.DesktopUI .WindowControls .windowControlButton:hover,
-body.DesktopUI .TitleBarControls .windowControlButton:hover {
-  color: var(--pp-ink) !important;
-  background: rgba(116, 215, 238, 0.14) !important;
+body.DesktopUI .BottomBar {
+  background: var(--pp-surface-raised) !important;
+  box-shadow: inset 0 1px var(--pp-border-subtle) !important;
 }
-
-/* Menus, dialogs, settings, notifications, and downloads */
-.ModalDialogPopup,
-.ModalPosition_Content,
-.DialogContent,
-.DialogContentTransition,
-.DialogBody,
-.GenericConfirmDialog,
-[role="dialog"],
-[class*="ModalDialogPopup"],
-[class*="DialogContent_"] {
-  color: var(--pp-ink) !important;
-  background: radial-gradient(circle at 88% 0%, rgba(117, 7, 135, 0.24), transparent 26rem), var(--pp-surface-raised) !important;
-  border-color: rgba(116, 215, 238, 0.24) !important;
-  box-shadow: 0 20px 56px rgba(9, 0, 15, 0.62) !important;
-}
-
-.ModalPosition_TopBar,
-[class*="ModalPosition_TopBar"] {
-  background: linear-gradient(90deg, var(--pp-red), var(--pp-orange), var(--pp-yellow), var(--pp-green), var(--pp-blue), var(--pp-violet), var(--pp-trans-blue), var(--pp-trans-pink)) !important;
-}
-
-.DialogHeader,
-.DialogSubHeader,
-.SettingsDialogSubHeader,
-.DialogLabelStrong,
-[class*="DialogHeader"],
-[class*="DialogSubHeader"] {
-  color: var(--pp-ink) !important;
-}
-
-.DialogBodyText,
-.DialogLabel,
-.DialogToggle_Description,
-.DialogLabelExplainer,
-[class*="DialogBodyText"] {
+body.DesktopUI :is(.RootMenuButton, .MenuButton, .AddGameButton, .FriendsButton, .DownloadStatus) {
   color: var(--pp-ink-muted) !important;
 }
-
-button.DialogButton,
-.DialogButton,
-[class*="DialogButton"] {
+body.DesktopUI :is(.RootMenuButton, .MenuButton):hover {
   color: var(--pp-ink) !important;
   background-color: var(--pp-surface-muted) !important;
-  border-color: rgba(255, 175, 200, 0.24) !important;
-  border-radius: 8px !important;
 }
-
-button.DialogButton.Primary,
-button.DialogButton.GreenPlay,
-[class*="PlayButton"],
-[class*="PrimaryButton"] {
-  color: var(--pp-ink) !important;
-  background: linear-gradient(100deg, var(--pp-violet), var(--pp-accent)) !important;
-  box-shadow: 0 8px 24px rgba(117, 7, 135, 0.34) !important;
+body.DesktopUI .SuperNavMenu.Selected .MenuButton {
+  color: var(--pp-selection-text) !important;
 }
-
-.PP7LM0Ow1K5qkR8WElLpt,
-.GreenEnvelopeMenu,
-.contextMenuItem,
-[role="menu"],
-[role="menuitem"],
-[class*="contextmenu_"],
-[class*="ContextMenu_"] {
+body.DesktopUI .SuperNavMenu.Selected .MenuButton::after {
+  background: var(--pp-focus) !important;
+}
+body.DesktopUI :is(.AddGameButton, .FriendsButton, .DownloadStatus):hover {
+  color: var(--pp-focus) !important;
+}
+body.DesktopUI :is(.AddGameButton .Text, .FriendsButton .Text, .DownloadStatus .Queue) {
   color: var(--pp-ink-muted) !important;
+}
+body.DesktopUI :is(.URLBar, .URLBarReplacement) {
+  background: var(--pp-surface) !important;
+  color: var(--pp-ink-muted) !important;
+}
+
+/* Exact Library surfaces; game art, logos and overlay layers are untouched. */
+.LocalContentContainer.Library :is(.LeftListSizableContainer > .Container, .GameListHomeAndSearch) {
+  background: var(--pp-surface-raised) !important;
+  color: var(--pp-ink) !important;
+}
+.LocalContentContainer.Library .LibraryWindowDivider {
+  background-color: var(--pp-border-subtle) !important;
+}
+.LocalContentContainer.Library .AppDetailsOverlayTransitionGroup {
+  background: transparent !important;
+}
+.LocalContentContainer.Library :is(.AppDetailsTransitionGroup, .AppDetailsMain > .Container, .AppDetailsMain .Body.ScrollContainer) {
+  background: var(--pp-surface) !important;
+  color: var(--pp-ink) !important;
+}
+.LocalContentContainer.Library :is(.HomeBox .Bar, .CollectionDropDown, .SearchBar .MenuHeader) {
+  background: var(--pp-surface-muted) !important;
+  color: var(--pp-ink-muted) !important;
+}
+.LocalContentContainer.Library .HomeBox .Bar.Selected {
+  background: var(--pp-selection) !important;
+  color: var(--pp-selection-text) !important;
+  box-shadow: inset 3px 0 var(--pp-focus) !important;
+}
+.LocalContentContainer.Library .GameListEntryContainer {
+  color: var(--pp-ink-muted) !important;
+}
+.LocalContentContainer.Library .GameListEntryContainer:hover {
+  background-color: var(--pp-surface-muted) !important;
+}
+.LocalContentContainer.Library .LeftListSizableContainer .Selected > .GameListEntryContainer {
+  background: var(--pp-selection) !important;
+  color: var(--pp-selection-text) !important;
+  box-shadow: inset 3px 0 var(--pp-focus) !important;
+}
+.LocalContentContainer.Library :is(.LibraryHome, .RecentGameFooter, .AppDetailsSectionContainer, .PartnerEventMediumImage_Container) {
+  background: var(--pp-surface-raised) !important;
+}
+.LocalContentContainer.Library :is(.PartnerEventRowCapsule_TextTitle, .Event_Title, .AppDetailsSection .SectionHeader, .CollectionDropDown) {
+  color: var(--pp-ink) !important;
+}
+.LocalContentContainer.Library :is(.PartnerEventRowCapsule_TextCtn, .GameIconAndName .GameName, .AppDetailsSection .Label) {
+  color: var(--pp-ink-muted) !important;
+}
+.LocalContentContainer.Library .PlayBar.Glassy {
   background-color: var(--pp-surface-raised) !important;
-  border-color: rgba(116, 215, 238, 0.18) !important;
 }
-
-.contextMenuItem:hover,
-[role="menuitem"]:hover,
-[role="menuitem"][aria-selected="true"] {
+/* PlayButtonContainer and its children retain Steam's native action colors. */
+.LocalContentContainer.Library :is(.PlayBarLabel, .PlayBarDetailLabel, .GameDescription, .PlaytimeStatus, .PartnerEventMediumImage_Summary, .PartnerEventType, .CommentCount, .LikeCount) {
+  color: var(--pp-ink-muted) !important;
+}
+.LocalContentContainer.Library :is(.LinksSection .Link .Text, .ShowMore.TextButton) {
+  color: var(--pp-link) !important;
+}
+.LocalContentContainer.Library .PartnerEventMediumImage_Title {
   color: var(--pp-ink) !important;
-  background-color: rgba(117, 7, 135, 0.5) !important;
 }
 
-[class*="notification_"],
-[class*="Notification_"],
-[class*="toast_"],
-[class*="Toast_"],
-[class*="achievement_"],
-[class*="Achievement_"] {
+/* Downloads: only real page/panel surfaces, never game art or graph series.
+ * SectionItemStatus, progress fills and connection/status colors stay native. */
+.DownloadsPage,
+.DownloadsPage .TopSection {
+  background-color: var(--pp-surface) !important;
+}
+.DownloadsPage .TopSection .Section.Empty.Active,
+.DownloadsPage .HeroAndLogo.Empty,
+.DownloadsPage .DownloadGraph,
+.DownloadsPage .SectionItem,
+.DownloadsPage .ItemListScrollWrapper {
+  background-color: var(--pp-surface-raised) !important;
+  border-color: var(--pp-border-subtle) !important;
+}
+.DownloadsPage .SectionTitle,
+.DownloadsPage .DownloadItemName .Name,
+.DownloadsPage .ProgressDetails .Value {
   color: var(--pp-ink) !important;
-  background: linear-gradient(105deg, rgba(36, 16, 58, 0.98), rgba(51, 22, 77, 0.98)) !important;
-  border-color: rgba(255, 175, 200, 0.26) !important;
-  box-shadow: inset 3px 0 0 var(--pp-trans-pink), 0 12px 34px rgba(9, 0, 15, 0.45) !important;
+}
+.DownloadsPage .SectionTitle .Count,
+.DownloadsPage .AutoUpdate {
+  color: var(--pp-ink-muted) !important;
 }
 
-[class*="downloads_ProgressBar"],
-.DialogProgressBar_Value,
-.DialogSlider_Value {
-  background: linear-gradient(90deg, var(--pp-trans-blue), var(--pp-accent), var(--pp-violet)) !important;
+/* Menus are independent windows, including root and tab submenus. */
+.ContextMenuPopupBody, .contextMenu, .contextMenuContents, .MenuPopup {
+  background: var(--pp-surface-raised) !important;
+  color: var(--pp-ink) !important;
+  border-color: var(--pp-border) !important;
+}
+.contextMenuItem, .MenuPopup .MenuItem {
+  background: transparent !important;
+  color: var(--pp-ink-muted) !important;
+}
+.contextMenuItem:hover, .contextMenuItem:focus-visible, .MenuPopup .MenuItem:hover {
+  background: var(--pp-selection) !important;
+  color: var(--pp-selection-text) !important;
 }
 
-* {
-  scrollbar-color: var(--pp-violet) #09000f !important;
+/* Paint dialogs once, not each nested label/body/transition element. */
+.ModalDialogPopup, .DialogContent, .PagedSettingsDialog {
+  background: var(--pp-surface-raised) !important;
+  color: var(--pp-ink) !important;
 }
-
-@keyframes pride-prism-steam-drift {
-  to { background-position: 180% 0; }
+.ModalPosition_TopBar {
+  background: var(--pp-pride) !important;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  body::before { animation: none; }
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.001ms !important;
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
+.PagedSettingsDialog .PageListColumn,
+.PagedSettingsDialog .PagedSettingDialog_ContentColumn {
+  background: var(--pp-surface) !important;
+}
+.PagedSettingsDialog :is(.PagedSettingsDialog_Title, .PageListItem_Title, .FieldLabel) {
+  color: var(--pp-ink) !important;
+}
+.PagedSettingsDialog .FieldDescription {
+  color: var(--pp-ink-muted) !important;
+}
+.PagedSettingsDialog .Field.Background {
+  background: var(--pp-surface-muted) !important;
+}
+.PagedSettingsDialog_PageListItem.Active,
+.PagedSettingsDialog_PageListItem:hover {
+  background: var(--pp-selection) !important;
+  color: var(--pp-selection-text) !important;
+  box-shadow: inset 3px 0 var(--pp-focus) !important;
+}
+.SettingsTitleBar .title-area-highlight {
+  background: transparent !important;
+}
+.DesktopUI .windowControlButton {
+  color: var(--pp-ink-muted) !important;
+  background-color: transparent !important;
+}
+.DesktopUI .windowControlButton:hover {
+  background-color: var(--pp-selection) !important;
+}
+:is(.DialogHeader, .DialogSubHeader, .SettingsDialogSubHeader, .DialogLabelStrong) {
+  color: var(--pp-ink) !important;
+}
+:is(.DialogBodyText, .DialogLabel, .DialogToggle_Description, .DialogLabelExplainer) {
+  color: var(--pp-ink-muted) !important;
+}
+.DialogButton:not(.GreenPlay) {
+  background: var(--pp-surface-muted) !important;
+  color: var(--pp-ink) !important;
+  border-color: var(--pp-border) !important;
+}
+.DialogButton:not(.GreenPlay):not(.Primary):not(:disabled):not(.Disabled):hover {
+  background: var(--pp-selection) !important;
+  color: var(--pp-selection-text) !important;
+}
+.DialogButton.Primary:not(.GreenPlay) {
+  background: var(--pp-accent) !important;
+  color: var(--pp-on-accent) !important;
+}
+.DialogButton.Primary:not(.GreenPlay):not(:disabled):not(.Disabled):hover {
+  background: var(--pp-accent-hover) !important;
+}
+.DialogButton.Primary:not(.GreenPlay):not(:disabled):not(.Disabled):active {
+  background: var(--pp-accent-pressed) !important;
+}
+.DialogButton:not(.GreenPlay):is(:disabled, .Disabled) {
+  background: var(--pp-surface-raised) !important;
+  color: var(--pp-ink-muted) !important;
+}
+:is(.DialogTextInputBase, .DialogInput, .DialogDropDown, .SearchFilterInput),
+.LocalContentContainer.Library input {
+  background: var(--pp-surface) !important;
+  color: var(--pp-ink) !important;
+  border-color: var(--pp-border) !important;
+}
+:is(.DialogProgressBar_Value, .DialogSlider_Value) {
+  background: var(--pp-focus) !important;
+}
+.DesktopUI :focus-visible {
+  outline-color: var(--pp-focus) !important;
+}
+.DesktopUI {
+  scrollbar-color: var(--pp-border) var(--pp-surface) !important;
+}
+.DesktopUI ::selection {
+  background: var(--pp-selection);
+  color: var(--pp-selection-text);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .RootMenuButton, .MenuButton, .contextMenuItem, .DialogButton:not(.GreenPlay) {
+    transition: background-color 140ms ease, color 140ms ease !important;
   }
 }

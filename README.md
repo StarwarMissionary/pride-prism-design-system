@@ -1,49 +1,64 @@
 # Pride Prism Design System
 
-Pride Prism is a polished, high-contrast Pride theme system for desktop apps. Its default is dark mode, it uses native theming where an app supports it, and it keeps motion optional, restrained, and reversible.
+A dark, palette-selectable foundation for desktop themes. Shared neutrals, tested control colors, static identity decoration and adapter-specific native layouts.
 
-**Live design system:** https://starwarmissionary.github.io/pride-prism-design-system/
+[Palette workbench](https://starwarmissionary.github.io/pride-prism-design-system/) · [Foundation audit](docs/FOUNDATION_AUDIT.md) · [Design contract](docs/DESIGN_SYSTEM.md) · [App support](docs/APP_MATRIX.md) · [Verification](docs/VERIFICATION.md)
 
-## Included
+## Start with the foundation
 
-- Shared color, typography, motion, and effect tokens in JSON, CSS, and XAML.
-- A native ChatGPT/Codex configuration adapter.
-- A permissionless Chrome theme package with no scripts or site access.
-- A separate permissionless Chrome start page with local shortcuts and opt-in celebration.
-- A portable Windows `.theme` package plus a per-user rainbow cursor scheme and restore workflow.
-- Discord custom-gradient values plus a no-restart theme for existing Vencord installs.
-- A Millennium-compatible Steam theme, kept CSS-only and reversible.
-- The optional Pride Prank Lab overlay for live celebration effects across supported desktop windows.
+`tokens/palettes.json` is the attributed public catalog. `tokens/theme.mjs` resolves it into semantic roles. The browser preview and exporter use the same module. Choose from Bisexual, Rainbow, Progress-inspired, Transgender, Pansexual, Lesbian, Nonbinary, Asexual, Aromantic and Neutral; use a custom interface accent independently.
 
-## Default character
+The public default is Neutral. A palette is a preference, not an identity declaration. Personal choices belong in browser storage or ignored local output, not the public repository.
 
-- Deep violet surfaces with white text.
-- Magenta focus/accent color.
-- Classic Pride and Progress Pride palettes for decoration and semantic states.
-- No continuous confetti, flashing, or full-screen tint by default.
-- Slow five-second accent transitions; celebration bursts are explicit.
+## Build a palette bundle
 
-## Quick start
+Requires Node.js. From the repository root:
 
-1. Review the tokens in `tokens/pride-prism.tokens.json`.
-2. Use the adapter README for the target application.
-3. Run `scripts/validate.ps1` before distributing changes.
+```powershell
+node scripts/build-theme.mjs --palette bisexual --output dist/bisexual
+node scripts/test-theme.mjs
+```
 
-The Windows and Chrome adapters include generated bitmap assets. Recreate them with `scripts/generate-assets.ps1`.
+The bundle contains `theme.json`, CSS, XAML and adapter copies with generated colors. Follow the **generated** adapter guide before installing. Do not install raw CSS templates from `adapters/`: their shared variables are injected at build time.
 
-## Safety and reversibility
+For matching Chrome bitmap assets (Windows PowerShell):
 
-Pride Prism does not modify signed application binaries. The Chrome package is theme-only and requests no permissions. The Windows installers save the previous theme and cursor values before making per-user changes. Discord can use its native Nitro editor or the local Vencord theme when Vencord is already installed. Steam's client does not expose custom palettes, so its CSS-only adapter requires the optional third-party, open-source Millennium framework; the adapter README documents installation and rollback.
+```powershell
+./scripts/generate-assets.ps1 -ThemeJson ./dist/bisexual/theme.json -OutputRoot ./dist/bisexual
+```
 
-## References
+For a custom accent, add `--accent '#E866AF'`. Reference stripes retain their original colors and proportions. Functional action text uses a tested foreground pair; status and focus colors remain independent.
 
-- [ChatGPT desktop appearance settings](https://learn.chatgpt.com/docs/reference/settings)
-- [Discord custom themes](https://support.discord.com/hc/en-us/articles/207260127-How-to-Change-Discord-Color-Themes-and-Customize-Appearance-Settings)
-- [Chrome themes](https://developer.chrome.com/docs/extensions/mv2/themes)
-- [Windows theme file format](https://learn.microsoft.com/en-us/windows/win32/controls/themesfileformat-overview)
-- [Millennium installation](https://docs.steambrew.app/users/getting-started/installation)
-- [Millennium theme template](https://github.com/SteamClientHomebrew/ThemeTemplate)
+## Application coverage
+
+- Windows: native dark preferences and accent, with typed rollback; wallpaper/cursor preserved.
+- Steam: CSS-only scoped patches using an existing optional Millennium installation.
+- Discord: surface-token CSS for an existing Vencord installation.
+- Chrome: theme-only package with neutral controls, plus a separate permissionless start page.
+- Codex desktop appearance: a mergeable native configuration snippet; not a universal ChatGPT web theme.
+- Blender: staged, color-only preferences with backup and guarded commit.
+- Unity: supported Dark and Colors preferences; no editor archive patches.
+
+See [support limits and verification gates](docs/APP_MATRIX.md). Exporting a bundle does not establish that an installed application is fully themed.
+
+## Website and validation
+
+The existing GitHub Pages site stays in `docs/`. No external site framework or account is required.
+
+```powershell
+node scripts/build-site.mjs
+node scripts/preview-site.mjs
+./scripts/validate.ps1
+```
+
+Open the printed local URL for preview. Before publishing, regenerate the shared site modules. The validator does not build or run the optional legacy overlay unless `-BuildOptionalOverlay` is explicitly supplied.
+
+## Safety
+
+The foundation does not patch application executables/resources, install client-mod frameworks, change security settings, or restart apps. Installers must preserve user work and explain native/third-party limitations. Local backups and generated personal bundles are excluded from Git.
+
+`tools/PridePrankLab` is a legacy optional experiment, not the theme engine or a required app. Its independent palette/effect UI is not the shared-system configuration surface; continuous border/accent effects now start disabled. Do not use it to claim native application coverage.
 
 ## License
 
-MIT
+MIT. Reference flag colors are attributed in the catalog; it is non-exhaustive and not a claim of universal identity representation.

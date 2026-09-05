@@ -1,15 +1,11 @@
-# Discord adapter
+# Discord surface adapter
 
-Pride Prism supports two non-destructive paths.
+This CSS adapter requires an **existing** Vencord installation. Vencord is a third-party client modification, not Discord's native appearance API. The theme does not install it or patch Discord application files.
 
-## Discord Custom Theme
+Build the palette, then back up the existing theme and copy the generated `dist/<palette>/adapters/discord/PridePrism.theme.css` into `%APPDATA%/Vencord/themes`. Enable Pride Prism in Vencord Themes. If already enabled, its file watcher may reload it; verify the result rather than forcing Discord to restart.
 
-Discord's supported custom-theme editor is under **User Settings -> Appearance -> Color Themes -> Custom Theme** for eligible Nitro accounts.
+Shared surfaces, text and a static identity rail are themed. Presence, roles, media and native progress are preserved. Legacy brand buttons use a dark selection fill because their text/icon foregrounds cannot reliably be paired with arbitrary bright accents.
 
-Use the five colors from `pride-prism-gradient.json` in order, set the direction near 135 degrees, and use 82% intensity for a vivid but readable dark-mode result. Apply it and enable sync only if you want the theme on other Discord clients.
+To undo, disable the theme or restore the backed-up CSS. Never replace unrelated QuickCSS.
 
-## Existing Vencord installation
-
-If Vencord is already installed, copy `PridePrism.theme.css` into `%APPDATA%\Vencord\themes`, then enable **Pride Prism** under **Vencord Settings -> Themes**. Vencord QuickCSS can apply the same file live when QuickCSS is already enabled.
-
-The adapter does not modify Discord's signed application files. Do not install or inject a client modification solely to use this theme.
+The historical `pride-prism-gradient.json` is a legacy native-Nitro experiment, not a generated foundation adapter. It must not be used as the selected palette's source of truth. Native Nitro availability and coverage differ from Vencord; this bundle does not automate account or sync settings.

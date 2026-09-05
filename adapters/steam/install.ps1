@@ -22,6 +22,15 @@ if (-not (Test-Path -LiteralPath $currentMillenniumDll) -and -not (Test-Path -Li
 }
 
 $source = Join-Path $PSScriptRoot 'PridePrism'
+$bundleThemePath = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\theme.json'))
+if (-not (Test-Path -LiteralPath $bundleThemePath)) {
+    throw 'Build a palette first, then run the installer from dist/<palette>/adapters/steam. Raw templates are not installable.'
+}
+$bundleTheme = Get-Content -LiteralPath $bundleThemePath -Raw -Encoding UTF8 | ConvertFrom-Json
+if ($bundleTheme.colors.accent -notmatch '^#[0-9a-fA-F]{6}$' -or
+    -not (Select-String -LiteralPath (Join-Path $source 'libraryroot.custom.css') -Pattern '--prism-surface:\s*#[0-9a-fA-F]{6}' -Quiet)) {
+    throw 'Generated theme tokens are missing or invalid; nothing installed.'
+}
 if (Test-Path -LiteralPath $currentMillenniumDll) {
     $skinsRoot = Join-Path $SteamPath 'millennium\themes'
 } else {
@@ -33,12 +42,17 @@ $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss-fff'
 New-Item -ItemType Directory -Path $skinsRoot -Force | Out-Null
 
 if (Test-Path -LiteralPath $destination) {
-    $backup = Join-Path $skinsRoot "PridePrism.backup-$timestamp"
-    Move-Item -LiteralPath $destination -Destination $backup
+    $backupRoot = Join-Path $SteamPath 'millennium\backups'
+    New-Item -ItemType Directory -Path $backupRoot -Force | Out-Null
+    $backup = Join-Path $backupRoot "PridePrism-$timestamp"
+    Copy-Item -LiteralPath $destination -Destination $backup -Recurse
     Write-Host "Previous theme preserved at: $backup"
 }
 
-Copy-Item -LiteralPath $source -Destination $destination -Recurse
+New-Item -ItemType Directory -Path $destination -Force | Out-Null
+Get-ChildItem -LiteralPath $source -File | ForEach-Object {
+    Copy-Item -LiteralPath $_.FullName -Destination (Join-Path $destination $_.Name) -Force
+}
 Write-Host "Pride Prism installed at: $destination"
 
 if (Test-Path -LiteralPath $currentMillenniumDll) {
@@ -52,11 +66,7 @@ if (Test-Path -LiteralPath $currentMillenniumDll) {
         if ($quickCss -match 'global Quick CSS is intentionally empty') {
             Write-Host 'Pride Prism global Quick CSS is already neutralized.'
         } elseif (($quickCss -match 'Pride Prism') -and ($quickCss -match '--pp-surface|generated fallback|Steam desktop \+ webviews')) {
-            $quickCssBackup = Join-Path $configRoot "quick.css.backup-$timestamp"
-            Copy-Item -LiteralPath $quickCssPath -Destination $quickCssBackup
-            Set-Content -LiteralPath $quickCssPath -Value '/* Pride Prism uses scoped Millennium theme patches; global Quick CSS is intentionally empty. */' -Encoding UTF8
-            Write-Host "Old Pride Prism Quick CSS preserved at: $quickCssBackup"
-            Write-Host 'Removed the obsolete global Quick CSS injection.'
+            Write-Warning 'Legacy Pride Prism rules were detected in global Quick CSS. The entire file is preserved because it may contain user edits. Review and remove only the obsolete rules before claiming layout compatibility.'
         } else {
             Write-Host 'Existing unrelated Millennium Quick CSS was left unchanged.'
         }
@@ -86,6 +96,9 @@ if (Test-Path -LiteralPath $currentMillenniumDll) {
             $config.themes.allowedScripts = $false
         }
         if ($config.PSObject.Properties['general']) {
+            if ($config.general.PSObject.Properties['accentColor']) {
+                $config.general.accentColor = $bundleTheme.colors.accent
+            }
             if (-not $config.general.PSObject.Properties['injectCSS']) {
                 $config.general | Add-Member -MemberType NoteProperty -Name injectCSS -Value $true
             } else {
@@ -110,4 +123,4 @@ if ($millennium) {
     Write-Host 'Open Steam -> Millennium -> Themes and select Pride Prism.'
 }
 
-Write-Host 'Restart Steam once to load the repaired Library, Friends, Big Picture, Store, and Community patches.'
+Write-Host 'Generated files are installed. Verify that Steam loaded them; a file copy alone does not prove visual coverage. No applications were restarted.'

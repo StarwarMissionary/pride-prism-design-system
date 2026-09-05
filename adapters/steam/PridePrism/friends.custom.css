@@ -1,314 +1,257 @@
 /**
  * Pride Prism — Steam Friends & Chat
- * Complete dark Progress Pride treatment with restrained motion.
+ * Surface-only treatment using Steam's semantic aliases, audited 2026-09-05.
+ * Preserve native layout, artwork, avatar frames, presence colors and feedback.
  */
 
 :root {
-  --pp-red: #e40303;
-  --pp-orange: #ff8c00;
-  --pp-yellow: #ffed00;
-  --pp-green: #008026;
-  --pp-blue: #004dff;
-  --pp-violet: #750787;
-  --pp-trans-blue: #74d7ee;
-  --pp-trans-pink: #ffafc8;
-  --pp-surface: #140021;
-  --pp-surface-deep: #09000f;
-  --pp-raised: #24103a;
-  --pp-muted: #33164d;
-  --pp-ink: #fff9f2;
-  --pp-ink-muted: #dccfe5;
-  --pp-accent: #ff4fd8;
-  --pp-focus: #74d7ee;
-
-  --gpSystemLightestGrey: var(--pp-ink) !important;
-  --gpSystemLighterGrey: var(--pp-ink-muted) !important;
-  --gpSystemLightGrey: #aa98b4 !important;
-  --gpSystemGrey: #755f80 !important;
-  --gpSystemDarkGrey: var(--pp-muted) !important;
-  --gpSystemDarkerGrey: var(--pp-raised) !important;
-  --gpSystemDarkestGrey: var(--pp-surface) !important;
-  --gpStoreLightestGrey: var(--pp-ink) !important;
-  --gpStoreLighterGrey: var(--pp-ink-muted) !important;
-  --gpStoreDarkGrey: var(--pp-muted) !important;
-  --gpStoreDarkerGrey: var(--pp-raised) !important;
-  --gpStoreDarkestGrey: var(--pp-surface) !important;
-  --gpColor-Blue: var(--pp-accent) !important;
-  --gpColor-BlueHi: var(--pp-focus) !important;
-  --color-text-secondary: var(--pp-ink-muted) !important;
-  --color-text-light-subtitle: #aa98b4 !important;
+  /* Shared --prism-* tokens are prepended by scripts/build-theme.mjs. */
+  --pp-surface: var(--prism-surface);
+  --pp-surface-raised: var(--prism-surface-raised);
+  --pp-surface-muted: var(--prism-surface-muted);
+  --pp-ink: var(--prism-foreground);
+  --pp-ink-muted: var(--prism-foreground-muted);
+  --pp-accent: var(--prism-accent);
+  --pp-on-accent: var(--prism-on-accent);
+  --pp-accent-hover: var(--prism-accent-hover);
+  --pp-accent-pressed: var(--prism-accent-pressed);
+  --pp-focus: var(--prism-focus);
+  --pp-link: var(--prism-link);
+  --pp-selection: var(--prism-selection);
+  --pp-selection-text: var(--prism-selection-text);
+  --pp-border: var(--prism-border);
+  --pp-border-subtle: var(--prism-border-subtle);
+  --pp-scrollbar: var(--prism-border);
+  --pp-pride: var(--prism-identity-gradient);
 }
 
-html,
-body,
-#root,
-.friendsui-container,
-.FriendsListContent,
-.friendsListContainer,
-.friendlist,
-.friendlistListContainer,
-.chatRoomListContainer,
-.ChatRoomList,
-.chatHistory,
-.chatHistoryScroll,
-.chatRoomGroupNavColumn,
-[class*="friendsui-container"],
-[class*="FriendsListContent"],
-[class*="friendsListContainer"],
-[class*="friendlistListContainer"],
-[class*="chatRoomListContainer"],
-[class*="chatHistoryScroll"] {
+html.friendsui-container,
+.friendsui-container body,
+.friendsui-container .chat_main,
+.friendsui-container .FriendsListContent,
+.friendsui-container .friendsListContainer,
+.friendsui-container .friendlist,
+.friendsui-container .friendlistListContainer,
+.friendsui-container .chatRoomListContainer,
+.friendsui-container .ChatRoomList,
+.friendsui-container .ChatHistoryContainer,
+.friendsui-container .chatHistoryScroll,
+.friendsui-container .chatRoomGroupNavColumn {
   color: var(--pp-ink) !important;
+  background-color: var(--pp-surface) !important;
+}
+
+.friendsui-container .chatWindow {
   background-color: var(--pp-surface) !important;
   background-image: none !important;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 999999;
-  height: 4px;
-  pointer-events: none;
-  background: linear-gradient(90deg, var(--pp-red), var(--pp-orange), var(--pp-yellow), var(--pp-green), var(--pp-blue), var(--pp-violet), var(--pp-trans-blue), var(--pp-trans-pink)) !important;
-  box-shadow: 0 2px 14px rgba(255, 79, 216, 0.28);
+/* The title hit-area (.chatTitleBar) overlays the user name: never paint it.
+ * This stripe decorates the existing header without inserting an overlay. */
+.friendsui-container .friendListHeaderContainer {
+  background-color: var(--pp-surface-raised) !important;
+  background-image: var(--pp-pride) !important;
+  background-position: top !important;
+  background-size: 100% 3px !important;
+  background-repeat: no-repeat !important;
+  border-color: var(--pp-border-subtle) !important;
+  box-shadow: none !important;
 }
 
-.friendListHeaderContainer,
-.friends_nav,
-.friendListFooter,
-.chatTitleBar,
-.chatHeader,
-.chatRoomHeader,
-.chatRoomGroupHeader,
-.groupHeaderContainer,
-.friendsListSectionTitle,
-[class*="friendListHeaderContainer"],
-[class*="friends_nav"],
-[class*="friendListFooter"],
-[class*="chatTitleBar"],
-[class*="chatHeader"],
-[class*="chatRoomHeader"],
-[class*="chatRoomGroupHeader"],
-[class*="groupHeaderContainer"],
-[class*="friendsListSectionTitle"] {
+.friendsui-container .socialListTab,
+.friendsui-container .friendsListSectionTitle,
+.friendsui-container .friendListFooter,
+.friendsui-container .friendGroup > .groupHeaderContainer,
+.friendsui-container .OtherGamesGroup > .groupName,
+.friendsui-container .chatRoomHeader,
+.friendsui-container .chatWindow .chatEntry {
   color: var(--pp-ink) !important;
-  background: linear-gradient(90deg, var(--pp-raised), #2d1046 58%, var(--pp-muted)) !important;
-  border-color: rgba(116, 215, 238, 0.22) !important;
-  box-shadow: 0 8px 24px rgba(9, 0, 15, 0.22) !important;
+  background-color: var(--pp-surface-raised) !important;
+  border-color: var(--pp-border-subtle) !important;
+  box-shadow: none !important;
 }
 
-.friendGroup,
-.gameGroup,
-.OtherGamesGroup,
-.chatRoomGroup,
-.chatRoomTextChannel,
-.chatEntry,
-.ChatMessageBlock,
-[class*="friendGroup"],
-[class*="gameGroup"],
-[class*="OtherGamesGroup"],
-[class*="chatRoomGroup"],
-[class*="chatRoomTextChannel"],
-[class*="chatEntry"],
-[class*="ChatMessageBlock"] {
-  color: var(--pp-ink-muted) !important;
-  border-color: rgba(255, 175, 200, 0.14) !important;
+.friendsui-container .socialListTab.activeTab {
+  color: var(--pp-selection-text) !important;
+  background-color: var(--pp-selection) !important;
+  box-shadow: inset 0 -2px var(--pp-focus) !important;
 }
 
-.friend,
-.friendGroup .friend,
-.gameGroup .friend,
-.OtherGamesGroup .friend,
-.chatRoomTextChannel,
-[class*="friendGroup"] [class*="friend"],
-[class*="gameGroup"] [class*="friend"],
-[class*="OtherGamesGroup"] [class*="friend"] {
-  color: var(--pp-ink-muted) !important;
-  background-color: rgba(36, 16, 58, 0.62) !important;
-  border-color: transparent !important;
-  transition: color 150ms ease, background-color 150ms ease, box-shadow 150ms ease !important;
-}
-
-.friend:hover,
-.friendGroup .friend:hover,
-.gameGroup .friend:hover,
-.OtherGamesGroup .friend:hover,
-.chatRoomTextChannel:hover,
-[class*="friendGroup"] [class*="friend"]:hover,
-[class*="gameGroup"] [class*="friend"]:hover,
-[class*="OtherGamesGroup"] [class*="friend"]:hover {
-  color: var(--pp-ink) !important;
-  background-color: rgba(117, 7, 135, 0.38) !important;
-  box-shadow: inset 3px 0 0 var(--pp-trans-blue) !important;
-}
-
-.friend.active,
-.friend.selected,
-.chatRoomTextChannel.active,
-.chatRoomTextChannel.selected,
-[aria-selected="true"],
-[class*="friendGroup"] [aria-selected="true"],
-[class*="chatRoom"] [aria-selected="true"] {
-  color: var(--pp-ink) !important;
-  background: linear-gradient(90deg, rgba(117, 7, 135, 0.82), rgba(255, 79, 216, 0.16)) !important;
-  box-shadow: inset 3px 0 0 var(--pp-trans-pink) !important;
-}
-
-.friend .personaName,
-.friend .playerName,
-.friend .friendStatus,
-.friend .gameName,
-.chatRoomTextChannel,
-.chatEntry,
-.ChatMessageBlock,
-[class*="personaName"],
-[class*="playerName"],
-[class*="friendStatus"],
-[class*="gameName"] {
-  color: var(--pp-ink-muted) !important;
-  text-shadow: none !important;
-}
-
-.friend.online .personaName,
-.friend.ingame .personaName,
-.friend .persona.online,
-.friend .persona.ingame,
-[class*="friend"] [class*="online"],
-[class*="friend"] [class*="ingame"] {
-  color: var(--pp-trans-blue) !important;
-}
-
-.friend.ingame .gameName,
-.friend .gameName,
-[class*="friend"] [class*="gameName"] {
-  color: #7ee7a2 !important;
-}
-
-.friendSearchInput,
-.chatTextarea,
-.chatTextarea textarea,
-.chatTextarea [contenteditable="true"],
-.DialogInput,
-.DialogTextInputBase,
-._DialogInputContainer,
-input,
-textarea,
-[contenteditable="true"],
-[class*="friendSearchInput"],
-[class*="chatTextarea"] {
-  color: var(--pp-ink) !important;
-  background-color: rgba(9, 0, 15, 0.82) !important;
-  border-color: rgba(255, 175, 200, 0.28) !important;
-  box-shadow: inset 0 0 0 1px rgba(116, 215, 238, 0.08) !important;
-}
-
-.ModalDialogPopup,
-.ModalPosition_Content,
-.DialogContent,
-.DialogContentTransition,
-.DialogBody,
-.GenericConfirmDialog,
-.ChatRoomGroupDialog_contents,
-.FriendNotificationsDialog,
-[class*="ModalDialogPopup"],
-[class*="DialogContent"],
-[class*="GenericConfirmDialog"] {
-  color: var(--pp-ink) !important;
-  background: radial-gradient(circle at 90% 0%, rgba(117, 7, 135, 0.24), transparent 24rem), var(--pp-raised) !important;
-  border-color: rgba(116, 215, 238, 0.24) !important;
-  box-shadow: 0 18px 52px rgba(9, 0, 15, 0.6) !important;
-}
-
-.DialogHeader,
-.DialogSubHeader,
-.SettingsDialogSubHeader,
-.DialogLabelStrong,
-[class*="DialogHeader"],
-[class*="DialogSubHeader"] {
+.friendsui-container .groupHeaderContainer .groupName {
   color: var(--pp-ink) !important;
 }
 
-.DialogBodyText,
-.DialogLabel,
-.DialogToggle_Description,
-.DialogLabelExplainer {
+.friendsui-container .friendGroup .groupCount,
+.friendsui-container .ChatRoomList_Empty,
+.friendsui-container .quickAccessFriendsMessage {
   color: var(--pp-ink-muted) !important;
 }
 
-button.DialogButton,
-button,
-[role="button"] {
-  color: var(--pp-ink) !important;
-  background-color: var(--pp-muted) !important;
-  border-color: rgba(255, 175, 200, 0.24) !important;
-  border-radius: 7px !important;
-  transition: color 150ms ease, background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease !important;
+.friendsui-container .quickAccessFriendsMessage {
+  border-color: var(--pp-border) !important;
 }
 
-button.DialogButton.Primary,
-button.DialogButton.GreenPlay,
-[class*="PrimaryButton"],
-[class*="AcceptButton"] {
-  color: var(--pp-ink) !important;
-  background: linear-gradient(100deg, var(--pp-violet), var(--pp-accent)) !important;
-  box-shadow: 0 8px 22px rgba(117, 7, 135, 0.3) !important;
+/* Paint only actual list rows, never friendCategoryContainer, labelHolder,
+ * game icons, status indicators or nested friend-name matches. */
+.friendsui-container .friendlistListContainer .friend {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  transition: background-color 120ms ease, box-shadow 120ms ease !important;
 }
 
-button:hover,
-[role="button"]:hover,
-button.DialogButton:hover {
-  color: var(--pp-ink) !important;
-  background-color: #472066 !important;
-  box-shadow: 0 0 0 1px rgba(116, 215, 238, 0.36) !important;
+.friendsui-container .friendlistListContainer .friend:hover {
+  background-color: var(--pp-surface-raised) !important;
+  box-shadow: inset 3px 0 var(--pp-focus) !important;
 }
 
-.contextMenuItem,
-.PP7LM0Ow1K5qkR8WElLpt,
-.GreenEnvelopeMenu,
-[role="menu"],
-[role="menuitem"],
-[class*="contextMenu"] {
+.friendsui-container .friendlistListContainer .friend.gpfocus,
+.friendsui-container .friendlistListContainer .friend:focus-visible {
+  background-color: var(--pp-selection) !important;
+  box-shadow: inset 3px 0 var(--pp-focus) !important;
+}
+
+/* Retain the native Away text, icons and hue without halving legibility.
+ * Restrict this to list rows so collapsed chat navigation stays collapsed. */
+.friendsui-container .friendlistListContainer .friend.awayOrSnooze .labelHolder {
+  opacity: 1 !important;
+}
+
+.friendsui-container .chatRoomTextChannel {
   color: var(--pp-ink-muted) !important;
-  background-color: var(--pp-raised) !important;
-  border-color: rgba(116, 215, 238, 0.18) !important;
+  transition: background-color 120ms ease, box-shadow 120ms ease !important;
 }
 
-.contextMenuItem:hover,
-[role="menuitem"]:hover,
-[role="menuitem"][aria-selected="true"] {
+.friendsui-container .chatRoomTextChannel:hover {
   color: var(--pp-ink) !important;
-  background-color: rgba(117, 7, 135, 0.52) !important;
+  background-color: var(--pp-surface-raised) !important;
+  box-shadow: inset 3px 0 var(--pp-focus) !important;
 }
 
-a,
-[role="link"] {
-  color: var(--pp-focus) !important;
+.friendsui-container .chatRoomTextChannel.ActiveTextChannel {
+  color: var(--pp-selection-text) !important;
+  background-color: var(--pp-selection) !important;
+  background-image: none !important;
+  box-shadow: inset 3px 0 var(--pp-focus) !important;
 }
 
-svg {
-  fill: currentColor;
+.friendsui-container .friendSearchInput,
+.friendsui-container .chatTextarea,
+.friendsui-container input.DialogInput,
+.friendsui-container input.DialogTextInputBase,
+.friendsui-container textarea.DialogInput {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-surface) !important;
+  border-color: var(--pp-border) !important;
+  box-shadow: none !important;
 }
 
-* {
-  scrollbar-color: var(--pp-violet) var(--pp-surface-deep) !important;
+.friendsui-container .friendSearchInput::placeholder,
+.friendsui-container .chatTextarea::placeholder,
+.friendsui-container input.DialogInput::placeholder,
+.friendsui-container input.DialogTextInputBase::placeholder,
+.friendsui-container textarea.DialogInput::placeholder {
+  color: var(--pp-ink-muted) !important;
 }
 
-::selection {
-  color: var(--pp-ink);
-  background: rgba(255, 79, 216, 0.42);
+/* One dialog surface; do not stack gradients or shadows on nested bodies. */
+.friendsui-container .DialogContent {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-surface-raised) !important;
+  background-image: none !important;
+  border-color: var(--pp-border) !important;
+  box-shadow: none !important;
 }
 
-:focus-visible {
-  outline: 2px solid var(--pp-focus) !important;
-  outline-offset: 2px !important;
+.friendsui-container .DialogHeader,
+.friendsui-container .DialogSubHeader,
+.friendsui-container .SettingsDialogSubHeader,
+.friendsui-container .DialogLabelStrong {
+  color: var(--pp-ink) !important;
 }
 
+.friendsui-container .DialogBodyText,
+.friendsui-container .DialogLabel,
+.friendsui-container .DialogToggle_Description,
+.friendsui-container .DialogLabelExplainer {
+  color: var(--pp-ink-muted) !important;
+}
+
+/* Friends and group headings also expose role=button; only style buttons.
+ * Keep Steam's GreenPlay treatment and all SVG fill/stroke rules intact. */
+.friendsui-container button.DialogButton:not(.GreenPlay) {
+  color: var(--pp-ink) !important;
+  background-color: var(--pp-surface-muted) !important;
+  background-image: none !important;
+  border-color: var(--pp-border) !important;
+  box-shadow: none !important;
+  transition: background-color 120ms ease, box-shadow 120ms ease !important;
+}
+
+.friendsui-container button.DialogButton.Primary:not(.GreenPlay) {
+  color: var(--pp-on-accent) !important;
+  background-color: var(--pp-accent) !important;
+}
+
+.friendsui-container button.DialogButton:not(.GreenPlay):enabled:not(.Disabled):hover,
+.friendsui-container button.DialogButton:not(.GreenPlay).gpfocus:not(.Disabled):enabled {
+  background-color: var(--pp-selection) !important;
+  box-shadow: inset 0 0 0 1px var(--pp-focus) !important;
+}
+
+.friendsui-container button.DialogButton.Primary:not(.GreenPlay):enabled:not(.Disabled):hover,
+.friendsui-container button.DialogButton.Primary:not(.GreenPlay).gpfocus:not(.Disabled):enabled {
+  background-color: var(--pp-accent-hover) !important;
+}
+
+.friendsui-container button.DialogButton.Primary:not(.GreenPlay):enabled:not(.Disabled):active {
+  background-color: var(--pp-accent-pressed) !important;
+}
+
+.friendsui-container button.DialogButton:not(.GreenPlay):disabled,
+.friendsui-container button.DialogButton:not(.GreenPlay).Disabled {
+  color: var(--pp-ink-muted) !important;
+  background-color: var(--pp-surface-raised) !important;
+  box-shadow: none !important;
+}
+
+.friendsui-container .contextMenuSectionContent {
+  color: var(--pp-ink-muted) !important;
+  background-color: var(--pp-surface-raised) !important;
+}
+
+.friendsui-container .contextMenuItem:hover,
+.friendsui-container .contextMenuItem:focus-visible {
+  background-color: var(--pp-selection) !important;
+  box-shadow: inset 3px 0 var(--pp-focus) !important;
+}
+
+.friendsui-container .ChatRoomList_Empty a,
+.friendsui-container .chatHistory a,
+.friendsui-container .DialogBodyText a,
+.friendsui-container .DialogLabelExplainer a {
+  color: var(--pp-link) !important;
+}
+
+.friendsui-container .listContentContainer,
+.friendsui-container .chatRoomListContainer,
+.friendsui-container .chatHistoryScroll {
+  scrollbar-color: var(--pp-scrollbar) var(--pp-surface) !important;
+}
+
+.friendsui-container ::selection {
+  color: var(--pp-selection-text);
+  background-color: var(--pp-selection);
+}
+
+.friendsui-container :focus-visible {
+  outline-color: var(--pp-focus) !important;
+}
+
+/* Theme feedback is finite; leave Steam's connection/status feedback alone. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.001ms !important;
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
+  .friendsui-container .friendlistListContainer .friend,
+  .friendsui-container .chatRoomTextChannel,
+  .friendsui-container button.DialogButton:not(.GreenPlay) {
+    transition: none !important;
   }
 }
