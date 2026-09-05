@@ -1,0 +1,3 @@
+# Generated contracts must remain byte-identical on Windows and other hosts.
+tokens/* text eol=lf
+docs/theme/* text eol=lf
