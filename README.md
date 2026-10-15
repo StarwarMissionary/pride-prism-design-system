@@ -1,8 +1,18 @@
 # Pride Prism Design System
 
-A dark, palette-selectable foundation for desktop themes. Shared neutrals, tested control colors, static identity decoration and adapter-specific native layouts.
+One dark foundation, your palette, every app. Pride Prism turns an attributed catalog of Pride flag colors and original palettes into a complete dark theme, then generates ready-to-install adapters for the desktop software you already use.
+
+Original concept, inspiration and influence: **Cinder**. Current maintainer: [StarwarMissionary](https://github.com/StarwarMissionary).
 
 [Palette workbench](https://starwarmissionary.github.io/pride-prism-design-system/) · [Foundation audit](docs/FOUNDATION_AUDIT.md) · [Design contract](docs/DESIGN_SYSTEM.md) · [App support](docs/APP_MATRIX.md) · [Verification](docs/VERIFICATION.md)
+
+## What you get
+
+- **Twenty-four palettes.** Sixteen attributed flag palettes, two inspired palettes that are explicitly not flags, and six original palettes, plus a custom accent you can set independently. Every preset passes the same readability gates.
+- **A single resolver.** `tokens/theme.mjs` derives eighteen semantic colors, hover and pressed states with tested text contrast, directional and conic identity gradients, a surface-safe wash, per-stripe variables, glass and glow effects, and a stable sixteen-color terminal set. The website and the exporter run the same module.
+- **Generated bundles for fourteen targets.** Windows accent and dark mode, Windows Terminal, Alacritty, WezTerm, kitty, VS Code, Steam (Millennium), Discord (Vencord), Chrome, a Chrome start page, Firefox, Obsidian, GTK 4 and KDE Plasma, Codex desktop, Blender and Unity. Each adapter ships with install and rollback notes and never patches an application.
+- **Quiet by default.** Decoration is static, celebrations are finite and opt-in, reduced motion is honored, and native layouts, artwork and status colors stay untouched.
+- **A live workbench.** The GitHub Pages site previews any palette, measures contrast for every role, shows the decoration kit, and exports CSS and JSON without installing anything.
 
 ## Start with the foundation
 
@@ -65,6 +75,12 @@ Open the printed local URL for preview. Before publishing, regenerate the shared
 The foundation does not patch application executables/resources, install client-mod frameworks, change security settings, or restart apps. Installers must preserve user work and explain native/third-party limitations. Local backups and generated personal bundles are excluded from Git.
 
 The repository ships no fixed flag bitmaps or overlay applications. Chrome bitmaps and a wallpaper are painted per bundle by `scripts/generate-assets.ps1` from the selected palette; the only tracked image is the website's social preview.
+
+## Credits
+
+- **Cinder**: original creator of the Pride Prism idea and the inspiration and influence behind its design direction.
+- **StarwarMissionary**: current maintainer of this repository, the palette catalog, the exporter and the adapters.
+- Reference flag colors are attributed per preset in `tokens/palettes.json`; the cursor adapter credits the upstream Bibata project.
 
 ## License
 

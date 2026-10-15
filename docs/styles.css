@@ -137,6 +137,14 @@ h3{
 .intro>p{
   margin:0;
   color:var(--prism-foreground-muted)}
+.byline{
+  margin:10px 0 0;
+  font-size:.875rem;
+  color:var(--prism-foreground-muted)}
+.byline strong{
+  color:var(--prism-foreground)}
+.footer .credits strong{
+  color:var(--prism-foreground)}
 .eyebrow{
   font-size:.75rem;
   letter-spacing:.07em;
@@ -491,6 +499,7 @@ pre{
   font-size:1rem}
 .footer{
   display:flex;
+  flex-wrap:wrap;
   justify-content:space-between;
   gap:16px;
   margin-top:48px;
