@@ -9,6 +9,9 @@ $jsonFiles = @(
     (Join-Path $repoRoot 'tokens\palettes.json'),
     (Join-Path $repoRoot 'adapters\chrome\manifest.json'),
     (Join-Path $repoRoot 'adapters\chrome-start-page\manifest.json'),
+    (Join-Path $repoRoot 'adapters\obsidian\manifest.json'),
+    (Join-Path $repoRoot 'adapters\firefox\manifest.json'),
+    (Join-Path $repoRoot 'adapters\terminals\windows-terminal.json'),
     (Join-Path $repoRoot 'adapters\steam\PridePrism\skin.json')
 )
 

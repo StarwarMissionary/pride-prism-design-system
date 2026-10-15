@@ -14,7 +14,9 @@ Accents and contrast inputs accept only opaque six-digit `#RRGGBB` hex. Invalid 
 
 The `gradient` is a hard-stop, ordered decorative rail; it is not a universal representation of a flag. In particular, `progress-inspired` is explicitly a palette rather than the original chevron flag. Reference colors are digital approximations with attribution; adjusted UI accents are separate values.
 
-`themeCss(theme)` emits only a `:root` custom-property block. Color and metric names become `--prism-kebab-case` (for example, `surfaceRaised` becomes `--prism-surface-raised`). Motion durations become `--prism-motion-fast`, `--prism-motion-standard`, `--prism-motion-decoration`, and `--prism-motion-celebration`, with `ms` units. Decoration defaults to off/static. The module never adds a global animation reset or host-app layout rules. Adapters own motion consent and reduced-motion handling.
+`themeCss(theme)` emits only a `:root` custom-property block. Color and metric names become `--prism-kebab-case` (for example, `surfaceRaised` becomes `--prism-surface-raised`, `space2xl` becomes `--prism-space-2xl`). Motion durations become `--prism-motion-fast`, `--prism-motion-standard`, `--prism-motion-decoration`, and `--prism-motion-celebration`, with `ms` units. Decoration defaults to off/static. The module never adds a global animation reset or host-app layout rules. Adapters own motion consent and reduced-motion handling.
+
+Beyond `colors`, a theme carries `gradients` (`--prism-identity-gradient`, `-vertical`, `-diagonal`, `-conic`, `-wash`), one variable per reference stripe (`--prism-stripe-1` … and `--prism-stripe-count`), `effects` (`--prism-glass`, `--prism-glass-border`, `--prism-glass-blur`, `--prism-glow`, `--prism-accent-wash`; translucent CSS values that reference the emitted variables), and `terminal` (`--prism-ansi-*`). Adapters that cannot use CSS read the same groups from `theme.json`; the XAML export carries the stripes, ANSI colors and the directional gradient brushes.
 
 ## Export and validation
 
@@ -26,7 +28,7 @@ node scripts/build-theme.mjs --palette neutral --accent '#E866AF' --output dist/
 node scripts/test-theme.mjs
 ```
 
-The exporter writes `theme.json`, `pride-prism.css`, `PridePrism.xaml`, and adapter copies. It injects CSS variables into copied stylesheets, preserving Discord metadata. It also renders a dark Codex appearance snippet and neutral Chrome manifest colors. It does not install anything. Output is restricted to this repository's `dist` tree, rejects links, and requires an empty directory or its own generated-output marker before overwriting. Use a fresh output directory after removing source adapters: export does not delete stale files. Local installer `.install-state` directories are excluded from exports.
+The exporter writes `theme.json`, `pride-prism.css`, `PridePrism.xaml`, and adapter copies. It injects CSS variables into copied stylesheets, preserving Discord metadata. It also renders generated files from source markers: the Chrome and Firefox manifests, the Codex appearance snippet, terminal schemes, the VS Code theme, Unity USS, GTK named colors and the KDE color scheme. It does not install anything. Output is restricted to this repository's `dist` tree, rejects links, and requires an empty directory or its own generated-output marker before overwriting. Use a fresh output directory after removing source adapters: export does not delete stale files. Local installer `.install-state` directories are excluded from exports.
 
 The Chrome package is exported with colors only. Matching Chrome bitmaps and a wallpaper are painted per bundle by `scripts/generate-assets.ps1`, which also restores the manifest's image references. Native app support is limited by each adapter; a CSS export alone cannot theme an unrelated application.
 

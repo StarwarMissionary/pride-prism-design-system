@@ -92,6 +92,28 @@ class ColorTests(unittest.TestCase):
         self.assertEqual(expected["Theme"]["view_3d"], original["Theme"]["view_3d"])
         self.assertEqual(expected["Theme"]["user_interface"]["wcol_regular"]["roundness"], 0.28)
 
+    def test_partial_xml_covers_every_allowlisted_field_once(self):
+        import xml.etree.ElementTree as ElementTree
+        text = adapter.theme_xml(sample_colors())
+        root = ElementTree.fromstring(text)
+        self.assertEqual(root.tag, "bpy")
+        self.assertIsNotNone(root.find("Theme"))
+        self.assertIsNotNone(root.find("ThemeStyle"), "The preset loader requires a ThemeStyle element")
+        found = set()
+        for path in adapter.COLOR_MAP:
+            parts = path.split(".")
+            node = root.find("Theme")
+            for part in parts[:-1]:
+                node = node.find(part)
+                self.assertIsNotNone(node, path)
+                node = list(node)[0]  # the typed element
+            self.assertEqual(node.get(parts[-1]), "#e866af", path)
+            found.add(path)
+        self.assertEqual(len(found), len(adapter.COLOR_MAP))
+        self.assertEqual(text.count("<ThemeWidgetColors"), len(adapter.WIDGETS), "Widget elements are self-closing, one per widget")
+        self.assertNotIn("alpha", text)
+        self.assertNotRegex(text, r"roundness|points|wcol_state|view_3d")
+
     def test_snapshot_accepts_scalar_rna_without_array_metadata(self):
         properties = [
             SimpleNamespace(identifier="filepath", type="STRING", is_readonly=False),

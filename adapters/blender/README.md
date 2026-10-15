@@ -4,6 +4,16 @@
 
 No scene/project/startup file, installed application resource, layout or keymap is modified. Merely importing the Python module does nothing. Deployment is two explicit commands: **stage**, then **commit**. The adapter passed unit tests and isolated stage/reload checks on Blender 4.5.11, including preservation of non-theme preferences and serialized add-on settings. This is not a claim of complete visual coverage; each deployment still requires the guarded staging checks and inspection in the actual app.
 
+## Quick path: a partial preset XML
+
+`export-xml` writes a preset containing only the allowlisted color attributes. Blender's preset loader applies listed attributes on top of the active theme and leaves every other field untouched, so this is a reversible, inspectable file rather than a preference replacement. It runs without Blender:
+
+```powershell
+python -B .\adapters\blender\theme_adapter.py export-xml --theme-json 'C:\path\to\generated\theme.json' --output 'C:\path\to\PridePrism.xml'
+```
+
+Install it with Preferences > Themes > Install, then save preferences. To undo, select the previous preset. The element structure was checked against Blender 4.5's `rna_xml` reader and the theme preset operator; it has not been exercised against every editor layout, so inspect the result in a normal session.
+
 ## Stage without changing live preferences
 
 Stage copies the existing `userpref.blend` into a unique directory, redirects Blender's CONFIG/scripts/extensions paths there, creates `before-theme.xml` for theme-only rollback, applies only color fields, and saves a candidate **in the copy**. A second independent Blender process reloads that candidate and compares every writable Theme/ThemeStyle field to the expected result. The operation stops on an unsupported API, missing color field, failed save, changed source hash, or preservation mismatch.

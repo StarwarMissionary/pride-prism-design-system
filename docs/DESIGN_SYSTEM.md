@@ -11,7 +11,10 @@ Use `tokens/palettes.json` and `tokens/theme.mjs`. Generated exports are the del
 - Border: essential control boundary. BorderSubtle: decorative separation only.
 - Focus / link: independent of identity. Use an offset ring or contrasting separator next to bright controls.
 - Positive / warning / negative: stable functional meaning, supplemented with text/icons. Preserve native presence, Play, commerce, charts, material and scene colors.
-- Identity gradient: decorative hard-stop rail using reference colors and weights. It is not a functional button fill. Progress-inspired is a palette, not a rendering of the geometric flag.
+- Identity gradient: decorative hard-stop rail using reference colors and weights. It is not a functional button fill. Progress-inspired and Intersex-inspired are palettes, not renderings of the geometric flags.
+- Derived decoration: vertical, diagonal and conic variants keep the same stripe order and proportions; the wash tints every stripe over the canvas so dark stripes stay visible as a band. Per-stripe variables feed aurora meshes and foil text. None of these are status colors.
+- Effects: glass, glass border and glow are translucent CSS values for panels and hover/focus lift. Glass needs content behind it and a solid fallback; glow never changes a control's size.
+- Terminal: sixteen ANSI colors tuned for the canvas, stable across palettes like the status colors. Only the cursor follows the accent.
 
 ## Rhythm and symmetry
 

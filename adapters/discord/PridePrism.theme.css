@@ -2,12 +2,87 @@
  * @name Pride Prism
  * @author StarwarMissionary
  * @description Shared dark surfaces and a static, selectable Pride palette.
- * @version 2.0.0
+ * @version 2.1.0
  * @source https://github.com/StarwarMissionary/pride-prism-design-system
  */
 /* Build this template with scripts/build-theme.mjs before installing.
-   Keep Discord's layout, role colors, presence, media and progress semantics. */
-.theme-light, .theme-dark, .theme-darker, .theme-midnight {
+   Keep Discord's layout, role colors, presence, media and progress semantics.
+   Scope excludes custom user-profile themes so profile gradients keep working. */
+body,
+.theme-dark:not(.custom-user-profile-theme),
+.theme-darker:not(.custom-user-profile-theme),
+.theme-amoled:not(.custom-user-profile-theme),
+.theme-light:not(.custom-user-profile-theme) {
+  /* Current semantic tokens (2024+ visual refresh). */
+  --background-base-lowest: var(--prism-surface) !important;
+  --background-base-lower: var(--prism-surface) !important;
+  --background-base-low: var(--prism-surface-raised) !important;
+  --background-surface-high: var(--prism-surface-raised) !important;
+  --background-surface-higher: var(--prism-surface-muted) !important;
+  --background-surface-highest: var(--prism-surface-muted) !important;
+  --background-mod-subtle: color-mix(in srgb, var(--prism-foreground) 6%, transparent) !important;
+  --background-mod-muted: color-mix(in srgb, var(--prism-foreground) 6%, transparent) !important;
+  --background-mod-normal: color-mix(in srgb, var(--prism-foreground) 10%, transparent) !important;
+  --background-mod-strong: color-mix(in srgb, var(--prism-foreground) 14%, transparent) !important;
+  --background-brand: var(--prism-selection) !important;
+  --background-code: var(--prism-surface-muted) !important;
+  --background-feedback-positive: color-mix(in srgb, var(--prism-positive) 20%, transparent) !important;
+  --background-feedback-warning: color-mix(in srgb, var(--prism-warning) 20%, transparent) !important;
+  --background-feedback-critical: color-mix(in srgb, var(--prism-negative) 20%, transparent) !important;
+  --background-feedback-info: color-mix(in srgb, var(--prism-link) 20%, transparent) !important;
+  --background-scrim: color-mix(in srgb, var(--prism-surface) 70%, transparent) !important;
+  --chat-background-default: var(--prism-surface) !important;
+  --text-default: var(--prism-foreground) !important;
+  --text-strong: var(--prism-foreground) !important;
+  --text-muted: var(--prism-foreground-muted) !important;
+  --text-subtle: var(--prism-foreground-muted) !important;
+  --text-link: var(--prism-link) !important;
+  --text-brand: var(--prism-link) !important;
+  --text-feedback-positive: var(--prism-positive) !important;
+  --text-feedback-warning: var(--prism-warning) !important;
+  --text-feedback-critical: var(--prism-negative) !important;
+  --text-feedback-info: var(--prism-link) !important;
+  --interactive-text-default: var(--prism-foreground-muted) !important;
+  --interactive-text-hover: var(--prism-foreground) !important;
+  --interactive-text-active: var(--prism-foreground) !important;
+  --interactive-icon-default: var(--prism-foreground-muted) !important;
+  --interactive-icon-hover: var(--prism-foreground) !important;
+  --interactive-icon-active: var(--prism-foreground) !important;
+  --interactive-background-hover: var(--prism-surface-muted) !important;
+  --interactive-background-active: var(--prism-selection) !important;
+  --interactive-background-selected: var(--prism-selection) !important;
+  --interactive-muted: var(--prism-foreground-muted) !important;
+  --icon-default: var(--prism-foreground-muted) !important;
+  --icon-subtle: var(--prism-foreground-muted) !important;
+  --icon-muted: var(--prism-foreground-muted) !important;
+  --icon-strong: var(--prism-foreground) !important;
+  --icon-link: var(--prism-link) !important;
+  --border-faint: color-mix(in srgb, var(--prism-border-subtle) 50%, transparent) !important;
+  --border-subtle: var(--prism-border-subtle) !important;
+  --border-muted: var(--prism-border-subtle) !important;
+  --border-normal: var(--prism-border) !important;
+  --border-strong: var(--prism-border) !important;
+  --border-focus: var(--prism-focus) !important;
+  --input-background-default: var(--prism-surface) !important;
+  --input-border-default: var(--prism-border-subtle) !important;
+  --input-border-hover: var(--prism-border) !important;
+  --input-border-active: var(--prism-focus) !important;
+  --input-text-default: var(--prism-foreground) !important;
+  --input-placeholder-text-default: var(--prism-foreground-muted) !important;
+  --control-brand-foreground: var(--prism-link) !important;
+  --control-brand-foreground-new: var(--prism-link) !important;
+  /* Primary controls use the dark selection fill: their white text/icons cannot
+     be paired reliably with an arbitrary bright accent. */
+  --control-primary-background-default: var(--prism-selection) !important;
+  --control-primary-background-hover: var(--prism-surface-muted) !important;
+  --control-primary-background-active: var(--prism-selection) !important;
+  --control-primary-text-default: var(--prism-selection-text) !important;
+  --mention-background: color-mix(in srgb, var(--prism-accent) 14%, transparent) !important;
+  --mention-foreground: var(--prism-link) !important;
+  --brand-260: var(--prism-selection) !important;
+  --brand-360: var(--prism-selection) !important;
+  --brand-500: var(--prism-selection) !important;
+  /* Legacy names kept as fallbacks for older client builds. */
   --background-primary: var(--prism-surface) !important;
   --background-secondary: var(--prism-surface-raised) !important;
   --background-secondary-alt: var(--prism-surface-muted) !important;
@@ -24,34 +99,18 @@
   --input-background: var(--prism-surface) !important;
   --scrollbar-thin-thumb: var(--prism-border) !important;
   --scrollbar-auto-thumb: var(--prism-border) !important;
-  --scrollbar-auto-track: var(--prism-surface) !important;
+  --scrollbar-thin-track: transparent !important;
+  --scrollbar-auto-track: transparent !important;
   --text-normal: var(--prism-foreground) !important;
-  --text-muted: var(--prism-foreground-muted) !important;
-  --text-link: var(--prism-link) !important;
   --header-primary: var(--prism-foreground) !important;
   --header-secondary: var(--prism-foreground-muted) !important;
   --interactive-normal: var(--prism-foreground-muted) !important;
   --interactive-hover: var(--prism-foreground) !important;
   --interactive-active: var(--prism-foreground) !important;
-  /* Legacy brand buttons do not expose reliable paired text variables.
-     Use the dark selection fill, not bright identity colors behind white icons. */
-  --brand-experiment: var(--prism-selection) !important;
-  --brand-experiment-560: var(--prism-surface-muted) !important;
-  --brand-500: var(--prism-selection) !important;
   --bg-base-primary: var(--prism-surface) !important;
   --bg-base-secondary: var(--prism-surface-raised) !important;
   --bg-base-tertiary: var(--prism-surface) !important;
   --bg-surface-overlay: var(--prism-surface-raised) !important;
-  --background-base-low: var(--prism-surface-raised) !important;
-  --background-base-lower: var(--prism-surface) !important;
-  --background-base-lowest: var(--prism-surface) !important;
-  --background-surface-high: var(--prism-surface-raised) !important;
-  --background-surface-higher: var(--prism-surface-muted) !important;
-  --background-surface-highest: var(--prism-surface-muted) !important;
-  --border-subtle: var(--prism-border-subtle) !important;
-  --border-normal: var(--prism-border) !important;
-  --text-default: var(--prism-foreground) !important;
-  --text-muted-new: var(--prism-foreground-muted) !important;
 }
 html, body, #app-mount { background-color: var(--prism-surface) !important; }
 #app-mount::before {
@@ -59,7 +118,7 @@ html, body, #app-mount { background-color: var(--prism-surface) !important; }
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100000;
-  height: 3px;
+  height: var(--prism-identity-thickness);
   pointer-events: none;
   background: var(--prism-identity-gradient);
 }
@@ -71,4 +130,5 @@ nav[aria-label="Servers sidebar"] { background-color: var(--prism-surface) !impo
   background-color: var(--prism-selection) !important;
   color: var(--prism-selection-text) !important;
 }
-/* No continuous effects and no global animation reset: native spinners survive. */
+/* No continuous effects and no global animation reset: native spinners survive.
+   Presence, speaking and status variables are deliberately untouched. */

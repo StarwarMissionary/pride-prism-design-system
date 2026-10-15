@@ -44,6 +44,41 @@
     "negative": "#FF7A90"
   },
   "gradient": "linear-gradient(90deg, #8B7998 0% 25%, #B6B9CF 25% 75%, #8B7998 75% 100%)",
+  "gradients": {
+    "horizontal": "linear-gradient(90deg, #8B7998 0% 25%, #B6B9CF 25% 75%, #8B7998 75% 100%)",
+    "vertical": "linear-gradient(180deg, #8B7998 0% 25%, #B6B9CF 25% 75%, #8B7998 75% 100%)",
+    "diagonal": "linear-gradient(135deg, #8B7998 0% 25%, #B6B9CF 25% 75%, #8B7998 75% 100%)",
+    "conic": "conic-gradient(from -90deg, #8B7998 0deg 90deg, #B6B9CF 90deg 270deg, #8B7998 270deg 360deg)",
+    "wash": "linear-gradient(90deg, #312A37 0% 25%, #3B3944 25% 75%, #312A37 75% 100%)"
+  },
+  "effects": {
+    "glass": "color-mix(in srgb, var(--prism-surface-raised) 64%, transparent)",
+    "glassBorder": "color-mix(in srgb, var(--prism-foreground) 14%, transparent)",
+    "glassBlur": "16px",
+    "glow": "0 0 0 1px color-mix(in srgb, var(--prism-accent) 40%, transparent), 0 8px 32px color-mix(in srgb, var(--prism-accent) 22%, transparent)",
+    "accentWash": "color-mix(in oklab, var(--prism-accent) 8%, var(--prism-surface-raised))"
+  },
+  "terminal": {
+    "black": "#2A2433",
+    "red": "#FF7A90",
+    "green": "#66D6A4",
+    "yellow": "#E8C66A",
+    "blue": "#A6C8FF",
+    "magenta": "#D9A3F5",
+    "cyan": "#7FD9E4",
+    "white": "#C9BFD2",
+    "brightBlack": "#8B7998",
+    "brightRed": "#FFA3B2",
+    "brightGreen": "#93E5BF",
+    "brightYellow": "#F2D996",
+    "brightBlue": "#C4DAFF",
+    "brightMagenta": "#E8C2FA",
+    "brightCyan": "#A8E7EE",
+    "brightWhite": "#F6F1F8",
+    "cursor": "#B6B9CF",
+    "selection": "#46314F",
+    "selectionText": "#F6F1F8"
+  },
   "metrics": {
     "spaceXs": "4px",
     "spaceSm": "8px",

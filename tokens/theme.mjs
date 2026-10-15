@@ -107,17 +107,65 @@ function validateCatalog(catalog) {
   if (!ids.has(catalog.defaultPreset)) throw new TypeError("Catalog defaultPreset must name an existing palette.");
 }
 
-function identityGradient(palette) {
-  const total = palette.weights.reduce((sum, weight) => sum + weight, 0);
+/** Ordered hard stops scaled to a unit (100% for linear, 360deg for conic). */
+function identityStops(colors, weights, unit, scale) {
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
   let used = 0;
-  const stops = palette.colors.map((color, index) => {
-    const start = Number((used / total * 100).toFixed(6));
-    used += palette.weights[index];
-    const end = Number((used / total * 100).toFixed(6));
-    return `${color} ${start}% ${end}%`;
-  });
-  return `linear-gradient(90deg, ${stops.join(", ")})`;
+  return colors.map((color, index) => {
+    const start = Number((used / total * scale).toFixed(6));
+    used += weights[index];
+    const end = Number((used / total * scale).toFixed(6));
+    return `${color} ${start}${unit} ${end}${unit}`;
+  }).join(", ");
 }
+
+function identityGradient(palette, angle = "90deg") {
+  return `linear-gradient(${angle}, ${identityStops(palette.colors, palette.weights, "%", 100)})`;
+}
+
+/** Decorative derivations of the reference stripes. Static values only. */
+function identityGradients(palette) {
+  // The wash keeps every stripe readable as a tint over the canvas, so even
+  // black or near-surface stripes remain visible as a band.
+  const washed = palette.colors.map((color) => mix(BASE_COLORS.surface, color, 0.24));
+  return {
+    horizontal: identityGradient(palette),
+    vertical: identityGradient(palette, "180deg"),
+    diagonal: identityGradient(palette, "135deg"),
+    conic: `conic-gradient(from -90deg, ${identityStops(palette.colors, palette.weights, "deg", 360)})`,
+    wash: `linear-gradient(90deg, ${identityStops(washed, palette.weights, "%", 100)})`
+  };
+}
+
+/** Translucent surface effects. CSS-only: they reference the emitted variables. */
+const EFFECTS = Object.freeze({
+  glass: "color-mix(in srgb, var(--prism-surface-raised) 64%, transparent)",
+  glassBorder: "color-mix(in srgb, var(--prism-foreground) 14%, transparent)",
+  glassBlur: "16px",
+  glow: "0 0 0 1px color-mix(in srgb, var(--prism-accent) 40%, transparent), 0 8px 32px color-mix(in srgb, var(--prism-accent) 22%, transparent)",
+  accentWash: "color-mix(in oklab, var(--prism-accent) 8%, var(--prism-surface-raised))"
+});
+
+/** Sixteen ANSI colors tuned for the dark neutrals. Like status colors, they
+ * do not change with the identity palette; cursor and selection do. */
+const ANSI = Object.freeze({
+  black: BASE_COLORS.surfaceMuted,
+  red: BASE_COLORS.negative,
+  green: BASE_COLORS.positive,
+  yellow: BASE_COLORS.warning,
+  blue: BASE_COLORS.link,
+  magenta: "#D9A3F5",
+  cyan: "#7FD9E4",
+  white: BASE_COLORS.foregroundMuted,
+  brightBlack: BASE_COLORS.border,
+  brightRed: "#FFA3B2",
+  brightGreen: "#93E5BF",
+  brightYellow: "#F2D996",
+  brightBlue: "#C4DAFF",
+  brightMagenta: "#E8C2FA",
+  brightCyan: "#A8E7EE",
+  brightWhite: BASE_COLORS.foreground
+});
 
 /** Create an independent dark theme. Invalid presets/accents fail explicitly. */
 export function createTheme(catalog, presetId = catalog?.defaultPreset, customAccent) {
@@ -161,6 +209,9 @@ export function createTheme(catalog, presetId = catalog?.defaultPreset, customAc
       negative: BASE_COLORS.negative
     },
     gradient: identityGradient(palette),
+    gradients: identityGradients(palette),
+    effects: { ...EFFECTS },
+    terminal: { ...ANSI, cursor: accent, selection: BASE_COLORS.selection, selectionText: BASE_COLORS.selectionText },
     metrics: {
       spaceXs: "4px", spaceSm: "8px", spaceMd: "12px", spaceLg: "16px", spaceXl: "24px", space2xl: "32px",
       radiusSm: "6px", radiusMd: "12px", radiusLg: "18px",
@@ -191,6 +242,13 @@ function kebab(value) {
 export function themeCss(theme) {
   const declarations = Object.entries(theme.colors).map(([name, value]) => `  --prism-${kebab(name)}: ${hex(value)};`);
   declarations.push(`  --prism-identity-gradient: ${theme.gradient};`);
+  for (const [name, value] of Object.entries(theme.gradients)) {
+    if (name !== "horizontal") declarations.push(`  --prism-identity-${kebab(name)}: ${value};`);
+  }
+  theme.palette.colors.forEach((color, index) => declarations.push(`  --prism-stripe-${index + 1}: ${hex(color)};`));
+  declarations.push(`  --prism-stripe-count: ${theme.palette.colors.length};`);
+  for (const [name, value] of Object.entries(theme.effects)) declarations.push(`  --prism-${kebab(name)}: ${value};`);
+  for (const [name, value] of Object.entries(theme.terminal)) declarations.push(`  --prism-ansi-${kebab(name)}: ${hex(value)};`);
   for (const [name, value] of Object.entries(theme.metrics)) declarations.push(`  --prism-${kebab(name)}: ${value};`);
   for (const [name, value] of Object.entries(theme.motion)) {
     const duration = name.endsWith("Ms");

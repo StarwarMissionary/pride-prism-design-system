@@ -1,0 +1,70 @@
+/* Pride Prism — Obsidian dark theme. Build with scripts/build-theme.mjs; the
+   shared --prism-* tokens are prepended. Light mode keeps Obsidian defaults. */
+.theme-dark {
+  --background-primary: var(--prism-surface);
+  --background-primary-alt: var(--prism-surface-raised);
+  --background-secondary: var(--prism-surface-raised);
+  --background-secondary-alt: var(--prism-surface-muted);
+  --background-modifier-border: var(--prism-border-subtle);
+  --background-modifier-border-hover: var(--prism-border);
+  --background-modifier-border-focus: var(--prism-focus);
+  --background-modifier-hover: var(--prism-surface-muted);
+  --background-modifier-active-hover: var(--prism-selection);
+  --background-modifier-form-field: var(--prism-surface);
+  --background-modifier-error: var(--prism-negative);
+  --background-modifier-success: var(--prism-positive);
+  --text-normal: var(--prism-foreground);
+  --text-muted: var(--prism-foreground-muted);
+  --text-faint: var(--prism-border);
+  --text-accent: var(--prism-link);
+  --text-accent-hover: var(--prism-focus);
+  --text-on-accent: var(--prism-on-accent);
+  --text-selection: var(--prism-selection);
+  --text-highlight-bg: var(--prism-selection);
+  --text-error: var(--prism-negative);
+  --text-success: var(--prism-positive);
+  --text-warning: var(--prism-warning);
+  --link-color: var(--prism-link);
+  --link-color-hover: var(--prism-focus);
+  --link-external-color: var(--prism-link);
+  --interactive-normal: var(--prism-surface-muted);
+  --interactive-hover: var(--prism-selection);
+  --interactive-accent: var(--prism-accent);
+  --interactive-accent-hover: var(--prism-accent-hover);
+  --titlebar-background: var(--prism-surface-raised);
+  --titlebar-background-focused: var(--prism-surface-raised);
+  --titlebar-text-color: var(--prism-foreground-muted);
+  --titlebar-text-color-focused: var(--prism-foreground);
+  --tab-text-color-focused-active: var(--prism-foreground);
+  --scrollbar-thumb-bg: var(--prism-border);
+  --scrollbar-active-thumb-bg: var(--prism-foreground-muted);
+  --scrollbar-bg: var(--prism-surface);
+  --divider-color: var(--prism-border-subtle);
+  --h1-color: var(--prism-foreground);
+  --h2-color: var(--prism-foreground);
+  --code-background: var(--prism-surface-raised);
+  --checkbox-color: var(--prism-accent);
+  --checkbox-marker-color: var(--prism-on-accent);
+  --tag-color: var(--prism-link);
+  --tag-background: var(--prism-surface-muted);
+}
+
+/* Static identity rail along the top of the workspace; never over text. */
+.theme-dark .workspace::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--prism-identity-thickness);
+  background: var(--prism-identity-gradient);
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Finite interaction feedback only; respect reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-dark .clickable-icon,
+  .theme-dark .nav-file-title,
+  .theme-dark .nav-folder-title {
+    transition: background-color var(--prism-motion-fast) var(--prism-motion-easing), color var(--prism-motion-fast) var(--prism-motion-easing);
+  }
+}

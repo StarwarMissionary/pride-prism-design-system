@@ -6,7 +6,9 @@ A dark, palette-selectable foundation for desktop themes. Shared neutrals, teste
 
 ## Start with the foundation
 
-`tokens/palettes.json` is the attributed public catalog. `tokens/theme.mjs` resolves it into semantic roles. The browser preview and exporter use the same module. Choose from Bisexual, Rainbow, Progress-inspired, Transgender, Pansexual, Lesbian, Nonbinary, Asexual, Aromantic and Neutral; use a custom interface accent independently.
+`tokens/palettes.json` is the attributed public catalog. `tokens/theme.mjs` resolves it into semantic roles. The browser preview and exporter use the same module. Twenty-four presets ship: flag palettes (Bisexual, Rainbow, Transgender, Pansexual, Lesbian, Nonbinary, Asexual, Aromantic, Gay men, Genderfluid, Genderqueer, Agender, Polysexual, Omnisexual, Bear, Leather), two inspired palettes that are explicitly not flags (Progress, Intersex), and original palettes (Neutral, Aurora, Dusk, Ember, Tide, Prism). Use a custom interface accent independently.
+
+Every theme resolves the same groups: `colors` (18 semantic roles), `gradients` (horizontal, vertical, diagonal, conic, and a surface-safe wash of the reference stripes), `effects` (glass, glow and accent wash as CSS values), `terminal` (sixteen dark-tuned ANSI colors plus cursor and selection), `metrics` and `motion`. Stripes are also emitted one per variable (`--prism-stripe-1` …) so adapters can build aurora meshes and foils without a second palette.
 
 The public default is Neutral. A palette is a preference, not an identity declaration. Personal choices belong in browser storage or ignored local output, not the public repository.
 
@@ -32,12 +34,17 @@ For a custom accent, add `--accent '#E866AF'`. Reference stripes retain their or
 ## Application coverage
 
 - Windows: native dark preferences and accent, with typed rollback; wallpaper/cursor preserved.
+- Terminals: Windows Terminal fragment, Alacritty, WezTerm and kitty schemes generated from the shared ANSI set.
+- VS Code: a local color-theme extension covering workbench, syntax and the integrated terminal.
 - Steam: CSS-only scoped patches using an existing optional Millennium installation.
-- Discord: surface-token CSS for an existing Vencord installation.
+- Discord: current semantic tokens plus legacy fallbacks for an existing Vencord installation.
 - Chrome: theme-only package with neutral controls, plus a separate permissionless start page.
+- Firefox: a static theme package for the frame, toolbar, popups and sidebar.
+- Obsidian: documented CSS variables with a static identity rail.
+- Linux desktops: GTK 4 named colors and a KDE Plasma color scheme.
 - Codex desktop appearance: a mergeable native configuration snippet; not a universal ChatGPT web theme.
-- Blender: staged, color-only preferences with backup and guarded commit.
-- Unity: supported Dark and Colors preferences; no editor archive patches.
+- Blender: a partial theme preset XML, or staged color-only preferences with backup and guarded commit.
+- Unity: supported Dark and Colors preferences plus USS for your own editor tools; no editor archive patches.
 
 See [support limits and verification gates](docs/APP_MATRIX.md). Exporting a bundle does not establish that an installed application is fully themed.
 

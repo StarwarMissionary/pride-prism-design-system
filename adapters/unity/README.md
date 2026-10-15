@@ -8,6 +8,10 @@ This adapter is deliberately read-only. It turns generated `theme.json` colors i
 
 In the user's normal Unity session, open Edit > Preferences. Select General > Editor Theme > Dark. Optional, bounded palette accents are Colors > Scene > Selected Outline (`colors.accent`) and Selected Children Outline (`colors.focus`), preserving each color's existing alpha. Record previous native values before changing them; rollback uses those same controls. Keep font/scaling, layouts, grids, material diagnostics and Playmode Tint unchanged. Preferences do not require a project asset or scene edit. If an existing view does not refresh, leave it until its next normal refresh/launch; no restart or domain reload is forced.
 
+## Generated USS for your own editor windows
+
+`PridePrism.uss` (generated into each bundle) defines Unity's documented `--unity-colors-*` UI Toolkit variables from the shared roles, plus a few `.pride-prism-window` rules. Import it from a custom `EditorWindow` or tool stylesheet to make your own editor tooling match the palette. It does not restyle Unity's built-in editor UI, and values are emitted as `rgb()` because USS does not support `color-mix()`.
+
 Unity documents Light/Dark and particular Colors controls, not an arbitrary global editor palette importer. Its `EditorPrefs` API documents storage and generic get/set operations, but does not establish a supported public contract for built-in theme keys. The audit found hashed binary color preference names locally; this adapter does not guess, encode or write them. Native Dark cannot by itself reproduce every bespoke background color across Unity's mixed UI frameworks.
 
 ## Existing resource patches and separate restoration

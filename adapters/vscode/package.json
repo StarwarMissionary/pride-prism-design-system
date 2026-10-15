@@ -1,0 +1,3 @@
+{
+  "note": "Source marker. scripts/build-theme.mjs generates the palette-specific file at dist/<palette>/adapters/vscode/package.json."
+}

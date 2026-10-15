@@ -13,7 +13,7 @@
     <meta property="og:title" content="Pride Prism — Dark-first design system" />
     <meta
       property="og:description"
-      content="Pride, engineered for everyday use. Tokens and adapters for Codex, Chrome, Discord, Steam, and Windows."
+      content="Pride, engineered for everyday use. Tokens and adapters for Windows, Steam, Discord, Chrome, Firefox, VS Code, terminals, Blender and more."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://starwarmissionary.github.io/pride-prism-design-system/" />
@@ -36,9 +36,9 @@
   </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="shell site-header"><a class="brand" href="#main"><span class="brand-mark" aria-hidden="true"></span>Pride Prism <span class="version">02</span></a><nav aria-label="Page sections"><a href="#workbench">Palette</a><a href="#principles">Principles</a><a href="#adapters">Apps</a><a href="https://github.com/StarwarMissionary/pride-prism-design-system">Source ↗</a></nav></header>
+<header class="shell site-header"><a class="brand" href="#main"><span class="brand-mark" aria-hidden="true"></span>Pride Prism <span class="version">03</span></a><nav aria-label="Page sections"><a href="#workbench">Palette</a><a href="#gallery">Gallery</a><a href="#tokens">Tokens</a><a href="#kit">Decoration</a><a href="#adapters">Apps</a><a href="https://github.com/StarwarMissionary/pride-prism-design-system">Source ↗</a></nav></header>
 <main id="main" class="shell">
-<section class="intro"><div><p class="eyebrow">Your colors. A shared foundation.</p><h1>Palette workbench</h1></div><p>Choose the colors that feel like you. <br>Keep your workspace calm, readable, and familiar.</p></section>
+<section class="intro prism-hero"><div class="prism-ribbon" aria-hidden="true"></div><div class="prism-dispersion" aria-hidden="true"></div><div><p class="eyebrow">Your colors. A shared foundation.</p><h1>Palette workbench</h1></div><p>Choose the colors that feel like you. <br>Keep your workspace calm, readable, and familiar.</p></section>
 <div id="load-error" role="alert" hidden></div>
 <section id="workbench" class="workbench" aria-label="Theme configuration and preview">
 <form id="theme-form" class="panel settings" aria-label="Theme settings">
@@ -50,6 +50,7 @@
 <div class="control-heading"><label for="accent">Interface accent</label><button id="reset-accent" class="text-button" type="button">Reset to palette</button></div>
 <div class="accent-control"><input id="accent-picker" type="color" value="#A6C8FF" aria-label="Pick an interface accent"><input id="accent" type="text" value="#A6C8FF" pattern="#[0-9A-Fa-f]{6}" maxlength="7" spellcheck="false" aria-describedby="accent-error"></div>
 <p id="accent-error" class="field-error" role="status"></p>
+<div id="accent-states" class="accent-states" aria-label="Derived action states"></div>
 <div class="control-heading"><label for="intensity">Preview decoration strength</label><output id="intensity-value" for="intensity">70%</output></div><input id="intensity" type="range" min="0" max="100" value="70">
 <label class="checkbox-label"><input id="motion" type="checkbox">Allow a short celebration when requested</label><p class="hint">Strength and celebration affect this preview only. No continuous animation; reduced-motion settings take priority.</p>
 <div class="actions"><button id="download-css" type="button" class="primary" disabled>Export CSS</button><button id="download-json" type="button" disabled>Export JSON</button><button id="reset-all" type="reset">Reset all</button></div>
@@ -57,6 +58,8 @@
 </form>
 <section id="preview" class="panel preview" aria-labelledby="preview-heading">
 <div class="identity-edge" aria-hidden="true"></div>
+<div class="preview-aurora" aria-hidden="true"></div>
+<div class="preview-glass">
 <div class="panel-heading"><h2 id="preview-heading">In your workspace</h2><span id="palette-badge" class="badge">Neutral</span></div>
 <div class="preview-tabs" role="group" aria-label="Preview navigation"><button type="button" aria-pressed="true">Workspace</button><button type="button" aria-pressed="false">Activity</button><button type="button" aria-pressed="false">Settings</button></div>
 <div class="preview-content">
@@ -68,12 +71,27 @@
 <div class="actions"><button id="celebrate" type="button" class="primary">Preview celebration</button><button id="focus-demo" type="button">Focus input</button><button type="button" disabled>Unavailable</button></div>
 <p id="preview-status" class="hint" role="status">Celebration is off. Use Tab to inspect keyboard focus.</p>
 <div class="semantic-states" aria-label="Semantic color examples"><span class="success">✓ Saved</span><span class="warning">△ Needs review</span><span class="error">! Error example</span></div>
+<pre class="terminal-sample" aria-label="Terminal color sample"><code id="terminal-sample"></code></pre>
 </div><div class="preview-footer"><span>Native layouts preserved</span><a href="#tokens">Inspect tokens ↓</a></div>
+</div>
 </section></section>
+<section id="gallery" class="section"><div class="section-heading"><div><p class="eyebrow">Attributed, non-exhaustive</p><h2>Palette gallery</h2></div><span class="hint">Stripes keep their reference proportions. Accents are tuned for dark interfaces.</span></div>
+<div id="gallery-grid" class="gallery-grid"><p class="hint">Loading palettes…</p></div></section>
 <section id="tokens" class="section"><div class="section-heading"><div><p class="eyebrow">Measured, not assumed</p><h2>Color pairs & exports</h2></div><button id="copy-css" type="button" disabled>Copy CSS tokens</button></div>
 <div id="contrast-grid" class="contrast-grid"><p class="hint">Loading measured color pairs…</p></div>
+<details class="code-panel" open><summary>Semantic roles</summary><table class="role-table" aria-label="Semantic color roles"><thead><tr><th scope="col">Role</th><th scope="col">Variable</th><th scope="col">Value</th><th scope="col">On canvas</th></tr></thead><tbody id="role-table"></tbody></table></details>
 <details class="code-panel"><summary>Resolved CSS tokens</summary><pre><code id="token-code">Loading theme…</code></pre></details>
 <details class="code-panel"><summary>Build a native adapter bundle</summary><p>From the repository root with Node.js installed:</p><pre><code id="build-command">node scripts/build-theme.mjs --palette neutral</code></pre><p>Use the generated adapter’s setup guide. This page cannot change desktop applications.</p></details></section>
+<section id="kit" class="section"><div class="section-heading"><div><p class="eyebrow">Static by default</p><h2>Decoration kit</h2></div><span class="hint">Every effect below uses only generated tokens. Nothing moves until you ask.</span></div>
+<div class="kit-grid">
+<article class="kit-card"><div class="kit-demo kit-rails"><div class="rail rail-flat"></div><div class="rail rail-wash"></div><div class="rail rail-diagonal"></div></div><h3>Rails and wash</h3><p><code>--prism-identity-gradient</code>, the surface-safe <code>--prism-identity-wash</code>, and the diagonal variant.</p></article>
+<article class="kit-card"><div class="kit-demo kit-ring"><div class="ring"><span></span></div></div><h3>Conic ring</h3><p><code>--prism-identity-conic</code> keeps stripe proportions around a circle for avatars, progress rings and badges.</p></article>
+<article class="kit-card"><div class="kit-demo kit-aurora"><div class="glass-card">Glass over aurora</div></div><h3>Aurora and glass</h3><p>Per-stripe variables build a mesh; <code>--prism-glass</code> and <code>--prism-glass-border</code> float a readable panel on top.</p></article>
+<article class="kit-card"><div class="kit-demo kit-glow"><button type="button" class="primary glow-button">Hover for glow</button></div><h3>Accent glow</h3><p><code>--prism-glow</code> is a two-layer shadow that lifts a focused or hovered control without changing its size.</p></article>
+<article class="kit-card"><div class="kit-demo kit-foil"><span class="foil-text">Prism</span></div><h3>Foil heading</h3><p>A conic sweep of the accent and stripes clipped to display text. Decorative only; never body copy.</p></article>
+<article class="kit-card"><div class="kit-demo kit-chevron"><div class="chevron"></div><div class="chevron chevron-wash"></div></div><h3>Chevron tab</h3><p>Clip paths cut the same gradient into a directional marker for tabs, steps and breadcrumbs.</p></article>
+</div>
+<details class="code-panel"><summary>Copy the decoration CSS</summary><pre><code id="kit-code"></code></pre></details></section>
 <section id="principles" class="section"><div class="section-heading"><div><p class="eyebrow">One language, different applications</p><h2>The foundation</h2></div><a href="https://github.com/StarwarMissionary/pride-prism-design-system/blob/main/docs/FOUNDATION_AUDIT.md">Read the audit ↗</a></div>
 <div class="principles-grid">
 <article><span class="number">01</span><h3>Color with choice</h3><p>Named, non-exhaustive palettes and a custom accent. Reference flag colors stay separate from readable interface colors.</p></article>
@@ -81,13 +99,18 @@
 <article><span class="number">03</span><h3>Quiet by default</h3><p>Consistent surfaces and aligned controls. No pulsing borders, moving backgrounds or forced layout changes.</p></article></div></section>
 <section id="adapters" class="section"><div class="section-heading"><div><p class="eyebrow">Install only what you choose</p><h2>Application adapters</h2></div><span class="hint">Support varies by app and version.</span></div><div class="adapter-grid">
 <a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/windows"><span><strong>Windows</strong><small>Dark mode and native accent. Preserve wallpaper and cursor.</small></span><span class="badge">Partial ↗</span></a>
+<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/terminals"><span><strong>Terminals</strong><small>Windows Terminal fragment, Alacritty, WezTerm and kitty schemes.</small></span><span class="badge">Generated ↗</span></a>
+<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/vscode"><span><strong>VS Code</strong><small>Workbench, syntax and integrated-terminal theme as a local extension.</small></span><span class="badge">Generated ↗</span></a>
 <a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/steam"><span><strong>Steam</strong><small>Scoped Library, Store, Friends and Big Picture styles.</small></span><span class="badge">Millennium ↗</span></a>
-<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/discord"><span><strong>Discord</strong><small>Shared surface tokens for an existing Vencord installation.</small></span><span class="badge">Vencord ↗</span></a>
+<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/discord"><span><strong>Discord</strong><small>Current semantic tokens for an existing Vencord installation.</small></span><span class="badge">Vencord ↗</span></a>
 <a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/chrome"><span><strong>Chrome</strong><small>Browser colors with neutral window controls.</small></span><span class="badge">Native ↗</span></a>
 <a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/chrome-start-page"><span><strong>Chrome start page</strong><small>Local shortcuts, search and opt-in celebration.</small></span><span class="badge">Extension ↗</span></a>
+<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/firefox"><span><strong>Firefox</strong><small>Static theme package: frame, toolbar, popups and sidebar.</small></span><span class="badge">Generated ↗</span></a>
+<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/obsidian"><span><strong>Obsidian</strong><small>Documented CSS variables with a static identity rail.</small></span><span class="badge">Generated ↗</span></a>
+<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/linux"><span><strong>Linux desktops</strong><small>GTK 4 named colors and a KDE Plasma color scheme.</small></span><span class="badge">Generated ↗</span></a>
 <a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/chatgpt"><span><strong>ChatGPT / Codex</strong><small>Native appearance configuration, no app patching.</small></span><span class="badge">Partial ↗</span></a>
-<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/blender"><span><strong>Blender</strong><small>Interface colors only; preserve scenes and materials.</small></span><span class="badge">Native ↗</span></a>
-<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/unity"><span><strong>Unity</strong><small>Supported Dark and Colors preferences, not resource patches.</small></span><span class="badge">Partial ↗</span></a>
+<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/blender"><span><strong>Blender</strong><small>Partial theme preset XML or guarded staged preferences.</small></span><span class="badge">Native ↗</span></a>
+<a class="adapter" href="https://github.com/StarwarMissionary/pride-prism-design-system/tree/main/adapters/unity"><span><strong>Unity</strong><small>Native preferences checklist plus USS for your own editor tools.</small></span><span class="badge">Partial ↗</span></a>
 </div><p class="hint">Each guide includes setup and rollback. Generated bundles are not evidence of live app verification.</p></section></main>
 <footer class="shell footer"><span>Pride Prism · An open design system</span><a href="https://github.com/StarwarMissionary/pride-prism-design-system/blob/main/LICENSE">MIT license</a></footer>
 <div id="toast" role="status" aria-live="polite"></div></body></html>

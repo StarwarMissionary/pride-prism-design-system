@@ -8,7 +8,7 @@ const catalog = JSON.parse(await read('tokens/palettes.json'));
 const defined = new Set([...themeCss(createTheme(catalog)).matchAll(/(--prism-[\w-]+)\s*:/g)].map(m=>m[1]));
 const steam = ['libraryroot.custom.css','friends.custom.css','webkit.css','bigpicture.custom.css'];
 test('adapter templates consume existing shared tokens without independent palettes',async()=>{
-  for(const file of [...steam.map(n=>'adapters/steam/PridePrism/'+n),'adapters/discord/PridePrism.theme.css','adapters/chrome-start-page/styles.css']) {
+  for(const file of [...steam.map(n=>'adapters/steam/PridePrism/'+n),'adapters/discord/PridePrism.theme.css','adapters/chrome-start-page/styles.css','adapters/obsidian/theme.css']) {
     const css=await read(file);
     for(const [,name]of css.matchAll(/var\((--prism-[\w-]+)/g)) assert.ok(defined.has(name),`${file}: undefined ${name}`);
     assert.doesNotMatch(css,/#[0-9a-f]{6}\b/i,`${file}: independent opaque hex palette`);

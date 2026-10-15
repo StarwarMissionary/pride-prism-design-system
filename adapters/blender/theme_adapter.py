@@ -60,6 +60,60 @@ for _editor in ("preferences", "properties", "outliner", "topbar", "statusbar"):
     }.items():
         COLOR_MAP[f"{_editor}.space.{_field}"] = _token
 SCHEMA_VERSION = 1
+# RNA type identifiers for each nesting level of Blender's theme preset XML.
+XML_TYPES = {
+    "user_interface": "ThemeUserInterface", "space": "ThemeSpaceGeneric", "panelcolors": "ThemePanelColors",
+    "preferences": "ThemePreferences", "properties": "ThemeProperties", "outliner": "ThemeOutliner",
+    "topbar": "ThemeTopBar", "statusbar": "ThemeStatusBar",
+}
+
+
+def theme_xml(colors: dict) -> str:
+    """Partial preset XML: only allowlisted color attributes, installable through
+    Preferences > Themes > Install. Blender keeps every unlisted field, and a
+    six-digit color onto an RGBA field keeps the existing alpha. An empty
+    ThemeStyle element is required by the preset loader."""
+    tree: dict = {}
+    for path, token in COLOR_MAP.items():
+        parts = path.split(".")
+        node = tree
+        for part in parts[:-1]:
+            node = node.setdefault(part, {})
+        node[parts[-1]] = colors[token].lower()
+
+    def element(name: str, members: dict, depth: int) -> list[str]:
+        pad = "  " * depth
+        type_name = XML_TYPES.get(name, "ThemeWidgetColors" if name.startswith("wcol_") else None)
+        if type_name is None:
+            raise ValueError(f"No XML type registered for theme member {name}")
+        attributes = {key: value for key, value in members.items() if isinstance(value, str)}
+        children = {key: value for key, value in members.items() if isinstance(value, dict)}
+        attribute_text = "".join(f'\n{pad}    {key}="{value}"' for key, value in attributes.items())
+        lines = [f"{pad}<{name}>", f"{pad}  <{type_name}{attribute_text}" + (">" if children else " />")]
+        if children:
+            for key, value in children.items():
+                lines.extend(element(key, value, depth + 2))
+            lines.append(f"{pad}  </{type_name}>")
+        lines.append(f"{pad}</{name}>")
+        return lines
+
+    lines = ["<bpy>", "  <Theme>"]
+    for key, value in tree.items():
+        lines.extend(element(key, value, 2))
+    lines.extend(["  </Theme>", "  <ThemeStyle />", "</bpy>", ""])
+    return "\n".join(lines)
+
+
+def export_xml(args) -> dict:
+    theme = read_theme(args.theme_json)
+    output = args.output.resolve()
+    if output.suffix.lower() != ".xml":
+        raise ValueError("Output must be an .xml preset path")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("w", encoding="utf-8", newline="\n") as stream:
+        stream.write(theme_xml(theme["colors"]))
+    return {"preset": str(output), "changed_color_fields": len(COLOR_MAP),
+            "applies": "Preferences > Themes > Install, then save preferences"}
 
 
 def sha256(path: Path) -> str:
@@ -348,6 +402,9 @@ def main(argv=None) -> None:
     commit_parser = commands.add_parser("commit", help="Apply a validated candidate while Blender is closed")
     commit_parser.add_argument("--stage-dir", type=Path, required=True)
     commit_parser.add_argument("--config-dir", type=Path, required=True)
+    xml_parser = commands.add_parser("export-xml", help="Write a partial theme preset XML for Preferences > Themes > Install (no Blender launch)")
+    xml_parser.add_argument("--theme-json", type=Path, required=True)
+    xml_parser.add_argument("--output", type=Path, required=True)
     for mode in ("blender-stage", "blender-verify"):
         worker = commands.add_parser(mode, help=argparse.SUPPRESS)
         worker.add_argument("--stage-dir", type=Path, required=True)
@@ -355,8 +412,8 @@ def main(argv=None) -> None:
     if args.command.startswith("blender-"):
         blender_worker(args.command, args.stage_dir)
     else:
-        result = stage(args) if args.command == "stage" else commit(args)
-        print(json.dumps(result, indent=2))
+        handlers = {"stage": stage, "commit": commit, "export-xml": export_xml}
+        print(json.dumps(handlers[args.command](args), indent=2))
 
 
 if __name__ == "__main__":

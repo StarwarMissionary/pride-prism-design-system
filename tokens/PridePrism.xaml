@@ -39,6 +39,31 @@
   <SolidColorBrush x:Key="PrismWarningBrush" Color="{StaticResource PrismWarning}" />
   <SolidColorBrush x:Key="PrismNegativeBrush" Color="{StaticResource PrismNegative}" />
 
+  <Color x:Key="PrismStripe1">#8B7998</Color>
+  <Color x:Key="PrismStripe2">#B6B9CF</Color>
+  <Color x:Key="PrismStripe3">#8B7998</Color>
+  <sys:Int32 x:Key="PrismStripeCount" xmlns:sys="clr-namespace:System;assembly=mscorlib">3</sys:Int32>
+
+  <Color x:Key="PrismAnsiBlack">#2A2433</Color>
+  <Color x:Key="PrismAnsiRed">#FF7A90</Color>
+  <Color x:Key="PrismAnsiGreen">#66D6A4</Color>
+  <Color x:Key="PrismAnsiYellow">#E8C66A</Color>
+  <Color x:Key="PrismAnsiBlue">#A6C8FF</Color>
+  <Color x:Key="PrismAnsiMagenta">#D9A3F5</Color>
+  <Color x:Key="PrismAnsiCyan">#7FD9E4</Color>
+  <Color x:Key="PrismAnsiWhite">#C9BFD2</Color>
+  <Color x:Key="PrismAnsiBrightBlack">#8B7998</Color>
+  <Color x:Key="PrismAnsiBrightRed">#FFA3B2</Color>
+  <Color x:Key="PrismAnsiBrightGreen">#93E5BF</Color>
+  <Color x:Key="PrismAnsiBrightYellow">#F2D996</Color>
+  <Color x:Key="PrismAnsiBrightBlue">#C4DAFF</Color>
+  <Color x:Key="PrismAnsiBrightMagenta">#E8C2FA</Color>
+  <Color x:Key="PrismAnsiBrightCyan">#A8E7EE</Color>
+  <Color x:Key="PrismAnsiBrightWhite">#F6F1F8</Color>
+  <Color x:Key="PrismAnsiCursor">#B6B9CF</Color>
+  <Color x:Key="PrismAnsiSelection">#46314F</Color>
+  <Color x:Key="PrismAnsiSelectionText">#F6F1F8</Color>
+
   <LinearGradientBrush x:Key="PrismIdentityGradient" StartPoint="0,0.5" EndPoint="1,0.5">
     <GradientStop Color="#8B7998" Offset="0" />
     <GradientStop Color="#8B7998" Offset="0.25" />
@@ -46,6 +71,33 @@
     <GradientStop Color="#B6B9CF" Offset="0.75" />
     <GradientStop Color="#8B7998" Offset="0.75" />
     <GradientStop Color="#8B7998" Offset="1" />
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="PrismIdentityGradientVertical" StartPoint="0.5,0" EndPoint="0.5,1">
+    <GradientStop Color="#8B7998" Offset="0" />
+    <GradientStop Color="#8B7998" Offset="0.25" />
+    <GradientStop Color="#B6B9CF" Offset="0.25" />
+    <GradientStop Color="#B6B9CF" Offset="0.75" />
+    <GradientStop Color="#8B7998" Offset="0.75" />
+    <GradientStop Color="#8B7998" Offset="1" />
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="PrismIdentityGradientDiagonal" StartPoint="0,0" EndPoint="1,1">
+    <GradientStop Color="#8B7998" Offset="0" />
+    <GradientStop Color="#8B7998" Offset="0.25" />
+    <GradientStop Color="#B6B9CF" Offset="0.25" />
+    <GradientStop Color="#B6B9CF" Offset="0.75" />
+    <GradientStop Color="#8B7998" Offset="0.75" />
+    <GradientStop Color="#8B7998" Offset="1" />
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="PrismIdentityWash" StartPoint="0,0.5" EndPoint="1,0.5">
+    <GradientStop Color="#312A37" Offset="0" />
+    <GradientStop Color="#312A37" Offset="0.25" />
+    <GradientStop Color="#3B3944" Offset="0.25" />
+    <GradientStop Color="#3B3944" Offset="0.75" />
+    <GradientStop Color="#312A37" Offset="0.75" />
+    <GradientStop Color="#312A37" Offset="1" />
   </LinearGradientBrush>
 
   <CornerRadius x:Key="PrismRadiusSmall">6</CornerRadius>

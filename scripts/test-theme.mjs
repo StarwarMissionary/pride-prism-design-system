@@ -6,12 +6,15 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import { contrast, createTheme, themeCss } from "../tokens/theme.mjs";
-import { buildTheme, readCatalog, themeXaml } from "./build-theme.mjs";
+import { GENERATED, buildTheme, readCatalog, themeXaml } from "./build-theme.mjs";
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST_ROOT = path.join(REPO_ROOT, "dist");
 const catalog = await readCatalog();
-const requiredIds = ["bisexual", "rainbow", "progress-inspired", "trans", "pan", "lesbian7", "nonbinary", "ace", "aro", "neutral"];
+const requiredIds = ["bisexual", "rainbow", "progress-inspired", "trans", "pan", "lesbian7", "nonbinary", "ace", "aro", "neutral",
+  "gay-men", "genderfluid", "genderqueer", "agender", "polysexual", "omnisexual", "bear", "leather", "intersex-inspired",
+  "aurora", "dusk", "ember", "tide", "prism"];
+const ansiNames = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "brightBlack", "brightRed", "brightGreen", "brightYellow", "brightBlue", "brightMagenta", "brightCyan", "brightWhite", "cursor", "selection", "selectionText"];
 const colorNames = ["surface", "surfaceRaised", "surfaceMuted", "foreground", "foregroundMuted", "accent", "onAccent", "accentHover", "accentPressed", "focus", "link", "selection", "selectionText", "border", "borderSubtle", "positive", "warning", "negative"];
 const kebab = (name) => name.replace(/([a-z0-9])([A-Z])/g, "$1-$2").replace(/([a-z])([0-9])/g, "$1-$2").toLowerCase();
 
@@ -26,9 +29,14 @@ test("catalog schema, attribution, generic default, and requested presets", () =
   const ids = catalog.presets.map((preset) => preset.id);
   assert.equal(new Set(ids).size, ids.length);
   requiredIds.forEach((id) => assert.ok(ids.includes(id), `Missing preset: ${id}`));
-  const progress = catalog.presets.find((preset) => preset.id === "progress-inspired");
-  assert.equal(progress.kind, "inspired-palette");
-  assert.match(progress.label, /not a flag/i);
+  for (const id of ["progress-inspired", "intersex-inspired"]) {
+    const inspired = catalog.presets.find((preset) => preset.id === id);
+    assert.equal(inspired.kind, "inspired-palette");
+    assert.match(inspired.label, /not a flag/i);
+  }
+  for (const preset of catalog.presets.filter((entry) => entry.kind === "original-palette")) {
+    assert.match(preset.label + preset.attribution.note, /original/i, `${preset.id} must declare itself original`);
+  }
   for (const preset of catalog.presets) {
     const theme = createTheme(catalog, preset.id);
     assert.deepEqual(Object.keys(theme.colors), colorNames);
@@ -70,6 +78,36 @@ test("every preset retains readable controls, text, statuses, links and focus", 
       assert.equal(colors[role], defaultColors[role], `${role} must not change with identity palette`);
     }
   }
+});
+
+test("terminal colors are readable, stable, and track cursor/selection only", () => {
+  const neutral = createTheme(catalog);
+  assert.deepEqual(Object.keys(neutral.terminal), ansiNames);
+  for (const preset of catalog.presets) {
+    const { terminal, colors } = createTheme(catalog, preset.id);
+    for (const name of ansiNames.filter((entry) => !["black", "selection", "cursor"].includes(entry))) {
+      assertContrast(terminal[name], colors.surface, 4.5, `${preset.id} ansi ${name}`);
+      if (name !== "selectionText") assert.equal(terminal[name], neutral.terminal[name], `${name} must not change with identity palette`);
+    }
+    assert.equal(terminal.cursor, colors.accent);
+    assert.equal(terminal.selection, colors.selection);
+    assertContrast(terminal.selectionText, terminal.selection, 4.5, `${preset.id} terminal selection`);
+  }
+});
+
+test("decorative derivations keep the reference stripe order and proportions", () => {
+  const theme = createTheme(catalog, "bisexual");
+  assert.equal(theme.gradients.horizontal, theme.gradient);
+  assert.equal(theme.gradients.vertical, theme.gradient.replace("90deg", "180deg"));
+  assert.equal(theme.gradients.diagonal, theme.gradient.replace("90deg", "135deg"));
+  assert.equal(theme.gradients.conic, "conic-gradient(from -90deg, #D60270 0deg 144deg, #9B4F96 144deg 216deg, #0038A8 216deg 360deg)");
+  assert.match(theme.gradients.wash, /^linear-gradient\(90deg, #[0-9A-F]{6} 0% 40%, #[0-9A-F]{6} 40% 60%, #[0-9A-F]{6} 60% 100%\)$/);
+  const wash = theme.gradients.wash.match(/#[0-9A-F]{6}/g);
+  for (const tint of wash) assert.ok(contrast(tint, theme.colors.surface) < 3, "Wash tints stay a background, not a text color.");
+  const dark = createTheme(catalog, "leather");
+  assert.notEqual(dark.gradients.wash.match(/#[0-9A-F]{6}/g)[0], dark.colors.surface, "Black stripes must still produce a visible tint.");
+  for (const value of Object.values(theme.effects)) assert.doesNotMatch(value, /#[0-9a-f]{6}/i, "Effects reference variables, never literal colors.");
+  assert.ok(theme.effects.glass.includes("--prism-surface-raised") && theme.effects.glow.includes("--prism-accent"));
 });
 
 test("custom accents keep one readable foreground through every action state", () => {
@@ -120,6 +158,14 @@ test("theme and CSS are deterministic, independent, and complete", () => {
     assert.ok(css.includes(`--prism-motion-${kebab(duration ? name.slice(0, -2) : name)}: ${value}${duration ? "ms" : ""};`), name);
   }
   assert.ok(css.includes(`--prism-identity-gradient: ${first.gradient};`));
+  for (const name of ["vertical", "diagonal", "conic", "wash"]) assert.ok(css.includes(`--prism-identity-${name}: ${first.gradients[name]};`), name);
+  first.palette.colors.forEach((color, index) => assert.ok(css.includes(`--prism-stripe-${index + 1}: ${color};`)));
+  assert.ok(css.includes(`--prism-stripe-count: ${first.palette.colors.length};`));
+  for (const [name, value] of Object.entries(first.effects)) assert.ok(css.includes(`--prism-${kebab(name)}: ${value};`), name);
+  for (const [name, value] of Object.entries(first.terminal)) assert.ok(css.includes(`--prism-ansi-${kebab(name)}: ${value};`), name);
+  assert.ok(themeXaml(first).includes('<LinearGradientBrush x:Key="PrismIdentityGradientVertical"'));
+  assert.ok(themeXaml(first).includes('<Color x:Key="PrismStripe1">#D60270</Color>'));
+  assert.ok(themeXaml(first).includes('<Color x:Key="PrismAnsiBrightWhite">#F6F1F8</Color>'));
   first.palette.colors[0] = "#000000";
   first.palette.weights[0] = 500;
   first.palette.attribution.name = "Changed";
@@ -194,9 +240,14 @@ test("export is deterministic, injects CSS, preserves sources and generates nati
   assert.deepEqual(await hashes(path.join(REPO_ROOT, "adapters")), before, "Exporter must never change source adapters.");
   assert.equal(first.adapterFileCount, Object.keys(before).length);
   const css = themeCss(first.theme);
-  for (const relative of Object.keys(before).filter((name) => name.endsWith(".css"))) {
+  for (const relative of Object.keys(before).filter((name) => name.endsWith(".css") && !Object.hasOwn(GENERATED, name))) {
     const output = await readFile(path.join(first.output, "adapters", relative), "utf8");
     assert.equal(output.split(css).length - 1, 1, `${relative} must contain one generated token block`);
+  }
+  for (const relative of Object.keys(GENERATED)) {
+    assert.ok(Object.hasOwn(before, relative), `${relative} needs a source marker so bundles stay self-describing`);
+    const output = await readFile(path.join(first.output, "adapters", relative), "utf8");
+    assert.doesNotMatch(output, /Source marker/, `${relative} must be generated, not copied`);
   }
   const discord = await readFile(path.join(first.output, "adapters/discord/PridePrism.theme.css"), "utf8");
   assert.match(discord, /^\/\*\*[\s\S]*?@name Pride Prism[\s\S]*?\*\//);
