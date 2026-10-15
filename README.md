@@ -2,7 +2,7 @@
 
 One dark foundation, your palette, every app. Pride Prism turns an attributed catalog of Pride flag colors and original palettes into a complete dark theme, then generates ready-to-install adapters for the desktop software you already use.
 
-Original concept, inspiration and influence: **Cinder**. Current maintainer: [StarwarMissionary](https://github.com/StarwarMissionary).
+Created by **Cinder**. Pride Prism began as Cinder's Pride Prank Lab, a playful desktop overlay, and grew into this design system; the idea, the inspiration and the influence are Cinder's. Current maintainer: [StarwarMissionary](https://github.com/StarwarMissionary).
 
 [Palette workbench](https://starwarmissionary.github.io/pride-prism-design-system/) · [Foundation audit](docs/FOUNDATION_AUDIT.md) · [Design contract](docs/DESIGN_SYSTEM.md) · [App support](docs/APP_MATRIX.md) · [Verification](docs/VERIFICATION.md)
 
@@ -78,7 +78,7 @@ The repository ships no fixed flag bitmaps or overlay applications. Chrome bitma
 
 ## Credits
 
-- **Cinder**: original creator of the Pride Prism idea and the inspiration and influence behind its design direction.
+- **Cinder**: creator of Pride Prism. It started as the Pride Prank Lab overlay (a prank, and proudly so) and that origin is the inspiration and influence behind everything here. The original overlay source remains in this repository's git history.
 - **StarwarMissionary**: current maintainer of this repository, the palette catalog, the exporter and the adapters.
 - Reference flag colors are attributed per preset in `tokens/palettes.json`; the cursor adapter credits the upstream Bibata project.
 
