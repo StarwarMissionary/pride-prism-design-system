@@ -13,7 +13,7 @@ const DIST_ROOT = path.join(REPO_ROOT, "dist");
 const catalog = await readCatalog();
 const requiredIds = ["bisexual", "rainbow", "progress-inspired", "trans", "pan", "lesbian7", "nonbinary", "ace", "aro", "neutral"];
 const colorNames = ["surface", "surfaceRaised", "surfaceMuted", "foreground", "foregroundMuted", "accent", "onAccent", "accentHover", "accentPressed", "focus", "link", "selection", "selectionText", "border", "borderSubtle", "positive", "warning", "negative"];
-const kebab = (name) => name.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const kebab = (name) => name.replace(/([a-z0-9])([A-Z])/g, "$1-$2").replace(/([a-z])([0-9])/g, "$1-$2").toLowerCase();
 
 function assertContrast(foreground, background, minimum, label) {
   const ratio = contrast(foreground, background);
@@ -114,6 +114,7 @@ test("theme and CSS are deterministic, independent, and complete", () => {
     assert.ok(themeXaml(first).includes(`<Color x:Key="Prism${name[0].toUpperCase() + name.slice(1)}">${value}</Color>`));
   }
   for (const [name, value] of Object.entries(first.metrics)) assert.ok(css.includes(`--prism-${kebab(name)}: ${value};`), name);
+  assert.ok(css.includes("--prism-space-2xl: 32px;"), "Digit boundaries are hyphenated in variable names.");
   for (const [name, value] of Object.entries(first.motion)) {
     const duration = name.endsWith("Ms");
     assert.ok(css.includes(`--prism-motion-${kebab(duration ? name.slice(0, -2) : name)}: ${value}${duration ? "ms" : ""};`), name);
@@ -219,6 +220,8 @@ test("export is deterministic, injects CSS, preserves sources and generates nati
   await assert.rejects(buildTheme({ output: occupied }), /nonempty/);
   assert.equal(await readFile(path.join(occupied, "keep.txt"), "utf8"), "Keep user content.");
   await assert.rejects(buildTheme({ output: "tokens" }), /dist directory/);
+  await assert.rejects(buildTheme({ output: "dist" }), /dist directory/);
+  await assert.rejects(buildTheme({ output: "dist/" }), /dist directory/);
   await assert.rejects(buildTheme({ output: "dist/../../outside" }), /dist directory/);
   await assert.rejects(buildTheme({ output: "dist/invalid", accent: "red" }), /six-digit hex/);
 });

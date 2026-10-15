@@ -1,12 +1,12 @@
 [CmdletBinding()]
-param([switch]$BuildOptionalOverlay)
+param()
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $PSScriptRoot
 
 $jsonFiles = @(
     (Join-Path $repoRoot 'tokens\pride-prism.tokens.json'),
-    (Join-Path $repoRoot 'adapters\discord\pride-prism-gradient.json'),
+    (Join-Path $repoRoot 'tokens\palettes.json'),
     (Join-Path $repoRoot 'adapters\chrome\manifest.json'),
     (Join-Path $repoRoot 'adapters\chrome-start-page\manifest.json'),
     (Join-Path $repoRoot 'adapters\steam\PridePrism\skin.json')
@@ -30,18 +30,17 @@ if ($steamSkin.PSObject.Properties['Patches']) {
 }
 Write-Host 'STEAM PATCH ROUTING OK: Library, Friends, Big Picture, and webviews are scoped.'
 
-Add-Type -AssemblyName System.Drawing
-$images = @(
-    (Join-Path $repoRoot 'adapters\chrome\images\theme_frame.png'),
-    (Join-Path $repoRoot 'adapters\chrome\images\theme_toolbar.png'),
-    (Join-Path $repoRoot 'adapters\chrome\images\theme_ntp_background.png'),
-    (Join-Path $repoRoot 'adapters\windows\assets\pride-prism-wallpaper.png')
-)
-foreach ($file in $images) {
-    $image = [Drawing.Image]::FromFile($file)
-    try { Write-Host "IMAGE OK: $file ($($image.Width)x$($image.Height))" }
-    finally { $image.Dispose() }
+$chromeManifest = Get-Content -LiteralPath (Join-Path $repoRoot 'adapters\chrome\manifest.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+if ($chromeManifest.theme.PSObject.Properties['images']) {
+    throw 'The source Chrome manifest must not reference bitmaps; scripts/generate-assets.ps1 adds palette-specific images to a bundle.'
 }
+Write-Host 'CHROME MANIFEST OK: colors only, no fixed bitmaps.'
+
+Add-Type -AssemblyName System.Drawing
+$siteImage = Join-Path $repoRoot 'docs\assets\pride-prism-og.png'
+$image = [Drawing.Image]::FromFile($siteImage)
+try { Write-Host "IMAGE OK: $siteImage ($($image.Width)x$($image.Height))" }
+finally { $image.Dispose() }
 
 $siteFiles = @(
     (Join-Path $repoRoot 'docs\index.html'),
@@ -128,10 +127,5 @@ if ($node) {
 }
 
 if (-not $node) { throw 'Node.js is required to validate the shared theme contract.' }
-if ($BuildOptionalOverlay) {
-    $buildScript = Join-Path $repoRoot 'tools\PridePrankLab\build.ps1'
-    & $buildScript | Out-Host
-    if ($LASTEXITCODE -ne 0) { throw 'Pride Prank Lab build failed.' }
-}
 
 Write-Host 'Pride Prism validation passed.'

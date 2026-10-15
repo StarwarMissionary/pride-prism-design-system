@@ -7,8 +7,8 @@
 :root {
   /* Shared --prism-* tokens are prepended by scripts/build-theme.mjs. */
   --pp-surface: var(--prism-surface);
-  --pp-raised: var(--prism-surface-raised);
-  --pp-muted: var(--prism-surface-muted);
+  --pp-surface-raised: var(--prism-surface-raised);
+  --pp-surface-muted: var(--prism-surface-muted);
   --pp-ink: var(--prism-foreground);
   --pp-ink-muted: var(--prism-foreground-muted);
   --pp-accent: var(--prism-accent);
@@ -28,13 +28,13 @@
   --gpSystemLighterGrey: var(--pp-ink-muted) !important;
   --gpSystemLightGrey: var(--pp-ink-muted) !important;
   --gpSystemGrey: var(--pp-border) !important;
-  --gpSystemDarkGrey: var(--pp-muted) !important;
-  --gpSystemDarkerGrey: var(--pp-raised) !important;
+  --gpSystemDarkGrey: var(--pp-surface-muted) !important;
+  --gpSystemDarkerGrey: var(--pp-surface-raised) !important;
   --gpSystemDarkestGrey: var(--pp-surface) !important;
   --gpBackground-DarkMedium: var(--pp-surface) !important;
-  --gpBackground-DarkSoft: var(--pp-raised) !important;
+  --gpBackground-DarkSoft: var(--pp-surface-raised) !important;
   --gpBackground-LightMedium: var(--pp-selection) !important;
-  --gpBackground-LightSoft: var(--pp-muted) !important;
+  --gpBackground-LightSoft: var(--pp-surface-muted) !important;
 }
 
 .BasicUiRoot {
@@ -50,7 +50,7 @@
  * Neither is a paint surface. Only the actual non-VR menu panel is decorated. */
 .MainMenuEmbedded .Menu:not(.VR) {
   color: var(--pp-ink) !important;
-  background: var(--pp-pride) top / 100% 3px no-repeat, var(--pp-raised) !important;
+  background: var(--pp-pride) top / 100% 3px no-repeat, var(--pp-surface-raised) !important;
   border-color: var(--pp-border-subtle) !important;
 }
 
@@ -58,14 +58,14 @@
 .BasicFooter,
 .QuickAccessFooter {
   color: var(--pp-ink) !important;
-  background-color: var(--pp-raised) !important;
+  background-color: var(--pp-surface-raised) !important;
   border-color: var(--pp-border-subtle) !important;
 }
 
 /* Paint the dialog once, never its transition/positioning layers. */
 .BasicUiRoot .DialogContent {
   color: var(--pp-ink) !important;
-  background-color: var(--pp-raised) !important;
+  background-color: var(--pp-surface-raised) !important;
   border-color: var(--pp-border-subtle) !important;
 }
 
@@ -80,7 +80,7 @@
 /* Actual dialog buttons only; native GreenPlay and game capsules are untouched. */
 .BasicUiRoot button.DialogButton:not(.GreenPlay) {
   color: var(--pp-ink) !important;
-  background: var(--pp-muted) !important;
+  background: var(--pp-surface-muted) !important;
   border-color: var(--pp-border) !important;
 }
 
@@ -104,7 +104,7 @@
 
 .BasicUiRoot button.DialogButton:not(.GreenPlay):is(:disabled, .Disabled) {
   color: var(--pp-ink-muted) !important;
-  background: var(--pp-raised) !important;
+  background: var(--pp-surface-raised) !important;
 }
 
 .BasicUiRoot input.DialogInput,

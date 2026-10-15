@@ -7,8 +7,8 @@
 :root {
   /* Shared --prism-* tokens are prepended by scripts/build-theme.mjs. */
   --pp-surface: var(--prism-surface);
-  --pp-raised: var(--prism-surface-raised);
-  --pp-muted: var(--prism-surface-muted);
+  --pp-surface-raised: var(--prism-surface-raised);
+  --pp-surface-muted: var(--prism-surface-muted);
   --pp-ink: var(--prism-foreground);
   --pp-ink-muted: var(--prism-foreground-muted);
   --pp-accent: var(--prism-accent);
@@ -23,8 +23,8 @@
   --pp-border-subtle: var(--prism-border-subtle);
   --pp-pride: var(--prism-identity-gradient);
   --gpStoreDarkestGrey: var(--pp-surface) !important;
-  --gpStoreDarkerGrey: var(--pp-raised) !important;
-  --gpStoreDarkGrey: var(--pp-muted) !important;
+  --gpStoreDarkerGrey: var(--pp-surface-raised) !important;
+  --gpStoreDarkGrey: var(--pp-surface-muted) !important;
   --gpStoreLightestGrey: var(--pp-ink) !important;
   --gpStoreLighterGrey: var(--pp-ink-muted) !important;
 }
@@ -45,7 +45,7 @@ body,
 .popup_block_new,
 .newmodal {
   color: var(--pp-ink) !important;
-  background-color: var(--pp-raised) !important;
+  background-color: var(--pp-surface-raised) !important;
   border-color: var(--pp-border-subtle) !important;
 }
 
@@ -53,14 +53,14 @@ body,
 .store_nav,
 body.v7 [role="navigation"][aria-label="Store menu"] {
   color: var(--pp-ink) !important;
-  background: var(--pp-pride) bottom / 100% 3px no-repeat, var(--pp-raised) !important;
+  background: var(--pp-pride) bottom / 100% 3px no-repeat, var(--pp-surface-raised) !important;
   border-color: var(--pp-border-subtle) !important;
 }
 
 /* Audited Store v7 dropdown wrapper: not its ancestors or every descendant. */
 body.v7 [role="navigation"][aria-label="Store menu"] + div {
   color: var(--pp-ink) !important;
-  background-color: var(--pp-raised) !important;
+  background-color: var(--pp-surface-raised) !important;
   border-color: var(--pp-border-subtle) !important;
 }
 
@@ -127,7 +127,7 @@ body.v7 form[role="search"] button:enabled:active {
 .home_section_button,
 .home_tab_button {
   color: var(--pp-ink) !important;
-  background: var(--pp-muted) !important;
+  background: var(--pp-surface-muted) !important;
   border-color: var(--pp-border) !important;
 }
 
@@ -145,7 +145,7 @@ body.v7 form[role="search"] button:enabled:active {
 /* These are content panels, not capsule art, takeovers or carousels. */
 .store_main_capsule > .info,
 .tab_row_item > .tab_item_content {
-  background: var(--pp-raised) !important;
+  background: var(--pp-surface-raised) !important;
   border-color: var(--pp-border-subtle) !important;
 }
 
@@ -187,7 +187,7 @@ body.v7 form[role="search"] button:enabled:active {
 
 #footer {
   color: var(--pp-ink-muted) !important;
-  background-color: var(--pp-raised) !important;
+  background-color: var(--pp-surface-raised) !important;
   border-color: var(--pp-border-subtle) !important;
 }
 

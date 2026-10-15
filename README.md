@@ -51,13 +51,13 @@ node scripts/preview-site.mjs
 ./scripts/validate.ps1
 ```
 
-Open the printed local URL for preview. Before publishing, regenerate the shared site modules. The validator does not build or run the optional legacy overlay unless `-BuildOptionalOverlay` is explicitly supplied.
+Open the printed local URL for preview. Before publishing, regenerate the shared site modules.
 
 ## Safety
 
 The foundation does not patch application executables/resources, install client-mod frameworks, change security settings, or restart apps. Installers must preserve user work and explain native/third-party limitations. Local backups and generated personal bundles are excluded from Git.
 
-`tools/PridePrankLab` is a legacy optional experiment, not the theme engine or a required app. Its independent palette/effect UI is not the shared-system configuration surface; continuous border/accent effects now start disabled. Do not use it to claim native application coverage.
+The repository ships no fixed flag bitmaps or overlay applications. Chrome bitmaps and a wallpaper are painted per bundle by `scripts/generate-assets.ps1` from the selected palette; the only tracked image is the website's social preview.
 
 ## License
 

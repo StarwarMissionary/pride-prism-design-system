@@ -66,8 +66,8 @@ function chromeManifest(source, theme) {
   manifest.name = `Pride Prism — ${theme.palette.label}`;
   manifest.description = "A dark, neutral workspace with a locally chosen Pride Prism palette.";
   manifest.theme ??= {};
-  // Legacy rainbow bitmaps would override these colors and misrepresent a
-  // different preset. A separate asset generator can add matching images later.
+  // Bitmaps are palette-specific. scripts/generate-assets.ps1 paints them into
+  // the bundle and restores this block; the source package ships colors only.
   delete manifest.theme.images;
   manifest.theme.colors = {
     ...(manifest.theme.colors ?? {}),
@@ -142,7 +142,9 @@ async function assertNoOutputLinks(directory) {
 async function assertSafeOutput(requested) {
   if (typeof requested !== "string" || !requested.trim()) throw new TypeError("Output must be a nonempty directory path.");
   const output = path.resolve(REPO_ROOT, requested);
-  if (!contained(DIST_ROOT, output)) throw new Error("Generated output must stay inside this repository's dist directory.");
+  // Strictly inside dist: exporting into the dist root itself would mark it as
+  // a bundle and let a later export overwrite sibling bundles.
+  if (output === DIST_ROOT || !contained(DIST_ROOT, output)) throw new Error("Generated output must stay inside this repository's dist directory.");
   // Reject junctions/symlinks anywhere from the repository to the destination.
   const parts = path.relative(REPO_ROOT, output).split(path.sep);
   let current = REPO_ROOT;

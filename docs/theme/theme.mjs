@@ -183,7 +183,8 @@ export function createTheme(catalog, presetId = catalog?.defaultPreset, customAc
 }
 
 function kebab(value) {
-  return value.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+  // Split before capitals and before digits so `space2xl` becomes `space-2xl`.
+  return value.replace(/([a-z0-9])([A-Z])/g, "$1-$2").replace(/([a-z])([0-9])/g, "$1-$2").toLowerCase();
 }
 
 /** Variables only: callers own layout, component states, and motion opt-in. */

@@ -23,8 +23,6 @@ Native applications retain their pane widths, window controls, fonts, DPI, contr
 
 Default decorative motion is off. Interactions may use 160–280 ms color/border transitions. Explicit celebrations finish within 1.5 seconds. Honor reduced motion and do not run global animation resets that suppress native loading/progress.
 
-The legacy optional overlay is not the foundation configuration system. It is excluded from normal validation builds and native coverage claims.
-
 ## Choice and privacy
 
 Palette names are preferences, not required identity labels. Reference colors and proportions are attributed, variants explicit, catalog non-exhaustive. Keep custom accents separate from reference colors. No telemetry or public personal profile; browser preferences stay local.

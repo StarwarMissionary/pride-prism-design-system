@@ -21,4 +21,4 @@ Generated bundles share color roles. Native support and runtime verification are
 - **Visually verified:** specific named app views inspected with content and control states.
 - **Pending:** requires a user action or a currently unavailable verification surface.
 
-Do not collapse these states into “done.” Source validation does not prove an installed app's appearance. The optional legacy overlay is not evidence of native theming and is not a required dependency.
+Do not collapse these states into “done.” Source validation does not prove an installed app's appearance.

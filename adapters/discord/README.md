@@ -8,4 +8,4 @@ Shared surfaces, text and a static identity rail are themed. Presence, roles, me
 
 To undo, disable the theme or restore the backed-up CSS. Never replace unrelated QuickCSS.
 
-The historical `pride-prism-gradient.json` is a legacy native-Nitro experiment, not a generated foundation adapter. It must not be used as the selected palette's source of truth. Native Nitro availability and coverage differ from Vencord; this bundle does not automate account or sync settings.
+Discord's native Nitro gradient profile is a separate account feature; this bundle does not automate account or sync settings.

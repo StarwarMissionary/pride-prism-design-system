@@ -4,569 +4,569 @@
   --decoration-opacity:.7;
   font-family:var(--prism-font-ui);
   line-height:1.5}
-  *{
-    box-sizing:border-box}
-    body{
-      margin:0;
-      background:var(--prism-surface);
-      color:var(--prism-foreground)}
-      button,input,select{
-        font:inherit}
-        a{
-          color:var(--prism-link);
-          text-underline-offset:4px}
-          button{
-            cursor:pointer;
-            min-height:42px;
-            padding:8px 16px;
-            color:var(--prism-foreground);
-            background:var(--prism-surface-muted)}
-            button,input,select{
-              border:1px solid var(--prism-border);
-              border-radius:6px;
-              touch-action:manipulation}
-              button:hover{
-                background:var(--prism-selection)}
-                button:active{
-                  background:var(--prism-surface)}
-                  button:disabled{
-                    opacity:.5;
-                    cursor:not-allowed}
-                    button.primary{
-                      background:var(--prism-accent);
-                      color:var(--prism-on-accent);
-                      border-color:var(--prism-border);
-                      font-weight:600}
-                      button.primary:hover{
-                        background:var(--prism-accent-hover)}
-                        button.primary:active{
-                          background:var(--prism-accent-pressed)}
-                          :focus-visible{
-                            outline:2px solid var(--prism-focus);
-                            outline-offset:3px;
-                            box-shadow:0 0 0 2px var(--prism-surface)}
-                            input,select{
-                              background:var(--prism-surface);
-                              color:var(--prism-foreground);
-                              width:100%;
-                              min-height:44px;
-                              padding:9px 12px}
-                              input[type=range]{
-                                padding:0;
-                                accent-color:var(--prism-accent)}
-                                label{
-                                  display:block;
-                                  font-size:.875rem;
-                                  font-weight:600;
-                                  margin:0 0 8px}
-                                  p{
-                                    margin:0 0 16px}
-                                    h1,h2,h3{
-                                      margin:0;
-                                      line-height:1.2}
-                                      h1{
-                                        font-size:clamp(2rem,4vw,3rem);
-                                        letter-spacing:-.035em;
-                                        font-weight:600}
-                                        h2{
-                                          font-size:1.25rem;
-                                          font-weight:600}
-                                          h3{
-                                            font-size:1.0625rem;
-                                            font-weight:600}
-                                            .shell{
-                                              width:min(1200px,calc(100% - 64px));
-                                              margin-inline:auto}
-                                              .site-header{
-                                                display:flex;
-                                                align-items:center;
-                                                justify-content:space-between;
-                                                gap:24px;
-                                                min-height:92px;
-                                                border-bottom:1px solid var(--prism-border-subtle)}
-                                                .brand{
-                                                  display:flex;
-                                                  gap:12px;
-                                                  align-items:center;
-                                                  color:var(--prism-foreground);
-                                                  font-weight:600;
-                                                  text-decoration:none;
-                                                  font-size:1.125rem}
-                                                  .brand-mark{
-                                                    width:22px;
-                                                    height:22px;
-                                                    border:1px solid var(--prism-border);
-                                                    border-radius:5px;
-                                                    background:var(--prism-identity-gradient)}
-                                                    .version{
-                                                      color:var(--prism-foreground-muted);
-                                                      font-size:.75rem;
-                                                      font-weight:400}
-                                                      .site-header nav{
-                                                        display:flex;
-                                                        gap:24px;
-                                                        font-size:.875rem;
-                                                        flex-wrap:wrap}
-                                                        .site-header nav a{
-                                                          color:var(--prism-foreground-muted);
-                                                          text-decoration:none}
-                                                          .intro{
-                                                            display:flex;
-                                                            justify-content:space-between;
-                                                            align-items:end;
-                                                            gap:24px;
-                                                            padding:40px 0 32px}
-                                                            .intro>p{
-                                                              margin:0;
-                                                              color:var(--prism-foreground-muted)}
-                                                              .eyebrow{
-                                                                font-size:.75rem;
-                                                                letter-spacing:.07em;
-                                                                text-transform:uppercase;
-                                                                color:var(--prism-foreground-muted);
-                                                                margin-bottom:10px}
-                                                                .workbench{
-                                                                  display:grid;
-                                                                  grid-template-columns:1fr 1fr;
-                                                                  gap:24px;
-                                                                  align-items:stretch}
-                                                                  .panel{
-                                                                    border:1px solid var(--prism-border-subtle);
-                                                                    border-radius:12px;
-                                                                    background:var(--prism-surface-raised);
-                                                                    overflow:clip;
-                                                                    min-width:0}
-                                                                    .settings{
-                                                                      padding:24px}
-                                                                      .panel-heading{
-                                                                        display:flex;
-                                                                        align-items:center;
-                                                                        justify-content:space-between;
-                                                                        gap:16px;
-                                                                        margin-bottom:24px}
-                                                                        .badge{
-                                                                          display:inline-block;
-                                                                          border:1px solid var(--prism-border-subtle);
-                                                                          border-radius:5px;
-                                                                          padding:3px 8px;
-                                                                          font-size:.75rem;
-                                                                          line-height:1.5;
-                                                                          color:var(--prism-foreground-muted);
-                                                                          white-space:nowrap}
-                                                                          .hint{
-                                                                            font-size:.875rem;
-                                                                            color:var(--prism-foreground-muted);
-                                                                            margin:8px 0 16px}
-                                                                            .flag{
-                                                                              height:48px;
-                                                                              border-radius:6px;
-                                                                              background:var(--prism-identity-gradient);
-                                                                              opacity:var(--decoration-opacity);
-                                                                              border:1px solid var(--prism-border);
-                                                                              margin-top:20px}
-                                                                              .swatches{
-                                                                                display:flex;
-                                                                                flex-wrap:wrap;
-                                                                                gap:8px;
-                                                                                margin-top:12px}
-                                                                                .swatch{
-                                                                                  display:flex;
-                                                                                  align-items:center;
-                                                                                  gap:6px;
-                                                                                  font-family:Consolas,monospace;
-                                                                                  font-size:.75rem;
-                                                                                  padding:0;
-                                                                                  min-height:30px;
-                                                                                  border:0;
-                                                                                  background:none}
-                                                                                  .swatch i{
-                                                                                    width:12px;
-                                                                                    height:12px;
-                                                                                    border:1px solid var(--prism-border);
-                                                                                    border-radius:3px}
-                                                                                    .control-heading{
-                                                                                      display:flex;
-                                                                                      align-items:center;
-                                                                                      justify-content:space-between;
-                                                                                      gap:12px;
-                                                                                      margin-top:24px}
-                                                                                      .control-heading output{
-                                                                                        font-size:.875rem;
-                                                                                        color:var(--prism-foreground-muted);
-                                                                                        margin-bottom:8px}
-                                                                                        .text-button{
-                                                                                          padding:0;
-                                                                                          min-height:28px;
-                                                                                          background:none;
-                                                                                          border:0;
-                                                                                          font-size:.875rem;
-                                                                                          color:var(--prism-link);
-                                                                                          margin-bottom:8px}
-                                                                                          .accent-control{
-                                                                                            display:grid;
-                                                                                            grid-template-columns:48px 1fr;
-                                                                                            gap:12px}
-                                                                                            .accent-control input[type=color]{
-                                                                                              height:44px;
-                                                                                              padding:4px}
-                                                                                              .field-error{
-                                                                                                font-size:.875rem;
-                                                                                                color:var(--prism-negative);
-                                                                                                margin:4px 0 0}
-                                                                                                .field-error:empty{
-                                                                                                  display:none}
-                                                                                                  .checkbox-label{
-                                                                                                    display:flex;
-                                                                                                    align-items:center;
-                                                                                                    gap:10px;
-                                                                                                    margin-top:20px;
-                                                                                                    font-weight:400}
-                                                                                                    .checkbox-label input{
-                                                                                                      width:18px;
-                                                                                                      height:18px;
-                                                                                                      min-height:18px;
-                                                                                                      margin:0;
-                                                                                                      accent-color:var(--prism-accent)}
-                                                                                                      .actions{
-                                                                                                        display:flex;
-                                                                                                        flex-wrap:wrap;
-                                                                                                        gap:8px;
-                                                                                                        margin-top:20px}
-                                                                                                        .actions button{
-                                                                                                          font-size:.875rem}
-                                                                                                          .settings>.hint:last-child{
-                                                                                                            margin-bottom:0}
-                                                                                                            .preview{
-                                                                                                              display:flex;
-                                                                                                              flex-direction:column;
-                                                                                                              position:relative}
-                                                                                                              .identity-edge{
-                                                                                                                height:3px;
-                                                                                                                background:var(--prism-identity-gradient);
-                                                                                                                opacity:var(--decoration-opacity);
-                                                                                                                flex-shrink:0}
-                                                                                                                .preview>.panel-heading{
-                                                                                                                  padding:24px 24px 0}
-                                                                                                                  .preview-tabs{
-                                                                                                                    display:flex;
-                                                                                                                    gap:8px;
-                                                                                                                    padding:0 24px 20px;
-                                                                                                                    border-bottom:1px solid var(--prism-border-subtle);
-                                                                                                                    flex-wrap:wrap}
-                                                                                                                    .preview-tabs button{
-                                                                                                                      background:transparent;
-                                                                                                                      border-color:transparent;
-                                                                                                                      font-size:.875rem;
-                                                                                                                      padding:8px 12px}
-                                                                                                                      .preview-tabs button[aria-pressed=true]{
-                                                                                                                        color:var(--prism-selection-text);
-                                                                                                                        background:var(--prism-selection);
-                                                                                                                        box-shadow:inset 0 -2px var(--prism-accent)}
-                                                                                                                        .preview-content{
-                                                                                                                          padding:24px;
-                                                                                                                          flex:1}
-                                                                                                                          .preview-content>p{
-                                                                                                                            color:var(--prism-foreground-muted);
-                                                                                                                            margin:12px 0 24px}
-                                                                                                                            .preview-title{
-                                                                                                                              display:flex;
-                                                                                                                              align-items:center;
-                                                                                                                              justify-content:space-between;
-                                                                                                                              gap:16px}
-                                                                                                                              .status-dot{
-                                                                                                                                width:9px;
-                                                                                                                                height:9px;
-                                                                                                                                border-radius:50%;
-                                                                                                                                background:var(--prism-positive);
-                                                                                                                                flex-shrink:0}
-                                                                                                                                .preview-title .eyebrow{
-                                                                                                                                  margin-bottom:8px}
-                                                                                                                                  .sample-row{
-                                                                                                                                    display:flex;
-                                                                                                                                    gap:12px;
-                                                                                                                                    align-items:center;
-                                                                                                                                    justify-content:space-between;
-                                                                                                                                    border:1px solid var(--prism-border-subtle);
-                                                                                                                                    border-radius:6px;
-                                                                                                                                    padding:12px;
-                                                                                                                                    margin-top:12px}
-                                                                                                                                    .sample-row.selected{
-                                                                                                                                      background:var(--prism-selection);
-                                                                                                                                      border-color:var(--prism-accent);
-                                                                                                                                      color:var(--prism-selection-text);
-                                                                                                                                      margin-top:24px}
-                                                                                                                                      .sample-row strong{
-                                                                                                                                        font-size:.875rem}
-                                                                                                                                        .sample-row small,.adapter small{
-                                                                                                                                          display:block;
-                                                                                                                                          margin-top:3px;
-                                                                                                                                          color:var(--prism-foreground-muted);
-                                                                                                                                          font-size:.875rem}
-                                                                                                                                          .semantic-states{
-                                                                                                                                            display:flex;
-                                                                                                                                            flex-wrap:wrap;
-                                                                                                                                            gap:16px;
-                                                                                                                                            font-size:.875rem;
-                                                                                                                                            padding-top:12px;
-                                                                                                                                            border-top:1px solid var(--prism-border-subtle)}
-                                                                                                                                            .success{
-                                                                                                                                              color:var(--prism-positive)}
-                                                                                                                                              .warning{
-                                                                                                                                                color:var(--prism-warning)}
-                                                                                                                                                .error{
-                                                                                                                                                  color:var(--prism-negative)}
-                                                                                                                                                  .preview-footer{
-                                                                                                                                                    display:flex;
-                                                                                                                                                    flex-wrap:wrap;
-                                                                                                                                                    gap:12px;
-                                                                                                                                                    justify-content:space-between;
-                                                                                                                                                    border-top:1px solid var(--prism-border-subtle);
-                                                                                                                                                    padding:16px 24px;
-                                                                                                                                                    color:var(--prism-foreground-muted);
-                                                                                                                                                    font-size:.75rem}
-                                                                                                                                                    .section{
-                                                                                                                                                      margin-top:56px}
-                                                                                                                                                      .section-heading{
-                                                                                                                                                        display:flex;
-                                                                                                                                                        justify-content:space-between;
-                                                                                                                                                        gap:16px;
-                                                                                                                                                        align-items:end;
-                                                                                                                                                        margin-bottom:24px;
-                                                                                                                                                        flex-wrap:wrap}
-                                                                                                                                                        .section-heading>a,.section-heading>button{
-                                                                                                                                                          font-size:.875rem}
-                                                                                                                                                          .section-heading .hint{
-                                                                                                                                                            margin:0}
-                                                                                                                                                            .contrast-grid{
-                                                                                                                                                              display:grid;
-                                                                                                                                                              grid-template-columns:repeat(4,1fr);
-                                                                                                                                                              gap:16px}
-                                                                                                                                                              .contrast-card{
-                                                                                                                                                                padding:20px;
-                                                                                                                                                                background:var(--prism-surface-raised);
-                                                                                                                                                                border:1px solid var(--prism-border-subtle);
-                                                                                                                                                                border-radius:12px;
-                                                                                                                                                                display:flex;
-                                                                                                                                                                flex-direction:column;
-                                                                                                                                                                gap:8px;
-                                                                                                                                                                min-width:0}
-                                                                                                                                                                .contrast-card h3{
-                                                                                                                                                                  font-size:.875rem}
-                                                                                                                                                                  .contrast-card p{
-                                                                                                                                                                    margin:0;
-                                                                                                                                                                    font-size:.75rem;
-                                                                                                                                                                    color:var(--prism-foreground-muted);
-                                                                                                                                                                    overflow-wrap:anywhere}
-                                                                                                                                                                    .contrast-card strong{
-                                                                                                                                                                      font-size:1.5rem;
-                                                                                                                                                                      font-weight:500;
-                                                                                                                                                                      margin-top:auto;
-                                                                                                                                                                      padding-top:8px}
-                                                                                                                                                                      .contrast-card small{
-                                                                                                                                                                        font-size:.75rem;
-                                                                                                                                                                        color:var(--prism-positive)}
-                                                                                                                                                                        .code-panel{
-                                                                                                                                                                          margin-top:16px;
-                                                                                                                                                                          border:1px solid var(--prism-border-subtle);
-                                                                                                                                                                          border-radius:6px;
-                                                                                                                                                                          padding:16px}
-                                                                                                                                                                          .code-panel summary{
-                                                                                                                                                                            cursor:pointer;
-                                                                                                                                                                            font-size:.875rem}
-                                                                                                                                                                            .code-panel p{
-                                                                                                                                                                              font-size:.875rem;
-                                                                                                                                                                              margin-top:16px;
-                                                                                                                                                                              color:var(--prism-foreground-muted)}
-                                                                                                                                                                              pre{
-                                                                                                                                                                                margin:16px 0 0;
-                                                                                                                                                                                max-height:360px;
-                                                                                                                                                                                overflow:auto;
-                                                                                                                                                                                font-size:.875rem;
-                                                                                                                                                                                line-height:1.6;
-                                                                                                                                                                                color:var(--prism-foreground-muted)}
-                                                                                                                                                                                .principles-grid{
-                                                                                                                                                                                  display:grid;
-                                                                                                                                                                                  grid-template-columns:repeat(3,1fr);
-                                                                                                                                                                                  gap:24px}
-                                                                                                                                                                                  .principles-grid article{
-                                                                                                                                                                                    border-top:1px solid var(--prism-border-subtle);
-                                                                                                                                                                                    padding-top:20px}
-                                                                                                                                                                                    .number{
-                                                                                                                                                                                      color:var(--prism-foreground-muted);
-                                                                                                                                                                                      font-family:Consolas,monospace;
-                                                                                                                                                                                      font-size:.75rem;
-                                                                                                                                                                                      display:block;
-                                                                                                                                                                                      margin-bottom:20px}
-                                                                                                                                                                                      .principles-grid p{
-                                                                                                                                                                                        font-size:.875rem;
-                                                                                                                                                                                        color:var(--prism-foreground-muted);
-                                                                                                                                                                                        margin:12px 0 0}
-                                                                                                                                                                                        .adapter-grid{
-                                                                                                                                                                                          display:grid;
-                                                                                                                                                                                          grid-template-columns:1fr 1fr;
-                                                                                                                                                                                          gap:16px}
-                                                                                                                                                                                          .adapter{
-                                                                                                                                                                                            display:flex;
-                                                                                                                                                                                            align-items:center;
-                                                                                                                                                                                            justify-content:space-between;
-                                                                                                                                                                                            gap:16px;
-                                                                                                                                                                                            padding:20px;
-                                                                                                                                                                                            border:1px solid var(--prism-border-subtle);
-                                                                                                                                                                                            border-radius:12px;
-                                                                                                                                                                                            text-decoration:none;
-                                                                                                                                                                                            color:var(--prism-foreground);
-                                                                                                                                                                                            min-width:0}
-                                                                                                                                                                                            .adapter:hover{
-                                                                                                                                                                                              background:var(--prism-surface-raised);
-                                                                                                                                                                                              border-color:var(--prism-border)}
-                                                                                                                                                                                              .adapter strong{
-                                                                                                                                                                                                font-size:1rem}
-                                                                                                                                                                                                .footer{
-                                                                                                                                                                                                  display:flex;
-                                                                                                                                                                                                  justify-content:space-between;
-                                                                                                                                                                                                  gap:16px;
-                                                                                                                                                                                                  margin-top:48px;
-                                                                                                                                                                                                  border-top:1px solid var(--prism-border-subtle);
-                                                                                                                                                                                                  padding:24px 0 32px;
-                                                                                                                                                                                                  font-size:.875rem;
-                                                                                                                                                                                                  color:var(--prism-foreground-muted)}
-                                                                                                                                                                                                  .skip-link{
-                                                                                                                                                                                                    position:fixed;
-                                                                                                                                                                                                    top:-100px;
-                                                                                                                                                                                                    left:16px;
-                                                                                                                                                                                                    z-index:5;
-                                                                                                                                                                                                    padding:12px;
-                                                                                                                                                                                                    background:var(--prism-surface-raised)}
-                                                                                                                                                                                                    .skip-link:focus{
-                                                                                                                                                                                                      top:8px}
-                                                                                                                                                                                                      #toast{
-                                                                                                                                                                                                        position:fixed;
-                                                                                                                                                                                                        bottom:24px;
-                                                                                                                                                                                                        left:50%;
-                                                                                                                                                                                                        transform:translateX(-50%);
-                                                                                                                                                                                                        background:var(--prism-surface-raised);
-                                                                                                                                                                                                        border:1px solid var(--prism-border);
-                                                                                                                                                                                                        border-radius:6px;
-                                                                                                                                                                                                        padding:12px 20px;
-                                                                                                                                                                                                        max-width:calc(100% - 32px);
-                                                                                                                                                                                                        font-size:.875rem;
-                                                                                                                                                                                                        z-index:5;
-                                                                                                                                                                                                        box-shadow:0 6px 24px #0008}
-                                                                                                                                                                                                        #toast:empty{
-                                                                                                                                                                                                          display:none}
-                                                                                                                                                                                                          #load-error{
-                                                                                                                                                                                                            padding:16px;
-                                                                                                                                                                                                            border:1px solid var(--prism-negative);
-                                                                                                                                                                                                            margin-bottom:24px;
-                                                                                                                                                                                                            border-radius:6px}
-                                                                                                                                                                                                            .celebrating .identity-edge{
-                                                                                                                                                                                                              animation:prism-once 1500ms ease-out 1}
-                                                                                                                                                                                                              @keyframes prism-once{
-                                                                                                                                                                                                                0%,100%{
-                                                                                                                                                                                                                  opacity:var(--decoration-opacity)}
-                                                                                                                                                                                                                  40%{
-                                                                                                                                                                                                                    opacity:1;
-                                                                                                                                                                                                                    box-shadow:0 4px 18px color-mix(in srgb,var(--prism-accent) 45%,transparent)}
-                                                                                                                                                                                                                  }
-                                                                                                                                                                                                                  @media(prefers-reduced-motion:no-preference){
-                                                                                                                                                                                                                    button,a{
-                                                                                                                                                                                                                      transition:background-color 140ms ease,border-color 140ms ease,color 140ms ease}
-                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                    @media(prefers-reduced-motion:reduce){
-                                                                                                                                                                                                                      .celebrating .identity-edge{
-                                                                                                                                                                                                                        animation:none}
-                                                                                                                                                                                                                      }
-                                                                                                                                                                                                                      @media(max-width:960px){
-                                                                                                                                                                                                                        .shell{
-                                                                                                                                                                                                                          width:calc(100% - 40px)}
-                                                                                                                                                                                                                          .intro{
-                                                                                                                                                                                                                            align-items:start}
-                                                                                                                                                                                                                            .intro>p{
-                                                                                                                                                                                                                              max-width:300px}
-                                                                                                                                                                                                                              .workbench{
-                                                                                                                                                                                                                                gap:16px}
-                                                                                                                                                                                                                                .settings,.preview-content{
-                                                                                                                                                                                                                                  padding:20px}
-                                                                                                                                                                                                                                  .preview>.panel-heading{
-                                                                                                                                                                                                                                    padding:20px 20px 0}
-                                                                                                                                                                                                                                    .preview-tabs{
-                                                                                                                                                                                                                                      padding-inline:20px}
-                                                                                                                                                                                                                                      .panel-heading{
-                                                                                                                                                                                                                                        align-items:start;
-                                                                                                                                                                                                                                        flex-wrap:wrap;
-                                                                                                                                                                                                                                        gap:8px}
-                                                                                                                                                                                                                                        .contrast-grid{
-                                                                                                                                                                                                                                          grid-template-columns:1fr 1fr}
-                                                                                                                                                                                                                                          .adapter{
-                                                                                                                                                                                                                                            align-items:start}
-                                                                                                                                                                                                                                            .adapter .badge{
-                                                                                                                                                                                                                                              white-space:normal}
-                                                                                                                                                                                                                                              .site-header nav{
-                                                                                                                                                                                                                                                gap:16px}
-                                                                                                                                                                                                                                              }
-                                                                                                                                                                                                                                              @media(max-width:740px){
-                                                                                                                                                                                                                                                .site-header{
-                                                                                                                                                                                                                                                  align-items:start;
-                                                                                                                                                                                                                                                  flex-direction:column;
-                                                                                                                                                                                                                                                  gap:16px;
-                                                                                                                                                                                                                                                  padding:24px 0;
-                                                                                                                                                                                                                                                  min-height:0}
-                                                                                                                                                                                                                                                  .site-header nav{
-                                                                                                                                                                                                                                                    gap:24px}
-                                                                                                                                                                                                                                                    .intro{
-                                                                                                                                                                                                                                                      display:block;
-                                                                                                                                                                                                                                                      padding:32px 0 24px}
-                                                                                                                                                                                                                                                      .intro>p{
-                                                                                                                                                                                                                                                        margin-top:16px;
-                                                                                                                                                                                                                                                        max-width:none}
-                                                                                                                                                                                                                                                        .intro>p br{
-                                                                                                                                                                                                                                                          display:none}
-                                                                                                                                                                                                                                                          .workbench{
-                                                                                                                                                                                                                                                            grid-template-columns:1fr}
-                                                                                                                                                                                                                                                            .principles-grid{
-                                                                                                                                                                                                                                                              grid-template-columns:1fr;
-                                                                                                                                                                                                                                                              gap:24px}
-                                                                                                                                                                                                                                                              .number{
-                                                                                                                                                                                                                                                                margin-bottom:12px}
-                                                                                                                                                                                                                                                                .adapter-grid{
-                                                                                                                                                                                                                                                                  grid-template-columns:1fr}
-                                                                                                                                                                                                                                                                  .section{
-                                                                                                                                                                                                                                                                    margin-top:40px}
-                                                                                                                                                                                                                                                                    .settings .panel-heading,.preview>.panel-heading{
-                                                                                                                                                                                                                                                                      align-items:center}
-                                                                                                                                                                                                                                                                      .footer{
-                                                                                                                                                                                                                                                                        flex-wrap:wrap}
-                                                                                                                                                                                                                                                                        .section-heading{
-                                                                                                                                                                                                                                                                          align-items:start}
-                                                                                                                                                                                                                                                                          .contrast-card{
-                                                                                                                                                                                                                                                                            padding:16px}
-                                                                                                                                                                                                                                                                            .control-heading{
-                                                                                                                                                                                                                                                                              flex-wrap:wrap;
-                                                                                                                                                                                                                                                                              gap:4px}
-                                                                                                                                                                                                                                                                              .actions button{
-                                                                                                                                                                                                                                                                                flex-grow:1}
-                                                                                                                                                                                                                                                                                .brand-mark{
-                                                                                                                                                                                                                                                                                  flex-shrink:0}
-                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                @media(max-width:360px){
-                                                                                                                                                                                                                                                                                  .shell{
-                                                                                                                                                                                                                                                                                    width:calc(100% - 24px)}
-                                                                                                                                                                                                                                                                                    .settings,.preview-content{
-                                                                                                                                                                                                                                                                                      padding:16px}
-                                                                                                                                                                                                                                                                                      .contrast-grid{
-                                                                                                                                                                                                                                                                                        grid-template-columns:1fr}
-                                                                                                                                                                                                                                                                                        .site-header nav{
-                                                                                                                                                                                                                                                                                          gap:16px}
-                                                                                                                                                                                                                                                                                          .badge{
-                                                                                                                                                                                                                                                                                            white-space:normal}
-                                                                                                                                                                                                                                                                                          }
-                                                                                                                                                                                                                                                                                          @media(forced-colors:active){
-                                                                                                                                                                                                                                                                                            .brand-mark,.flag,.identity-edge{
-                                                                                                                                                                                                                                                                                              forced-color-adjust:none}
-                                                                                                                                                                                                                                                                                              .selected,.preview-tabs button[aria-pressed=true]{
-                                                                                                                                                                                                                                                                                                outline:1px solid Highlight}
-                                                                                                                                                                                                                                                                                                .status-dot{
-                                                                                                                                                                                                                                                                                                  background:CanvasText}
-                                                                                                                                                                                                                                                                                                  .contrast-card small{
-                                                                                                                                                                                                                                                                                                    color:CanvasText}
-                                                                                                                                                                                                                                                                                                  }
+*{
+  box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--prism-surface);
+  color:var(--prism-foreground)}
+button,input,select{
+  font:inherit}
+a{
+  color:var(--prism-link);
+  text-underline-offset:4px}
+button{
+  cursor:pointer;
+  min-height:42px;
+  padding:8px 16px;
+  color:var(--prism-foreground);
+  background:var(--prism-surface-muted)}
+button,input,select{
+  border:1px solid var(--prism-border);
+  border-radius:6px;
+  touch-action:manipulation}
+button:hover{
+  background:var(--prism-selection)}
+button:active{
+  background:var(--prism-surface)}
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed}
+button.primary{
+  background:var(--prism-accent);
+  color:var(--prism-on-accent);
+  border-color:var(--prism-border);
+  font-weight:600}
+button.primary:hover{
+  background:var(--prism-accent-hover)}
+button.primary:active{
+  background:var(--prism-accent-pressed)}
+:focus-visible{
+  outline:2px solid var(--prism-focus);
+  outline-offset:3px;
+  box-shadow:0 0 0 2px var(--prism-surface)}
+input,select{
+  background:var(--prism-surface);
+  color:var(--prism-foreground);
+  width:100%;
+  min-height:44px;
+  padding:9px 12px}
+input[type=range]{
+  padding:0;
+  accent-color:var(--prism-accent)}
+label{
+  display:block;
+  font-size:.875rem;
+  font-weight:600;
+  margin:0 0 8px}
+p{
+  margin:0 0 16px}
+h1,h2,h3{
+  margin:0;
+  line-height:1.2}
+h1{
+  font-size:clamp(2rem,4vw,3rem);
+  letter-spacing:-.035em;
+  font-weight:600}
+h2{
+  font-size:1.25rem;
+  font-weight:600}
+h3{
+  font-size:1.0625rem;
+  font-weight:600}
+.shell{
+  width:min(1200px,calc(100% - 64px));
+  margin-inline:auto}
+.site-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  min-height:92px;
+  border-bottom:1px solid var(--prism-border-subtle)}
+.brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  color:var(--prism-foreground);
+  font-weight:600;
+  text-decoration:none;
+  font-size:1.125rem}
+.brand-mark{
+  width:22px;
+  height:22px;
+  border:1px solid var(--prism-border);
+  border-radius:5px;
+  background:var(--prism-identity-gradient)}
+.version{
+  color:var(--prism-foreground-muted);
+  font-size:.75rem;
+  font-weight:400}
+.site-header nav{
+  display:flex;
+  gap:24px;
+  font-size:.875rem;
+  flex-wrap:wrap}
+.site-header nav a{
+  color:var(--prism-foreground-muted);
+  text-decoration:none}
+.intro{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:24px;
+  padding:40px 0 32px}
+.intro>p{
+  margin:0;
+  color:var(--prism-foreground-muted)}
+.eyebrow{
+  font-size:.75rem;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  color:var(--prism-foreground-muted);
+  margin-bottom:10px}
+.workbench{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  align-items:stretch}
+.panel{
+  border:1px solid var(--prism-border-subtle);
+  border-radius:12px;
+  background:var(--prism-surface-raised);
+  overflow:clip;
+  min-width:0}
+.settings{
+  padding:24px}
+.panel-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:24px}
+.badge{
+  display:inline-block;
+  border:1px solid var(--prism-border-subtle);
+  border-radius:5px;
+  padding:3px 8px;
+  font-size:.75rem;
+  line-height:1.5;
+  color:var(--prism-foreground-muted);
+  white-space:nowrap}
+.hint{
+  font-size:.875rem;
+  color:var(--prism-foreground-muted);
+  margin:8px 0 16px}
+.flag{
+  height:48px;
+  border-radius:6px;
+  background:var(--prism-identity-gradient);
+  opacity:var(--decoration-opacity);
+  border:1px solid var(--prism-border);
+  margin-top:20px}
+.swatches{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px}
+.swatch{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-family:Consolas,monospace;
+  font-size:.75rem;
+  padding:0;
+  min-height:30px;
+  border:0;
+  background:none}
+.swatch i{
+  width:12px;
+  height:12px;
+  border:1px solid var(--prism-border);
+  border-radius:3px}
+.control-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:24px}
+.control-heading output{
+  font-size:.875rem;
+  color:var(--prism-foreground-muted);
+  margin-bottom:8px}
+.text-button{
+  padding:0;
+  min-height:28px;
+  background:none;
+  border:0;
+  font-size:.875rem;
+  color:var(--prism-link);
+  margin-bottom:8px}
+.accent-control{
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:12px}
+.accent-control input[type=color]{
+  height:44px;
+  padding:4px}
+.field-error{
+  font-size:.875rem;
+  color:var(--prism-negative);
+  margin:4px 0 0}
+.field-error:empty{
+  display:none}
+.checkbox-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:20px;
+  font-weight:400}
+.checkbox-label input{
+  width:18px;
+  height:18px;
+  min-height:18px;
+  margin:0;
+  accent-color:var(--prism-accent)}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:20px}
+.actions button{
+  font-size:.875rem}
+.settings>.hint:last-child{
+  margin-bottom:0}
+.preview{
+  display:flex;
+  flex-direction:column;
+  position:relative}
+.identity-edge{
+  height:3px;
+  background:var(--prism-identity-gradient);
+  opacity:var(--decoration-opacity);
+  flex-shrink:0}
+.preview>.panel-heading{
+  padding:24px 24px 0}
+.preview-tabs{
+  display:flex;
+  gap:8px;
+  padding:0 24px 20px;
+  border-bottom:1px solid var(--prism-border-subtle);
+  flex-wrap:wrap}
+.preview-tabs button{
+  background:transparent;
+  border-color:transparent;
+  font-size:.875rem;
+  padding:8px 12px}
+.preview-tabs button[aria-pressed=true]{
+  color:var(--prism-selection-text);
+  background:var(--prism-selection);
+  box-shadow:inset 0 -2px var(--prism-accent)}
+.preview-content{
+  padding:24px;
+  flex:1}
+.preview-content>p{
+  color:var(--prism-foreground-muted);
+  margin:12px 0 24px}
+.preview-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px}
+.status-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--prism-positive);
+  flex-shrink:0}
+.preview-title .eyebrow{
+  margin-bottom:8px}
+.sample-row{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid var(--prism-border-subtle);
+  border-radius:6px;
+  padding:12px;
+  margin-top:12px}
+.sample-row.selected{
+  background:var(--prism-selection);
+  border-color:var(--prism-accent);
+  color:var(--prism-selection-text);
+  margin-top:24px}
+.sample-row strong{
+  font-size:.875rem}
+.sample-row small,.adapter small{
+  display:block;
+  margin-top:3px;
+  color:var(--prism-foreground-muted);
+  font-size:.875rem}
+.semantic-states{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  font-size:.875rem;
+  padding-top:12px;
+  border-top:1px solid var(--prism-border-subtle)}
+.success{
+  color:var(--prism-positive)}
+.warning{
+  color:var(--prism-warning)}
+.error{
+  color:var(--prism-negative)}
+.preview-footer{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:space-between;
+  border-top:1px solid var(--prism-border-subtle);
+  padding:16px 24px;
+  color:var(--prism-foreground-muted);
+  font-size:.75rem}
+.section{
+  margin-top:56px}
+.section-heading{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:end;
+  margin-bottom:24px;
+  flex-wrap:wrap}
+.section-heading>a,.section-heading>button{
+  font-size:.875rem}
+.section-heading .hint{
+  margin:0}
+.contrast-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px}
+.contrast-card{
+  padding:20px;
+  background:var(--prism-surface-raised);
+  border:1px solid var(--prism-border-subtle);
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  min-width:0}
+.contrast-card h3{
+  font-size:.875rem}
+.contrast-card p{
+  margin:0;
+  font-size:.75rem;
+  color:var(--prism-foreground-muted);
+  overflow-wrap:anywhere}
+.contrast-card strong{
+  font-size:1.5rem;
+  font-weight:500;
+  margin-top:auto;
+  padding-top:8px}
+.contrast-card small{
+  font-size:.75rem;
+  color:var(--prism-positive)}
+.code-panel{
+  margin-top:16px;
+  border:1px solid var(--prism-border-subtle);
+  border-radius:6px;
+  padding:16px}
+.code-panel summary{
+  cursor:pointer;
+  font-size:.875rem}
+.code-panel p{
+  font-size:.875rem;
+  margin-top:16px;
+  color:var(--prism-foreground-muted)}
+pre{
+  margin:16px 0 0;
+  max-height:360px;
+  overflow:auto;
+  font-size:.875rem;
+  line-height:1.6;
+  color:var(--prism-foreground-muted)}
+.principles-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px}
+.principles-grid article{
+  border-top:1px solid var(--prism-border-subtle);
+  padding-top:20px}
+.number{
+  color:var(--prism-foreground-muted);
+  font-family:Consolas,monospace;
+  font-size:.75rem;
+  display:block;
+  margin-bottom:20px}
+.principles-grid p{
+  font-size:.875rem;
+  color:var(--prism-foreground-muted);
+  margin:12px 0 0}
+.adapter-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px}
+.adapter{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:20px;
+  border:1px solid var(--prism-border-subtle);
+  border-radius:12px;
+  text-decoration:none;
+  color:var(--prism-foreground);
+  min-width:0}
+.adapter:hover{
+  background:var(--prism-surface-raised);
+  border-color:var(--prism-border)}
+.adapter strong{
+  font-size:1rem}
+.footer{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  margin-top:48px;
+  border-top:1px solid var(--prism-border-subtle);
+  padding:24px 0 32px;
+  font-size:.875rem;
+  color:var(--prism-foreground-muted)}
+.skip-link{
+  position:fixed;
+  top:-100px;
+  left:16px;
+  z-index:5;
+  padding:12px;
+  background:var(--prism-surface-raised)}
+.skip-link:focus{
+  top:8px}
+#toast{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--prism-surface-raised);
+  border:1px solid var(--prism-border);
+  border-radius:6px;
+  padding:12px 20px;
+  max-width:calc(100% - 32px);
+  font-size:.875rem;
+  z-index:5;
+  box-shadow:0 6px 24px #0008}
+#toast:empty{
+  display:none}
+#load-error{
+  padding:16px;
+  border:1px solid var(--prism-negative);
+  margin-bottom:24px;
+  border-radius:6px}
+.celebrating .identity-edge{
+  animation:prism-once 1500ms ease-out 1}
+@keyframes prism-once{
+  0%,100%{
+    opacity:var(--decoration-opacity)}
+  40%{
+    opacity:1;
+    box-shadow:0 4px 18px color-mix(in srgb,var(--prism-accent) 45%,transparent)}
+}
+@media(prefers-reduced-motion:no-preference){
+  button,a{
+    transition:background-color 140ms ease,border-color 140ms ease,color 140ms ease}
+}
+@media(prefers-reduced-motion:reduce){
+  .celebrating .identity-edge{
+    animation:none}
+}
+@media(max-width:960px){
+  .shell{
+    width:calc(100% - 40px)}
+  .intro{
+    align-items:start}
+  .intro>p{
+    max-width:300px}
+  .workbench{
+    gap:16px}
+  .settings,.preview-content{
+    padding:20px}
+  .preview>.panel-heading{
+    padding:20px 20px 0}
+  .preview-tabs{
+    padding-inline:20px}
+  .panel-heading{
+    align-items:start;
+    flex-wrap:wrap;
+    gap:8px}
+  .contrast-grid{
+    grid-template-columns:1fr 1fr}
+  .adapter{
+    align-items:start}
+  .adapter .badge{
+    white-space:normal}
+  .site-header nav{
+    gap:16px}
+}
+@media(max-width:740px){
+  .site-header{
+    align-items:start;
+    flex-direction:column;
+    gap:16px;
+    padding:24px 0;
+    min-height:0}
+  .site-header nav{
+    gap:24px}
+  .intro{
+    display:block;
+    padding:32px 0 24px}
+  .intro>p{
+    margin-top:16px;
+    max-width:none}
+  .intro>p br{
+    display:none}
+  .workbench{
+    grid-template-columns:1fr}
+  .principles-grid{
+    grid-template-columns:1fr;
+    gap:24px}
+  .number{
+    margin-bottom:12px}
+  .adapter-grid{
+    grid-template-columns:1fr}
+  .section{
+    margin-top:40px}
+  .settings .panel-heading,.preview>.panel-heading{
+    align-items:center}
+  .footer{
+    flex-wrap:wrap}
+  .section-heading{
+    align-items:start}
+  .contrast-card{
+    padding:16px}
+  .control-heading{
+    flex-wrap:wrap;
+    gap:4px}
+  .actions button{
+    flex-grow:1}
+  .brand-mark{
+    flex-shrink:0}
+}
+@media(max-width:360px){
+  .shell{
+    width:calc(100% - 24px)}
+  .settings,.preview-content{
+    padding:16px}
+  .contrast-grid{
+    grid-template-columns:1fr}
+  .site-header nav{
+    gap:16px}
+  .badge{
+    white-space:normal}
+}
+@media(forced-colors:active){
+  .brand-mark,.flag,.identity-edge{
+    forced-color-adjust:none}
+  .selected,.preview-tabs button[aria-pressed=true]{
+    outline:1px solid Highlight}
+  .status-dot{
+    background:CanvasText}
+  .contrast-card small{
+    color:CanvasText}
+}

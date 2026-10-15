@@ -1,6 +1,6 @@
 # Windows native preferences adapter
 
-Consumes a generated `theme.json`. The default changes only current-user app/system dark mode and the native title-bar accent. It never applies a `.theme` file, replaces wallpaper/cursors, changes fonts/scaling, restarts Explorer/apps, or patches resources. The old template/wallpaper assets remain available but are not used by this installer.
+Consumes a generated `theme.json`. The default changes only current-user app/system dark mode and the native title-bar accent. It never applies a `.theme` file, replaces wallpaper/cursors, changes fonts/scaling, restarts Explorer/apps, or patches resources. A matching wallpaper can be painted into a bundle by `scripts/generate-assets.ps1`; applying it is a separate manual choice.
 
 ```powershell
 .\adapters\windows\install.ps1 -ThemeJson 'C:\path\to\generated\theme.json' -WhatIf
