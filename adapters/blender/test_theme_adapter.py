@@ -193,6 +193,35 @@ class IsolatedFixtureTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             adapter.validate_commit(stage, live)
 
+    def test_commit_replaces_live_preferences_with_verified_candidate(self):
+        stage, live, manifest = self.commit_fixture()
+        with patch.object(adapter, "assert_blender_closed"):
+            adapter.commit(SimpleNamespace(stage_dir=stage, config_dir=live))
+        self.assertEqual((live / "userpref.blend").read_bytes(), b"candidate fixture")
+        self.assertEqual(adapter.sha256(live / "userpref.blend"), manifest["candidate_preferences_sha256"])
+        self.assertEqual(sorted(path.name for path in live.iterdir()), ["userpref.blend"])
+
+    def test_commit_guard_failure_leaves_live_file_and_no_temporary_copy(self):
+        stage, live, _manifest = self.commit_fixture()
+        with patch.object(adapter, "assert_blender_closed", side_effect=[None, RuntimeError("Blender started")]):
+            with self.assertRaises(RuntimeError):
+                adapter.commit(SimpleNamespace(stage_dir=stage, config_dir=live))
+        self.assertEqual((live / "userpref.blend").read_bytes(), b"original fixture")
+        self.assertEqual(sorted(path.name for path in live.iterdir()), ["userpref.blend"])
+
+    def test_commit_rejects_corrupt_copy_before_replacing_live_preferences(self):
+        stage, live, _manifest = self.commit_fixture()
+
+        def corrupt_copy(source, destination):
+            destination.write(b"corrupt")
+
+        with patch.object(adapter, "assert_blender_closed"), \
+                patch.object(adapter.shutil, "copyfileobj", side_effect=corrupt_copy):
+            with self.assertRaises(RuntimeError):
+                adapter.commit(SimpleNamespace(stage_dir=stage, config_dir=live))
+        self.assertEqual((live / "userpref.blend").read_bytes(), b"original fixture")
+        self.assertEqual(sorted(path.name for path in live.iterdir()), ["userpref.blend"])
+
 
 if __name__ == "__main__":
     unittest.main()

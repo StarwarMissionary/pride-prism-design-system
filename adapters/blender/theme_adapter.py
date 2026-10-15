@@ -322,13 +322,24 @@ def commit(args) -> dict:
     target = config_dir / "userpref.blend"
     temporary = config_dir / ("userpref.pride-prism-" + uuid.uuid4().hex + ".tmp")
     # Same-directory replacement is atomic. A full original backup already exists.
-    with temporary.open("xb") as destination, (stage_dir / "config" / "userpref.blend").open("rb") as source:
-        shutil.copyfileobj(source, destination)
-        destination.flush()
-        os.fsync(destination.fileno())
-    assert_blender_closed()
-    validate_commit(stage_dir, config_dir)
-    os.replace(temporary, target)
+    created = False
+    try:
+        with temporary.open("xb") as destination:
+            created = True
+            with (stage_dir / "config" / "userpref.blend").open("rb") as source:
+                shutil.copyfileobj(source, destination)
+            destination.flush()
+            os.fsync(destination.fileno())
+        # The copy itself must match before it can replace the live file.
+        if sha256(temporary) != manifest["candidate_preferences_sha256"]:
+            raise RuntimeError("Copied candidate failed its hash check. Nothing committed.")
+        assert_blender_closed()
+        validate_commit(stage_dir, config_dir)
+        os.replace(temporary, target)
+        created = False
+    finally:
+        if created:
+            temporary.unlink(missing_ok=True)
     if sha256(target) != manifest["candidate_preferences_sha256"]:
         raise RuntimeError("Commit read-back mismatch. Original backup retained; do not open Blender until reviewed.")
     return {"preferences": str(target), "applies": "next normal Blender launch",
